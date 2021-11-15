@@ -6,12 +6,24 @@
   <title>JS Bin</title>
 </head>
 <style>
-  a:visited {
+  body> :first-child {
+    color:red;
+  }
+  p.a.c {
+    color:red;
+  }
+  p.a.c span span {
+    color:green;
+  }
+  p.a.c span span:last-child {
+    color:blue;
+  }
+   div a:visited {
     color:orange;
   }
-  a:link{
+  div a:link{
     color:pink;
-  }
+  } 
   p.a[tabindex="1"]:focus {
       color:blue;
   }
@@ -21,22 +33,28 @@
   p.a[tabindex="1"]:active {
       color:green;
   }
-  [href^="mailto:"i]{
+  div a[href^="mailto:"i]{
     color:blue;
     }
-  [href^="tel:"]{
+  div a[href^="tel:"]{
     color:yellow;
   }
-  [href$=".pdf"i]{
+  div a[href$=".pdf"i]{
     font-size: 30px;
   }
-  .a li:nth-of-type(-n+7){
+  /* .a li:nth-of-type(-n+7){
       color: red;
   }
   .a li:nth-of-type(-n+3){
       color: black;
+  } */
+  div.a li:nth-child(4),
+  div.a li:nth-child(5),
+  div.a li:nth-child(6),
+  div.a li:nth-child(7){
+    color:red;
   }
-  .b li:nth-of-type(-n+100){
+  /* .b li:nth-of-type(-n+100){
       color: green;
   }
   .b li:nth-of-type(-n+65){
@@ -45,11 +63,23 @@
   .b li:nth-of-type(-n+50){
       color: blue;
   }
-  .b li:nth-of-type(-n+35){
+  .b li:nth-of-type(-n+34){
       color: black;
   }
   .b li:nth-of-type(-n+25){
     color: red;
+  } */
+  div.b li:nth-of-type(-n+25){
+    color:red;
+  }
+  div.b li:nth-of-type(n+65){
+    color:green;
+  }
+  div.b li:nth-of-type(n+35):nth-of-type(-n+50){
+    color:blue;
+  }
+  .prime li:nth-of-type(n){
+    color:blue;
   }
   .prime li:nth-of-type(2n){
     color: red;
@@ -64,16 +94,16 @@
     color: red;
   }
   .prime li:nth-child(2){
-    color: black;
+    color: blue;
   }
   .prime li:nth-child(3){
-    color: black;
+    color: blue;
   }
   .prime li:nth-child(5){
-    color: black;
+    color: blue;
   } 
   .prime li:nth-child(7){
-    color: black;
+    color: blue;
   } 
 </style>
 <body>
