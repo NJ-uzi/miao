@@ -21,7 +21,7 @@
     background-color: cyan;
   }
   .left { 
-    height: calc(100vh - 100px);
+    height: calc(100% - 100px); 
     width: 200px;
     overflow: auto;
     display: inline-block;
@@ -29,19 +29,18 @@
     font-size: 20px;
   }
   .right {
-    height: calc(100vh - 100px);
-    width: calc(100vw - 200px);
+    height: calc(100% - 100px);
+    width: calc(100% - 200px); 
     display: inline-block;
-    margin-left: 200px;
     overflow: auto; 
-    margin-top: calc(100px - 100vh);
     background-color: yellow;
     font-size: 20px;
+    vertical-align: top;
   }  
 </style>
 <body>
   <div class="header"></div>
-  <div class="left">
+<div class="left">
     <ul>
       <li>1</li>
       <li>2</li>
@@ -125,7 +124,7 @@
       <li>37</li>
     </ul>
   </div>
-  <div class="right">
+<div class="right">
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime ipsam fugit, consequuntur voluptates quis sit? Quae vero tempora magni dolores possimus nihil? Saepe quasi necessitatibus dolorum a explicabo cum non.
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint perferendis dolores distinctio explicabo, rerum fuga est illum rem suscipit et blanditiis, mollitia tenetur neque fugit quam! Ipsum nam tempore eum.
     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui nam in alias aut fugiat id labore deserunt repudiandae perferendis voluptatem autem, necessitatibus magni recusandae dolor. Accusamus aspernatur delectus praesentium corporis.
