@@ -1,0 +1,119 @@
+body {
+    font: 14px/1.5 Helvetica,Arial,sans-serif;
+    color: #333;
+    background-color: #fff;
+    min-width: 1226px;
+    margin: 0;
+}
+.site-topbar {
+  position: relative;
+  height: 40px;
+  font-size: 12px;
+  z-index: 30;
+  background-color: black;
+}
+.container {
+  width: 1226px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.site-topbar .topbar-nav {
+  float: left;
+  height: 40px;
+  line-height: 40px;
+}
+.site-topbar .topbar-cart {
+  float: right;
+  position: relative;
+  width: 120xp;
+  height: 40px;
+  margin-left: 15px;
+  font-size: 12px;
+}
+.site-topbar .topbar-info {
+  float: right;
+  position: relative;
+  height: 40px;
+  line-height: 40px;
+}
+.site-topbar a {
+  color: #b0b0b0;
+  line-height: 40px;
+  display: inline-block;
+}
+a, a:hover {
+  text-decoration: none;
+}
+.topbar-nav .sep {
+  margin: 0 .3em;
+  color: #424242;
+}
+.site-header {
+  position: relative;
+  z-index: 20px;
+  height: 100px;
+}
+
+.site-header .header-logo {
+  background: url(//s02.mifile.cn/assets/static/image/logo-mi2.png) no-repeat;
+  background-size: 56px;
+  float: left;
+  height: 62px;
+  margin-top: 22px;
+}
+.site-header .topbar-nav {
+  float: left;
+  width: 850px;
+}
+.site-header .nav-category {
+    position: relative;
+    float: left;
+    width: 127px;
+    padding-right: 15px;
+}
+.site-header .nav-list {
+  position: relative;
+  z-index: 10;
+  width: 1100px;
+  height: 88px;
+  float: left;
+  margin: 0;
+  padding: 12px 0 0 30px;
+  list-style-type: none;
+  font-size: 16px;
+}
+.site-header .nav-category {
+  position: relative;
+  float: left;
+  width: 127px;
+  padding-left: 15px;
+}
+.site-header .nav-item {
+  float: left;
+}
+.header-nav .link {
+  display: inline-block;
+  position: relative;
+  padding: 26px 10px 38px;
+  color: #333;
+}
+.header-nav .nav-item {
+  position: relative;
+}
+.header-nav .item-children ul {
+  display: none;
+  position:absolute;
+  list-style-type: none;
+  font-size: 16px;
+}
+.nav-item:hover .children-list {
+  display: block;
+  float: left;
+}
+.main-list {
+  width: 1226px;
+  margin: auto;
+}
+.aside-list {
+  list-style-type: none;
+}
