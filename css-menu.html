@@ -18,6 +18,7 @@ ul {
 .menu-main li {
   position: relative;
   white-space: nowrap;
+
 }
 .menu-main > li {
   display: inline-block;
@@ -25,18 +26,19 @@ ul {
 .menu-main  li:hover {
   background-color: darkseagreen;
 }
-.menu-main ul {
-  display: none;
+ .menu-main ul {
+  display: none; 
   position: absolute;
-}
+  width: auto;
+} 
 li:hover > ul {
   display: block;
 }
-ul ul ul {
+ /* ul ul ul {
   position: absolute;
   left: 100%;
   top: 0;
-}
+}  */
 </style>
 <body>
     <ul class="menu-main">
@@ -47,16 +49,16 @@ ul ul ul {
           <li>打开文件…</li>
           <li>打开文件夹…</li>
           <li>从文件打开工作区</li>
-          <li>打开最近的文件
-            <ul>
-              <li>new</li>
-              <li>old</li>
-              <li>bba</li>
-            </ul>
-          </li> 
+            <li>打开最近的文件
+              <ul>
+                <li>new</li>
+                <li>old</li>
+                <li>bba</li>
+              </ul>
+            </li> 
         </ul>
       </li>
-      <li>编辑
+       <li>编辑
         <ul>
           <li>撤销</li>
           <li>恢复</li>
@@ -64,7 +66,7 @@ ul ul ul {
           <li>复制</li>
           <li>粘贴</li> 
         </ul>
-      </li>              
+      </li>                
     </ul>
 </body>
 </html>
