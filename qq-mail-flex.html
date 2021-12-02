@@ -7,79 +7,118 @@
   <title>Document</title>
 </head>
 <style>
-  * {
-    box-shadow: inset 0 0 1px red;
-  }
-  body {
+  html,body {
     margin: 0;
-    padding: 0;
-    overflow: hidden;
     font-size: 0px;
     height: 100%;
   }
 .mail {
   display: flex;
-  position: relative;
-  flex-direction: row;
+  flex-direction: column;
   font-size: 16px;
-  flex-wrap: wrap;
-  height: calc(100%-100px);
+  height: 100%;
+  
 }
-.header {
+header {
   width: 100%;
   height: 100px;
   background-color: aquamarine;
+  overflow: auto;
+  flex: none;
 }
-.aside-left {
+section {
+  height: 0;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+aside {
   background-color: pink;
   width: 200px;
+  overflow: auto;
+  flex-shrink: 0;
 }
-.main {
+main {
 background-color: blueviolet;
 width: 300px;
 flex-grow: 1;
+flex-shrink: 0;
+overflow: auto;
 }
 </style>
 <body>
 <div class="mail">
-  <div class="header"> header<header></div>
-  <div class="aside-left">
-    <ul class="word-list">
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>
-      <li><a href="#">English-words</a></li>  
-    </ul>
-  </div>
-  <div class="main">
-    Lorem ipsum dolor, Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reprehenderit porro, mollitia aspernatur inventore atque alias neque cumque totam iusto corporis quidem voluptatibus eveniet! Totam ut dolor nostrum nulla voluptatum earum?  sit amet consectetur adipisicing elit. Nobis id placeat mollitia atque suscipit rerum consectetur reiciendis, vitae quia explicabo nihil illum est repellat rem reprehenderit, omnis libero, dolorum odio?
-  </div>
+  <header > uas. Ea.Odit, porro illo nisi facilis repudiandae, nobis perferendis dolores ducimus cumque vero quam natus ipsam ad animi officiis doloribus. Odio itaque nostrum ipsa dignissimos dolores eveniet omnis eum veniam cupiditate.
+      Repellendus, s, blanditiis tempore adipisci. Eveniet tenetur possimus blanditiis in repellat. Eos praesentium placeat hic consequatur explicabo voluptates cupiditate tempora, dolor quas eius error, quibusdam facilis incidunt.
+      Sed necessitatibus reiciendis adipisci rem recusandae, a quaerat provident odio ipsum sunt impedit repellat ex aperiam, voluptate error molestias, sapiente earum magni pariatur architecto perspiciatis qui! Nesciunt id amet eum?
+      Odit officiis nihil ad dolorum laudantium, non consequatur, perferendis amet minus expedita quidem reprehenderit, maxime fugit molestias fuga reiciendis id qui cum cupiditate incidunt veniam esse blanditiis! Nulla, explicabo optio!
+     Repellendus earum quod fugiat inventore id sit, deserunt dignissimos quis, cum praesentium ut adipisci voluptates. Voluptatibus blanditiis expedita hic iste possimus similique, aliquid provident, dolorum fugiat, explicabo debitis assumenda. Aut?
+      Cum perspiciatis explicabo eos? Itaque dolorem eos quibusdam dignissimos reiciendis nobis tenetur officia velit aperiam totam minus maxime tempore, porro qui est fugit recusandae fugiat molestiae numquam consequatur iste illo.
+  </header>
+  <section>
+    <aside>
+      <ul class="word-list">
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li><li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li><li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li><li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li><li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li><li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li><li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li><li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>
+        <li><a href="#">English-words</a></li>  
+      </ul>
+    </aside>
+    <main>
+      Lorem ipsum dolor, Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reprehenderit porro, mollitia aspernatur inventore atque alias neque cumque totam iusto corporis quidem voluptatibus eveniet! Totam ut dolor nostrum nulla voluptatum earum?  sit amet consectetur adipisicing elit. Nobis id placeat mollitia atque suscipit rerum consectetur reiciendis, vitae quia explicabo nihil illum est repellat rem reprehenderit, omnis libero, dolorum odio?
+    </main>
+  </section>
 </div>
 </body>
 </html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  @media (max-width:399px) {
+    div {
+      background-color: red;
+    }
+  }
+  @media (max-width:599px) and (min-width:400px) {
+    div {
+      background-color: green;
+    }
+  }
+  @media (max-width:799px) and (min-width:600px) {
+    div {
+      background-color: blue;
+    }
+  }
+  @media (max-width:999px) and (min-width:800px) {
+    div {
+      background-color: yellow;
+    }    
+  }
+  @media (min-width:1000px) {
+    div {
+      background-color: violet;
+    }
+  }
+  html,body,div {
+    min-width: 100px;
+  }
+</style>
+<body>
+  <div>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus illo aliquam, delectus molestias cupiditate aliquid vero dolor ea repudiandae, culpa dolore ratione est sint. Quo provident labore deleniti impedit a.
+  </div>
+</body>
+</html>
