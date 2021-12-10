@@ -1,6 +1,6 @@
-/* * {
+* {
   box-shadow: inset 0 0 1px red;
-} */
+}
 
 ul,
 li {
@@ -349,7 +349,6 @@ body {
   color   : #fff;
 }
 
-
 .aside-list :nth-child(1):hover .children-list-col1,
 .aside-list :nth-child(2):hover .children-list-col2,
 .aside-list :nth-child(3):hover .children-list-col3,
@@ -406,7 +405,6 @@ div.children-list-col7 {
   background-color: #fff;
 }
 
-
 div.children-list-col ul {
   float  : left;
   width  : 248px;
@@ -444,7 +442,6 @@ div.children-list-col .list-col1 span {
   overflow      : hidden;
   vertical-align: middle;
 }
-
 
 .icon-left,
 .icon-right {
@@ -550,6 +547,7 @@ div.children-list-col .list-col1 span {
   transition: box-shadow 0.4s linear;
 }
 
+/* 主要页面板块--淡灰色部分 */
 .page-main {
   display         : block;
   width           : 100%;
@@ -558,8 +556,8 @@ div.children-list-col .list-col1 span {
   background-color: #f5f5f5;
 }
 
-.page-main .container,
-.page-main .container2 {
+/* 主要板块中中间从上到下的整块 */
+.page-main .container {
   display: block;
   width  : 1226px;
   height : 6385px;
@@ -625,8 +623,9 @@ h2 {
 }
 
 .box9 {
-  width : 1226px;
-  height: 628px;
+  width        : 1248px;
+  height       : 628px;
+  margin-bottom: 8px;
 }
 
 .box9 ul {
@@ -636,30 +635,36 @@ h2 {
   flex-direction: column;
   flex-wrap     : wrap;
   padding       : 0;
+  margin        : 0;
 }
 
 .box9 .box9-first {
-  width : 234px;
+  width : 239px;
   height: 100%;
+}
+
+.box9 .box9-first img {
+  width : 234px;
+  height: 614px;
 }
 
 .box9 .box9-top4 {
   margin-bottom: 24px;
 }
 
-.box9 li {
+.box9-list>li {
   display         : block;
-  width           : 220px;
+  width           : 225px;
   height          : 300px;
   padding         : 0;
   background-color: #fff;
   justify-content : space-between;
-  transition      : .4s;
+  transition      : box-shadow 1s 3s;
 }
 
-.box9 li:hover {
+.box9-list li:hover {
   box-shadow: 0 15px 30px rgb(0, 0, 0, .2);
-  transition: .4s;
+  transition: box-shadow 1s 3s;
 }
 
 .box9 .box8 a {
@@ -676,7 +681,7 @@ h2 {
 }
 
 .box8 .title {
-  line-height: 10px;
+  line-height: 15px;
   font-size  : 14px;
   color      : black;
 }
@@ -693,24 +698,225 @@ h2 {
   font-size  : 14px;
 }
 
-.wearable-header {
+div.wearable,
+div.home-appliance {
+  width        : 1226px;
+  height       : 686px;
+  margin-bottom: 20px;
+}
+
+.wearable-header,
+.appliance-header {
   height  : 58px;
   width   : 1226px;
   position: relative;
 }
 
-.wearable-header .more-box {
+div.wear-more {
   position: absolute;
-  right   : 0;
-  top     : 0;
-  width   : 126px;
-  height  : 26px;
-  padding : 16px 0 0;
+  right   : 0px;
+  top     : 17px;
+  height  : 40px;
+  width   : 124px;
+  padding : 5px 0;
 }
 
-.wearable-header .waer-more li {
-  display: inline-block;
+.more-list {
+  height: 40px;
+  width : 124px;
+  margin: 0;
+}
+
+.wear-more .more-list-child {
+  float       : left;
+  margin      : 0;
+  padding-left: 30px;
+  width       : 32px;
+  height      : 40px;
+  font-size   : 16px;
+  line-height : 40px;
+  transition  : 0s 999s;
+}
+
+.more-list:hover .more-list-child {
+  color     : black;
+  transition: none;
+}
+
+.more-list .more-list-child:hover {
+  color     : #ff6700;
+  transition: none;
+}
+
+
+div.box9-one {
+  position  : absolute;
+  left      : -1102px;
+  top       : 40px;
+  visibility: visible;
+}
+
+div.box9-two {
+  position  : absolute;
+  left      : -1102px;
+  top       : 40px;
+  visibility: hidden;
+}
+
+div.wear-more>.more-list:hover div {
+  visibility: hidden;
+  transition: none;
+}
+
+div.wear-more .more-list-child:hover>div {
+  visibility: visible;
+  transition: none;
+}
+
+div.wear-more div {
+  transition: 0s 999s;
+}
+
+/* 半个大小的更多链接li------------------------ */
+.wearable-header .box9-one ul li:nth-child(9),
+.wearable-header .box9-two ul li:nth-child(7) {
+  height       : 150px;
+  margin-bottom: 150px;
+}
+
+/* 半个大小的购物链接li */
+.appliance-header .box9-one ul li:nth-child(10),
+.appliance-header .box9-two ul li:nth-child(10) {
+  height       : 140px;
+  margin-bottom: 20px;
+}
+
+/* 购物链接li的组合更多链接 */
+.appliance-header .box9-one ul li:nth-child(11),
+.appliance-header .box9-two ul li:nth-child(11) {
+  height: 140px;
+  margin: 0px;
+}
+
+/* 半个盒子里的div----------------------- */
+.wearable-header .box9-one ul li:nth-child(9) .last-box-9,
+.wearable-header .box9-two ul li:nth-child(7) .last-box-9,
+.appliance-header .box9-one ul li:nth-child(10) .last-box-9,
+.appliance-header .box9-one ul li:nth-child(11) .last-box-9,
+.appliance-header .box9-two ul li:nth-child(10) .last-box-9,
+.appliance-header .box9-two ul li:nth-child(11) .last-box-9 {
+  width : 80px;
+  height: 45px;
+  margin: 30px 100px 0 22px;
+}
+
+/* div里的文本 ---------------------------*/
+.wearable-header .box9-one ul li:nth-child(9) .last-title,
+.wearable-header .box9-two ul li:nth-child(7) .last-title,
+.appliance-header .box9-one ul li:nth-child(10) .last-title,
+.appliance-header .box9-one ul li:nth-child(11) .last-title,
+.appliance-header .box9-two ul li:nth-child(10) .last-title,
+.appliance-header .box9-two ul li:nth-child(11) .last-title {
+  margin     : 0;
+  line-height: 20px;
+}
+
+.box9-other .duo {
+  font-size: 18px;
+}
+
+.box9-other .hot {
+  font-size : 12px;
+  text-align: left;
+  color     : #b0b0b0;
+}
+
+section.picture-more {
+  float       : right;
+  width       : 45px;
+  height      : 45px;
+  margin-right: -96px;
+  margin-top  : -40px;
+}
+
+section.picture-more>i {
+  font-size: 50px;
+  color    : #ff6700;
+}
+
+div.home-appliance .wear-more {
+  position: absolute;
+  right   : 0px;
+  top     : 17px;
+  height  : 40px;
+  width   : 168px;
+  padding : 5px 0;
+}
+
+div.home-appliance .more-list {
+  height: 40px;
+  width : 168px;
+  margin: 0;
+}
+
+.home-appliance .wear-more .more-list-child {
+  float       : left;
+  margin      : 0;
+  padding-left: 18px;
+  width       : 66px;
+  height      : 40px;
+  font-size   : 16px;
+  line-height : 30px;
+  transition  : 0s 999s;
+}
+
+.appliance-header .more-list:hover .more-list-child {
+  color     : black;
+  transition: none;
+}
+
+.appliance-header .more-list .more-list-child:hover {
+  color     : #ff6700;
+  transition: none;
+}
+
+.appliance-header .box9-one {
+  position  : absolute;
+  left      : -1057px;
+  top       : 40px;
+  visibility: visible;
+}
+
+.appliance-header .box9-two {
+  position  : absolute;
+  left      : -1057px;
+  top       : 40px;
+  visibility: hidden;
+}
+
+.appliance-header .middle a {
   padding: 0;
-  height : 24px;
-  width  : 32px;
+}
+
+.appliance-header .middle img {
+  width : 225px;
+  height: 300px;
+}
+
+.appliance-header .box9-small .price,
+.appliance-header .box9-small .title {
+  text-align   : left;
+  margin-bottom: 10px;
+}
+
+.appliance-header .box9-one .box9-small img {
+  width : 80px;
+  height: 80px;
+  margin: -26px 0 0 -19px;
+}
+
+.appliance-header .box9-two .box9-small img {
+  width : 80px;
+  height: 80px;
+  margin: -53px 0 0 -19px;
 }
