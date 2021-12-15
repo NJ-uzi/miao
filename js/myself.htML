@@ -12,6 +12,25 @@
   // if (age >= 18) {
   //   alert("老板刷卡!")
   // } 
+  debugger
+
+  var a = parseInt(prompt('a'))
+  var b = parseInt(prompt('b'))
+  var c = parseInt(prompt('c'))
+
+  var delat = b * b - 4 * a * c
+  var sqrDelet = Math.sqrt(delat)
+
+  var x1 = (-b + sqrDelet) / (2 * a)
+  var x2 = (-b - sqrDelet) / (2 * a)
+
+  if (delat < 0) {
+    console.log("无解");
+  } else if (delat == 0) {
+    console.log("x1=x2=", 22222);
+  } else {
+    console.log("x1=", 1, "x2=", 2);
+  }
 
 
 </script>
