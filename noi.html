@@ -560,20 +560,67 @@
   console.log(m);
 </script>
 
-<script id="ch0105/09">
-
+<script type="x" id="ch0105/09">
+  var m = Number(prompt('m'))
+  var n = Number(prompt('n'))
+  var x = 0
+  var M1 = m
+  var M2 = m + 1
+  for (i = 0; i < n; i++) {
+    if (m % 2 != 0 && M1 <= n) {
+      x += M1
+      M1 += 2
+    } else if (m % 2 == 0 && M2 <= n) {
+      x += M2
+      M2 += 2
+    }
+  }
+  console.log(x);
 </script>
 
-<script id="ch0105/10">
+<script type="x" id="ch0105/10">
+  var m = Number(prompt('m'))
+  var n = Number(prompt('n'))
+  var x = 0
 
+  for (i = 0; i < 1000; i++) {
+    if (i % 17 == 0 && i >= m && i <= n && m < n) {
+      x += i
+    }
+  }
+  console.log(x);
 </script>
 
-<script id="ch0105/11">
+<script type="x" id="ch0105/11">
+  var n = Number(prompt('n'))
+  var a = 0
+  var b = 0
+  var c = 0
 
+  for (i = 0; i < n; i++) {
+    var m = Number(prompt('m'))
+    if (m == 1) {
+      a++
+    } else if (m == 5) {
+      b++
+    } else if (m == 10) {
+      c++
+    }
+  }
+  console.log(a, b, c);
 </script>
 
-<script id="ch0105/12">
-
+<script type="x" id="ch0105/12">
+  var N = Number(prompt('长度'))
+  var m = Number(prompt('取值'))
+  var a = 0
+  for (i = 0; i < N; i++) {
+    var x = Number(prompt('x'))
+    if (x == m) {
+      a++
+    }
+  }
+  console.log(a);
 </script>
 
 <script id="ch0105/13">
@@ -624,7 +671,7 @@
 
 </script>
 
-<script id="ch0105/25">
+<script type="x" id="ch0105/25">
   var a = 0
   var b = 0
   var c = 0
