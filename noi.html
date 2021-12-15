@@ -271,7 +271,7 @@
   var a = Number(prompt('a'))
 
   if (a % 3 == 0 && a % 5 == 0) {
-    console.log('YSE');
+    console.log('YES');
   }
   else {
     console.log('NO');
@@ -428,7 +428,7 @@
   }
 </script>
 
-<script xtype="x" id="ch0104/20">
+<script type="x" id="ch0104/20">
   var a = Number(prompt('a'))
   var b = Number(prompt('b'))
   var c = Number(prompt('c'))
@@ -465,35 +465,99 @@
     var age = Number(prompt('age'));
     m += age;
   }
-  console.log(m / n);
+  console.log((m / n).toFixed(2));
 </script>
 
-<script id="ch0105/02">
+<script type="x" id="ch0105/02">
+  var money = 0
 
+  for (i = 0; i < 12; i++) {
+    var a = Number(prompt('结余'))
+    money += a
+  }
+  var all = money / 12
+  console.log("$" + all.toFixed(2));
 </script>
 
-<script id="ch0105/03">
+<script type="x" id="ch0105/03">
+  var x = 0
 
+  for (i = 0; i < 3; i++) {
+    var n = Number(prompt('n'))
+    x += n
+  }
+  console.log((x / 3).toFixed(4));
 </script>
 
-<script id="ch0105/04">
-
+<script type="x" id="ch0105/04">
+  var n = Number(prompt('数量'))
+  var m = 0
+  for (i = 0; i < n; i++) {
+    var x = Number(prompt('值'))
+    m += x
+  }
+  var v = m / n
+  console.log(m, v.toFixed(5));
 </script>
 
-<script id="ch0105/05">
+<script type="x" id="ch0105/05">
+  var n = Number(prompt('人数'))
+  var x = 0
 
+  for (i = 0; i < n; i++) {
+    var a = Number(prompt('分数'))
+    if (a > x)
+      x = a
+  }
+  console.log(x);
 </script>
 
-<script id="ch0105/06">
+<script type="x" id="ch0105/06">
+  var x = Number(prompt('个数'))
+  var max = 0
+  var min = 0
 
+  for (i = 0; i < x; i++) {
+    var a = Number(prompt('值'))
+    if (a > max) {
+      if (i == 1) {
+        min = max
+      }
+      max = a
+    } else if (a < min) {
+      min = a
+    }
+  }
+  console.log(max - min);
 </script>
 
-<script id="ch0105/07">
+<script type="x" id="ch0105/07">
+  var n = Number(prompt('天数'))
+  var gold = 0
+  var silver = 0
+  var copper = 0
+  for (i = 0; i < n; i++) {
+    var a = Number(prompt('金牌'))
+    gold += a
 
+    var b = Number(prompt('银牌'))
+    silver += b
+
+    var c = Number(prompt('铜牌'))
+    copper += c
+  }
+  var m = gold + silver + copper
+  console.log(gold, silver, copper, m);
 </script>
 
-<script id="ch0105/08">
-
+<script type="x" id="ch0105/08">
+  var n = Number(prompt('几边形？'))
+  var m = (n - 2) * 180
+  for (i = 0; i < n - 1; i++) {
+    var x = Number(prompt('角度'))
+    m -= x
+  }
+  console.log(m);
 </script>
 
 <script id="ch0105/09">
@@ -561,7 +625,24 @@
 </script>
 
 <script id="ch0105/25">
+  var a = 0
+  var b = 0
+  var c = 0
+  var d = 0
+  var e = 0
+  var f = 0
 
+  for (i = 0; i < 1000; i++) {
+    a = i / 49
+    b = i / 7 % 7
+    c = i % 7
+    d = i / 81
+    e = i / 9 % 9
+    f = i % 9
+    if (Math.trunc(a) == f && b == e && c == Math.trunc(d)) {
+      console.log(i, 100 * a + 10 * b + c, 100 * d + 10 * e + f);
+    }
+  }
 </script>
 
 <script id="ch0105/26">
