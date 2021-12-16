@@ -282,7 +282,7 @@
   var a = Number(prompt('a'))
   var flag = false
 
-  if (a & 3 == 0) {
+  if (a % 3 == 0) {
     console.log(3);
     flag = true
   }
@@ -775,16 +775,55 @@
   }
 </script>
 
-<script id="ch0105/22">
-
+<script type="x" id="ch0105/22">
+  var money = 0
+  var save = 0
+  for (i = 1; i <= 12; i++) {
+    var budget = Number(prompt('预算'))
+    money += 300
+    money -= budget
+    if (money >= 100) {
+      save += Math.trunc(money / 100) * 100
+      money -= Math.trunc(money / 100) * 100
+    } else if (money < 0) {
+      console.log(-i);
+      break
+    }
+    if (i == 12) {
+      console.log(save * 1.2 + money);
+    }
+  }
 </script>
 
-<script id="ch0105/23">
+<script type="x" id="ch0105/23">
+  var m = Number(prompt('药品总数'))
+  var n = Number(prompt('取药人数'))
+  var y = 0
 
+  for (i = 0; i < n; i++) {
+    var a = Number(prompt('取药数量'))
+    if (a > m) {
+      y++
+    } else if (a <= m) {
+      m -= a
+    }
+  }
+  console.log(y);
 </script>
 
-<script id="ch0105/24">
-
+<script type="x" id="ch0105/24">
+  var n = Number(prompt('测量次数'))
+  var time = 0
+  for (i = 0; i < n; i++) {
+    var M = Number(prompt('收缩压'))
+    var m = Number(prompt('舒张压'))
+    if (M >= 90 && M <= 140 && m >= 60 && m <= 90) {
+      time++
+    } else {
+      time = 0
+    }
+  }
+  console.log(time);
 </script>
 
 <script type="x" id="ch0105/25">
@@ -808,20 +847,62 @@
   }
 </script>
 
-<script id="ch0105/26">
+<script type="x" id="ch0105/26">
 
+  var n = Number(prompt('个数'))
+  var y = 0
+  for (i = 0; i < n; i++) {
+    var x = Number(prompt('值'))
+    var a = Math.trunc(x / 1000)
+    var b = Math.trunc(x / 100 % 10)
+    var c = Math.trunc(x / 10 % 10)
+    var d = Math.trunc(x % 10)
+    if ((d - a - b - c) > 0) {
+      y++
+    }
+  }
+  console.log(y);
 </script>
 
-<script id="ch0105/27">
-
+<script type="x" id="ch0105/27">
+  var k = Number(prompt('k'))
+  var s = 0
+  for (i = 1; i < 99999; i++) {
+    s += 1 / i
+    if (s > k) {
+      console.log(i);
+      break
+    }
+  }
 </script>
 
-<script id="ch0105/28">
-
+<script type="x" id="ch0105/28">
+  var a = Number(prompt('n'))
+  var x = 0
+  for (i = 0; i < 99; i++) {
+    x = a % 10
+    a /= 10
+    console.log(Math.trunc(x));
+    if (a < 1) {
+      break
+    }
+  }
 </script>
 
-<script id="ch0105/29">
+<script type="x" id="ch0105/29">
 
+  var N = Number(prompt('N'))
+  var x = 0
+  var y = 0
+  for (i = 0; i < 999; i++) {
+    x = Math.trunc(N % 10)
+    y = y * 10 + x
+    N /= 10
+    if (N < 1 && N > 0 || N > -1 && N < 0) {
+      break
+    }
+  }
+  console.log(y);
 </script>
 
 <script id="ch0105/30">
