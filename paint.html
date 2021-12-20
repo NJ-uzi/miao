@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>画图</title>
+  <style>
+    canvas {
+      border: 2px solid #f0f;
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="500" height="400"></canvas>
+</body>
+<script>
+  var canvas = document.querySelector('canvas')
+  canvas.style.imageRendering = 'pixelated' //放大时的插帧方式：不插帧，直接放大像素
+  var ctx = canvas.getContext('2d')
+
+  function dot(x, y, color = 'black') {
+    x = Math.round(x)
+    y = Math.round(y)
+    ctx.fillStyle = color
+    ctx.fillRect(x, y, 1, 1)
+  }
+  /**
+   * YOUR TASK
+      // * 在 坐标 (42, 42) 画出一个点
+      // * 画一条实线
+      // * 画一条一个实点一个空点的虚线
+      // * 画一条两个实点两个空点的虚线
+      // * 画一条三个实点两个空点的虚线
+      // * 画一条45度的斜线
+      // * 画一条30度的斜线（与x轴或y轴的夹角呈30度）
+      // * 画一条跨越画布左上角和右下角的对角线
+      // * 画一个空心矩形
+      // * 画一个实心矩形
+      // * 画两个个空心的圆，居中：
+      //   * 一个半径为50像素
+      //   * 一个半径为200像素
+      // * 画一个实心的圆，半径至少为100像素
+      // * 画一个【大小合适】的sin(x)的图像
+
+      // * 画出rgb色彩空间的某一面（尺寸要大于100x100）
+        如果做出上一题后，尝试将其每个点的坐标乘以一个矩阵（如(2,0,0,2)或(1,0.27得到新的位置，即绘制出被线性变幻后的色彩空间某一面
+        可以考虑如下几种矩阵：
+           2 0
+           0 2
+           ------
+           1  0.27
+           0  1
+           ------
+           0.5    0.87
+           -0.87  0.5
+
+   */
+</script>
+<script>
+  // 不可更改上面的代码
+  // 你的代码写在这里
+  // YOUR CODE GOES BELOW
+
+  // 在 坐标(42, 42) 画出一个点
+  dot(42, 42)
+  // 画一条实线
+  var x1 = 0
+  var y1 = 0
+  for (let i1 = 0; i1 < 9999; i1++) {
+    y1 = 3
+    x1 = i1
+    dot(x1, y1)
+  }
+  // 画一条一个实点一个空点的虚线
+  var x2 = 0
+  var y2 = 0
+  for (let i2 = 0; i2 < 9999; i2++) {
+    y2 = 6
+    x2 = i2
+    if (x2 % 2 == 0) {
+      dot(x2, y2)
+    }
+  }
+  // 画一条两个实点两个空点的虚线
+  var x3 = 0
+  var y3 = 0
+  for (let i3 = 0; i3 < 9999; i3 += 4) {
+    y3 = 9
+    x3 = i3
+    dot(x3, y3)
+    dot(x3 + 1, y3)
+  }
+  // 画一条三个实点两个空点的虚线
+  var x4 = 0
+  var y4 = 0
+  for (let i4 = 0; i4 < 9999; i4 += 5) {
+    x4 = i4
+    y4 = 12
+    dot(x4, y4)
+    dot(x4 + 1, y4)
+    dot(x4 + 2, y4)
+  }
+  // 画一条45度的斜线
+  var x5 = 0
+  var y5 = 0
+  for (let i5 = 0; i5 < 9999; i5++) {
+    x5 = i5
+    y5 = i5
+    dot(x5, y5)
+  }
+  // 画一条30度的斜线（与x轴或y轴的夹角呈30度）
+  var x6 = 0
+  var y6 = 0
+  for (let i6 = 0; i6 < 9999; i6++) {
+    x6 = i6
+    y6 = i6 * Math.sqrt(3)
+    dot(x6, y6)
+  }
+  // 画一条跨越画布左上角和右下角的对角线
+  var x7 = 0
+  var y7 = 0
+  for (let i7 = 0; i7 < 9999; i7++) {
+    x7 = i7
+    y7 = i7 * 4 / 5
+    dot(x7, y7)
+  }
+  // 画一个空心矩形
+  var x8 = 0
+  var y8 = 0
+  for (let i8 = 0; i8 < 9999; i8++) {
+    for (let j = 0; j <= 50; j++) {
+      x8 = 20
+      y8 = j
+      dot(x8, y8)
+    }
+    for (let j = 0; j <= 50; j++) {
+      x8 = 70
+      y8 = j
+      dot(x8, y8)
+    }
+    for (let j = 20; j <= 70; j++) {
+      x8 = j
+      y8 = 0
+      dot(x8, y8)
+    }
+    for (let j = 20; j <= 70; j++) {
+      x8 = j
+      y8 = 50
+      dot(x8, y8)
+    }
+  }
+  // 画一个实心矩形
+  var x9 = 0
+  var y9 = 0
+  for (let i9 = 0; i9 < 999; i9++) {
+    for (let j = 0; j < 999; j++) {
+      if (i9 >= 40 && i9 <= 80 && j >= 40 && j <= 80) {
+        dot(i9, j, "pink")
+      }
+    }
+  }
+  // 画两个个空心的圆，居中：
+  //     一个半径为50像素
+  //     一个半径为200像素
+  // var r = 0
+  // var a = 300
+  // var b = 200
+  // dot(a, b, 'black')
+  // for (let i10 = 0; i10 < 999; i10++) {
+  //   for (let j = 0; j < 999; j++) {
+  //     r = (i10 - a) * (i10 - a) + (j - b) * (j - b)
+  //     if (Math.sqrt(r) == 51 || Math.sqrt(r) == 50 || Math.sqrt(r) == 200) {
+  //       dot(i10, j, "red")
+  //     }
+  //   }
+  // }
+  for (let i = 0; i < 360; i++) {
+    let x = 200 + 200 * Math.cos(i * 3.14 / 180)
+    let y = 200 + 200 * Math.sin(i * 3.14 / 180)
+    dot(x, y)
+  }
+  for (let i = 0; i < 360; i++) {
+    let x = 200 + 50 * Math.cos(i * 3.14 / 180)
+    let y = 200 + 50 * Math.sin(i * 3.14 / 180)
+    dot(x, y)
+  }
+  // 画一个实心的圆，半径至少为100像素
+  for (let i = 0; i < 360; i++) {
+    for (let j = 0; j < 100; j++) {
+
+      let x = 400 + j * Math.cos(i * 3.14 / 180)
+      let y = 300 + j * Math.sin(i * 3.14 / 180)
+      dot(x, y)
+    }
+    for (let j = 0; j < 100; j++) {
+
+      let x = 400 + j * Math.sin(i * 3.14 / 180)
+      let y = 300 + j * Math.cos(i * 3.14 / 180)
+      dot(x, y)
+    }
+  }
+  // 画一个【大小合适】的sin(x)的图像
+  for (let x = 20; x < 220; x += 0.4) {
+    let y = 300 + Math.sin(x / 4) * 20
+    dot(x, y)
+  }
+  // 画出rgb色彩空间的某一面（尺寸要大于100x100）
+  // for (i = 200; i < 455; i++) {
+  //   for (j = 0; j < 255; j++) {
+  //     dot(i, j)
+  //   }
+  // }
+</script>
+
+</html>
