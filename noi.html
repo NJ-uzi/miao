@@ -57,10 +57,10 @@
   var b = Number(prompt('b'))
   var c = Number(prompt('c'))
   var d = Number(prompt('d'))
- 
+
   var y = a*x*x*x + b*x*x + c*x +d
 
-  console.log(y.toFixed(7)); 
+  console.log(y.toFixed(7));
 </script>
 
 <script type="x" id="ch0103/08">
@@ -184,8 +184,6 @@
 
   console.log(Math.pow(2, a));
 </script>
-
-
 
 <script type="x" id="ch0104/01">
   var a = Number(prompt('a'))
@@ -315,7 +313,7 @@
   //   console.log(7);
   // } else if (a % 3 != 0 && a % 5 != 0 && a % 7 != 0) {
   //   console.log('n');
-  // } 
+  // }
 </script>
 
 <script type="x" id="ch0104/10">
@@ -406,7 +404,6 @@
   } else {
     console.log('no');
   }
-
 </script>
 
 <script type="x" id="ch0104/17">
@@ -460,7 +457,6 @@
   } else {
     console.log("x1=", -b / (2 * a) + Math.sqrt(4 * a * c - b * b) + "i", " x2=", -b / (2 * a) - Math.sqrt(4 * a * c - b * b) + "i",);
   }
-
 </script>
 
 <script type="x" id="ch0104/21">
@@ -472,9 +468,6 @@
 
   console.log(a - Math.ceil(d)); //向上取整   Math.ceil(x)
 </script>
-
-
-
 
 <script type="x" id="ch0105/01">
   var n = Number(prompt('人数'));
@@ -930,30 +923,30 @@
   }
 </script>
 
-<script type="x" id="ch0105/31">//不会写的
-  var N = Number(prompt('多少盏灯'))
-  var M = Number(prompt('多少人'))
-  var lights = ''
-  var isFrist = true
+<script type="x" id="ch0105/31">
+  //不会写的
+    var N = Number(prompt('多少盏灯'))
+    var M = Number(prompt('多少人'))
+    var lights = ''
+    var isFrist = true
 
-  for (var i = 1; i <= N; i++) {
-    var light = true //灯的状态，ture为打开，false为关闭
-    for (var j = 0; j <= M; j++) {//j表示人的编号
-      if (i % j == 0) {//用灯的编号%人的编号
-        light = !light
+    for (var i = 1; i <= N; i++) {
+      var light = true //灯的状态，ture为打开，false为关闭
+      for (var j = 0; j <= M; j++) {//j表示人的编号
+        if (i % j == 0) {//用灯的编号%人的编号
+          light = !light
+        }
+      }
+      if (!light) {
+        if (isFrist) {
+          lights += i
+        } else {
+          lights += ',' + i
+        }
+        isFrist = false
       }
     }
-    if (!light) {
-      if (isFrist) {
-        lights += i
-      } else {
-        lights += ',' + i
-      }
-      isFrist = false
-    }
-  }
-  console.log(lights);
-
+    console.log(lights);
 </script>
 
 <script type="x" id="ch0105/32">
@@ -1045,23 +1038,24 @@
   console.log(N);
 </script>
 
-<script type="x" id="ch0105/38"> // buhui  12-20-15-57
-  var m = Number(prompt('m'))
+<script type="x" id="ch0105/38">
+  // buhui  12-20-15-57
+   var m = Number(prompt('m'))
 
-  for (var i = 0; i < m; i++) {
-    var n = Number(prompt('n'))
-    for (var j = 0; j < n; j++) {
-      if (n == 0) {
+   for (var i = 0; i < m; i++) {
+     var n = Number(prompt('n'))
+     for (var j = 0; j < n; j++) {
+       if (n == 0) {
 
-        var c = Number(prompt('c'))
-        console.log(0);
-      } else {
-        for (var j = 0; j > 0; j--) {
-          var c = Number(prompt('15.57'))
-        }
-      }
-    }
-  }
+         var c = Number(prompt('c'))
+         console.log(0);
+       } else {
+         for (var j = 0; j > 0; j--) {
+           var c = Number(prompt('15.57'))
+         }
+       }
+     }
+   }
 </script>
 
 <script type="x" id="ch0105/39">
@@ -1073,7 +1067,7 @@
     a = i
     for (j = 0; j < 9; j++) {
       b = a % 10
-      a /= 10 
+      a /= 10
       if (i % 7 == 0) {
         break
       }
@@ -1170,7 +1164,6 @@
       break
     }
   }
-
 </script>
 
 <script type="x" id="ch0105/44">
@@ -1214,3 +1207,146 @@
   }
   console.log(sum);
 </script>
+
+<script type="x" id="narcissistic">
+  var n = Number(prompt('n是否是水仙花数'))
+  var sum = 0
+  var a = 0
+  var x = n
+
+  for (let i = 0; ; i++) {
+    a = x % 10
+    x /= 10
+    sum += Math.trunc(a) * Math.trunc(a) * Math.trunc(a)
+    if (x < 1) {
+      break
+    }
+  }
+  if (sum == n) {
+    console.log('YES');
+  } else {
+    console.log('NO');
+  }
+</script>
+
+<script type="x" id="narcissistics">
+  var x = 0;
+  var a = 0;
+
+  for (let i = 100; i < 10000; i++) {
+    var sum = 0;
+    x = i;
+    for (let j = 0; j < 9; j++) {
+      a = x % 10;
+      x /= 10;
+      sum += Math.trunc(a) * Math.trunc(a) * Math.trunc(a);
+      if (x < 1) {
+        break;
+      }
+    }
+    if (sum == i) {
+      console.log(sum);
+    }
+  }
+</script>
+
+<script type="x" id="palindrom">
+  var n = Number(prompt("n"))
+  var x = 0
+  var word = 0
+  var a = n
+
+  for (let j = 0; ; j++) {
+    x = a % 10
+    a /= 10
+    word += Math.trunc(x)
+    if (a < 1) {
+      break
+    }
+    word *= 10
+  }
+  if (word == n) {
+    console.log('YES');
+  } else {
+    console.log('NO');
+  }
+</script>
+
+<script xtype="" id="weekday">
+</script>
+
+<script type="x" id="complete-number">
+  var n = Number(prompt('n'))
+  var x = 0
+  var sum = 0
+
+  for (let i = 1; i < n; i++) {
+    x = n % i
+    if (x == 0) {
+      sum += i
+    }
+  }
+  if (sum == n) {
+    console.log('YES');
+  } else {
+    console.log('NO');
+  }
+</script>
+
+<script type="x" id="complete-numbers">
+
+  var x = 0
+  for (let j = 1; j <= 1000; j++) {
+    var sum = 0
+    for (let i = 1; i < j; i++) {
+      x = j % i
+      if (x == 0) {
+        sum += i
+      }
+    }
+    if (sum == j) {
+      console.log(sum);
+    }
+  }
+</script>
+
+<script type="x" id="prime">
+  var n = Number(prompt('n'))
+  var x = 0
+  var count = 0
+
+  for (let i = 1; i <= n; i++) {
+    x = n % i
+    if (x == 0) {
+      count++
+    }
+  }
+  if (count == 2) {
+    console.log('YES');
+  } else {
+    console.log('NO');
+  }
+</script>
+
+<script type="x" id="primes">
+  var x = 0
+
+  for (let j = 2; j <= 100; j++) {
+    var count = 0
+    for (let i = 1; i <= j; i++) {
+      x = j % i
+      if (x == 0) {
+        count++
+      }
+    }
+    if (count == 2) {
+      console.log(j);
+    }
+  }
+</script>
+
+<script xtype="" id=""></script>
+
+<script xtype="" id=""></script>
+
+<script xtype="" id=""></script>
