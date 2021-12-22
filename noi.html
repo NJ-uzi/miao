@@ -1216,8 +1216,8 @@
 
   for (let i = 0; ; i++) {
     a = x % 10
-    x /= 10
-    sum += Math.trunc(a) * Math.trunc(a) * Math.trunc(a)
+    x = (x - a) / 10
+    sum += a * a * a
     if (x < 1) {
       break
     }
@@ -1228,51 +1228,109 @@
     console.log('NO');
   }
 </script>
-
-<script type="x" id="narcissistics">
-  var x = 0;
-  var a = 0;
-
-  for (let i = 100; i < 10000; i++) {
-    var sum = 0;
-    x = i;
-    for (let j = 0; j < 9; j++) {
-      a = x % 10;
-      x /= 10;
-      sum += Math.trunc(a) * Math.trunc(a) * Math.trunc(a);
+<!-- <script type="a-function" id="narcissistic">
+  function a(n) {
+    let sum = 0
+    let x = n
+    let a = 0
+    for (let i = 0; ; i++) {
+      a = x % 10
+      x = (x - a) / 10
+      sum += a * a * a
       if (x < 1) {
-        break;
+        break
       }
     }
-    if (sum == i) {
-      console.log(sum);
+    if (sum == n) {
+      return true
+    } else {
+      return false
+    }
+  }
+</script> -->
+<script type="x" id="narcissistics">  //调用函数运算
+  // var x = 0;
+  // var a = 0;
+
+  for (let i = 100; i < 10000; i++) {
+    // var sum = 0;
+    // x = i;
+    // for (let j = 0; j < 9; j++) {
+    //   a = x % 10;
+    //   x /= 10;
+    //   sum += Math.trunc(a) * Math.trunc(a) * Math.trunc(a);
+    //   if (x < 1) {
+    //     break;
+    //   }
+    // }
+    // if (sum == i) {
+    //   console.log(sum);
+    // }
+    if (a(i)) {
+      console.log(i);
+    }
+  }
+  function a(n) {
+    let sum = 0
+    let x = n
+    let a = 0
+    for (let i = 0; ; i++) {
+      a = x % 10
+      x = (x - a) / 10
+      sum += a * a * a
+      if (x < 1) {
+        break
+      }
+    }
+    if (sum == n) {
+      return true
+    } else {
+      return false
     }
   }
 </script>
 
 <script type="x" id="palindrom">
+  debugger
   var n = Number(prompt("n"))
-  var x = 0
-  var word = 0
-  var a = n
+  // var x = 0
+  // var word = 0
+  // var a = n
 
-  for (let j = 0; ; j++) {
-    x = a % 10
-    a /= 10
-    word += Math.trunc(x)
-    if (a < 1) {
-      break
+  // for (let j = 0; ; j++) {
+  //   x = a % 10
+  //   a = (a - x) / 10
+  //   word += x
+  //   if (a < 1) {
+  //     break
+  //   }
+  //   word *= 10
+  // }
+  // if (word == n) {
+  //   console.log('YES');
+  // } else {
+  //   console.log('NO');
+  // }
+  console.log(ispalindrom(n));
+  function ispalindrom(n) {
+    var x = 0
+    var word = 0
+    var a = n
+
+    for (let j = 0; ; j++) {
+      x = a % 10
+      a = (a - x) / 10
+      word += x
+      if (a < 1) {
+        break
+      }
+      word *= 10
     }
-    word *= 10
-  }
-  if (word == n) {
-    console.log('YES');
-  } else {
-    console.log('NO');
+    return word == n
   }
 </script>
 
-<script xtype="" id="weekday">
+<script type="x" id="weekday">
 </script>
 
 <script type="x" id="complete-number">
@@ -1280,7 +1338,7 @@
   var x = 0
   var sum = 0
 
-  for (let i = 1; i < n; i++) {
+  for (let i = 1; i*i <= n; i++) {
     x = n % i
     if (x == 0) {
       sum += i
@@ -1345,8 +1403,56 @@
   }
 </script>
 
-<script xtype="" id=""></script>
+<script type="x" id="itoa">
+  var n = Number(prompt('整数n'))
+  n = n.toFixed(0)
+  console.log(n);
+</script>
 
-<script xtype="" id=""></script>
+<script type="x" id="lcf&lcm">
+  var n = Number(prompt('n'))
+  var m = Number(prompt('m'))
+  var x = 0
+  var y = 0
+  for (let i = 1; i <= m * n; i++) {
+    var a = n % i
+    var b = m % i
+    if (a == 0 && b == 0 && i >= x) {
+      x = i
+    }
+    var c = i % n
+    var d = i % m
+    if (c == 0 && d == 0) {
+      y = i
+    }
 
-<script xtype="" id=""></script>
+  }
+  console.log(x, y);
+</script>
+
+<script type="x" id="sqrt">
+  //debugger
+  // var x = Number(prompt('x'))
+  // var y = Math.pow(10, 8) * x
+
+  // for (let i = 1; i * i <= x; i++) {
+  //   var a = 0
+  //   a == i * Math.pow(10, 4)
+
+  //   if (y == a * a) {
+  //     console.log(a / Math.pow(10, 4));
+  //     break
+  //   }
+
+  // }
+  var a = Number(prompt('a'))
+  console.log(sqrt(a).toFixed(3));
+  function sqrt(n, def = 0.001) {
+    var val = n, last
+    do {
+      last = val
+      val = (val + n / val) / 2
+    } while (Math.abs(val - last) > def)
+    return val
+  }
+</script>
