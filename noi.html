@@ -110,11 +110,11 @@
 <script type="x" id="ch0103/13">
   var a = Number(prompt('a'))
 
-  var b = a / 100
-  var c = (a / 10) % 10
-  var d = a % 10
+  var b = a % 10
+  var c = (a - b) / 10 % 10
+  var d = ((a - b) / 10 - c) / 10
 
-  console.log(d.toFixed(0) + c.toFixed(0) * 10 + b.tofixed(0));
+  console.log(b + '' + c + '' + d + '');
 </script>
 
 <script type="x" id="ch0103/14">
@@ -1338,7 +1338,7 @@
   var x = 0
   var sum = 0
 
-  for (let i = 1; i*i <= n; i++) {
+  for (let i = 1; i * i <= n; i++) {
     x = n % i
     if (x == 0) {
       sum += i
@@ -1410,49 +1410,66 @@
 </script>
 
 <script type="x" id="lcf&lcm">
-  var n = Number(prompt('n'))
-  var m = Number(prompt('m'))
-  var x = 0
-  var y = 0
-  for (let i = 1; i <= m * n; i++) {
-    var a = n % i
-    var b = m % i
-    if (a == 0 && b == 0 && i >= x) {
-      x = i
-    }
-    var c = i % n
-    var d = i % m
-    if (c == 0 && d == 0) {
-      y = i
-    }
-
-  }
-  console.log(x, y);
-</script>
-
-<script type="x" id="sqrt">
-  //debugger
-  // var x = Number(prompt('x'))
-  // var y = Math.pow(10, 8) * x
-
-  // for (let i = 1; i * i <= x; i++) {
-  //   var a = 0
-  //   a == i * Math.pow(10, 4)
-
-  //   if (y == a * a) {
-  //     console.log(a / Math.pow(10, 4));
-  //     break
+  // var n = Number(prompt('n'))
+  // var m = Number(prompt('m'))
+  // var x = 0
+  // var y = 0
+  // for (let i = 1; i <= m * n; i++) {
+  //   var a = n % i
+  //   var b = m % i
+  //   if (a == 0 && b == 0 && i >= x) {
+  //     x = i
+  //   }
+  //   var c = i % n
+  //   var d = i % m
+  //   if (c == 0 && d == 0) {
+  //     y = i
   //   }
 
   // }
+  // console.log(x, y);
+function lcf_lcm(n){
+
+}
+</script>
+
+<script type="x" id="sqrt">
   var a = Number(prompt('a'))
-  console.log(sqrt(a).toFixed(3));
-  function sqrt(n, def = 0.001) {
-    var val = n, last
-    do {
-      last = val
-      val = (val + n / val) / 2
-    } while (Math.abs(val - last) > def)
-    return val
+
+  console.log(sqrt(a));
+
+  // function sqrt(n, def = 0.001) {
+  //   var val = n, last
+  //   do {
+  //     last = val
+  //     val = (val + n / val) / 2
+  //   } while (Math.abs(val - last) > def)
+  //   return val
+  // }
+
+  //牛顿公式
+  function sqrt(n) {
+    var x = n
+    while (Math.abs(x * x - n) > 0.001) {
+      x = x / 2 + n / 2 / x
+    }
+    return x
   }
+
+  //二分法
+  // function sqrt(n) {
+  //   var left = 0
+  //   var right = n
+
+  //   while (Math.abs(mid * mid - n) > 0.001) {
+  //     var mid = (left + right) / 2
+  //     if (mid * mid < n) {              //如果mid<根号n 即 n/2 < 根号n < n
+  //       left = mid                   //把范围的左区间收缩至mid处
+  //     } else if (mid * mid > n) {     //如果mid>根号n 即 0 < 根号n < n/2
+  //       right = mid                  //把范围的右区间收缩至mid处
+  //     } else {
+  //       return mid          //当mid==根号n 得到结果
+  //     }
+  //   }
+  // }
 </script>
