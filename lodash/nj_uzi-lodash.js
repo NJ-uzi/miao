@@ -19,14 +19,18 @@ var nj_uzi = {
     var res=[]
     for (let i = 0; i < array.length; i++) { 
       if (array[i]) {
-        
+        res.push(array[i])
       }
     }
- },
+    return res
+  },
+  dorp: function (array, num) { 
+    
+  },
 };
 
 // chunk xx
-// compact
+// compact xx
 // drop
 // dropRight
 // dropRightWhile
