@@ -68,10 +68,57 @@ var nj_uzi = {
     }
     return res
   },
-  flattenDeep: function (array) { 
 
+  flattenDeep :function (array) {
+  let res = []
+  array.forEach(item => {
+    if(Array.isArray(item)){
+      res = res.concat(flattenDeep(item))
+    } else {
+      res.push(item)
+    }
+  })
+  return res;
+},
+
+  fromPairs: function (pairs) {
+    var res = {}
+    for (let i = 0; i < pairs.length; i++) { 
+      let x = pairs[i][0]
+      let y = pairs[i][1]
+      res[x] = y
+    }
+    return res
   },
 
+  head: function (array) { 
+    if (!array) { 
+      return undefined
+    }
+    return [array[0]]
+  },
+
+  indexOf: function (array, value, fromIndex = 0) {
+    var sum=0
+    for (let i = 0; i < array.length; i++) { 
+      if (!fromIndex) {
+        if (array[i] == value) {
+          return i
+        }
+      } else { 
+        if (array[i] == value) {
+          sum++
+        }
+        if (sum == fromIndex) {
+          return i
+        }
+      }
+    }
+  },
+
+  initial: function () { 
+    
+  }
 };
 // chunk    xx
 // compact    xx
@@ -83,11 +130,11 @@ var nj_uzi = {
 // findIndex    
 // findLastIndex    
 // flatten    xx
-// flattenDeep
-// flattenDepth
-// fromPairs
-// head
-// indexOf
+// flattenDeep    yy
+// flattenDepth    
+// fromPairs    xx
+// head    xx
+// indexOf    xx
 // initial
 // join
 // last
