@@ -12,13 +12,17 @@ var nj_uzi = {
       }
       x += size
       y += size
-    } 
-
+    }
     return res
-  }
-compact: function () {
-  
- }
+  },
+  compact: function (array) {
+    var res=[]
+    for (let i = 0; i < array.length; i++) { 
+      if (array[i]) {
+        
+      }
+    }
+ },
 };
 
 // chunk xx
