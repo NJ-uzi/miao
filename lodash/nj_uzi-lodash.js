@@ -130,7 +130,7 @@ var nj_uzi = {
       if (i == array.length - 1) {
         str += array[i]
       } else {
-        str += array[i] + separator
+        str += array[i] + '' + separator
       }
     }
     return str
@@ -176,27 +176,35 @@ var nj_uzi = {
     return array
   },
 
+  uniq: function (array) {
+    var res = []
+    var k = new Object()
+    for (let i = 0; i < array.length; i++) {
+
+    }
+
+  },
 };
-// chunk    xx
-// compact    xx
-// drop    xx
-// dropRight    xx
+// chunk          xx
+// compact        xx
+// drop           xx
+// dropRight      xx
 // dropRightWhile
 // dropWhile
-// fill    xx
+// fill           xx
 // findIndex
 // findLastIndex
-// flatten    xx
+// flatten        xx
 // flattenDeep    yy
 // flattenDepth
-// fromPairs    xx
-// head    xx
-// indexOf    xx
-// initial    xx
-// join    xx
-// last    xx
+// fromPairs      xx
+// head           xx
+// indexOf        xx
+// initial        xx
+// join           xx
+// last           xx
 // lastIndexOf    xx
-// reverse
+// reverse        xx
 // uniq
 // uniqBy
 // without
