@@ -2,12 +2,12 @@ var nj_uzi = {
   chunk: function (array, size) {
     let leng = array.length
     var res = []
-    var temp = Math.ceil(leng/size)
+    var temp = Math.ceil(leng / size)
     var x = 0
-    var y=size
+    var y = size
     for (var i = 0; i < temp; i++) {
       res[i] = new Array()
-      for (var j = x; j < y&&j<leng; j++) { 
+      for (var j = x; j < y && j < leng; j++) {
         res[i].push(array[j])
       }
       x += size
@@ -17,8 +17,8 @@ var nj_uzi = {
   },
 
   compact: function (array) {
-    var res=[]
-    for (let i = 0; i < array.length; i++) { 
+    var res = []
+    for (let i = 0; i < array.length; i++) {
       if (array[i]) {
         res.push(array[i])
       }
@@ -26,12 +26,12 @@ var nj_uzi = {
     return res
   },
 
-  dorp: function (array, num) { 
+  dorp: function (array, num) {
     var res = []
-    if (!num) { 
+    if (!num) {
       return array
     }
-    for (let i = num; i < array.length; i++) { 
+    for (let i = num; i < array.length; i++) {
       res.push(array[i])
     }
     return res
@@ -40,50 +40,50 @@ var nj_uzi = {
   dropRight: function (array, num) {
     var res = []
     var leng = array.length
-    if (!num) { 
-      num=num==0?0:1 
+    if (!num) {
+      num = num == 0 ? 0 : 1
     }
-    for (let i = 0; i < leng-num; i++) { 
+    for (let i = 0; i < leng - num; i++) {
       res.push(array[i])
     }
     return res
   },
 
-  fill: function (array, value, start=0, end=array.length) {
+  fill: function (array, value, start = 0, end = array.length) {
     for (let i = start; i < end; i++) {
-      array[i]=value
+      array[i] = value
     }
     return array
   },
 
   flatten: function (array) {
     var res = []
-    for (let i = 0; i < array.length; i++) { 
-      if (!array[i].length) { 
+    for (let i = 0; i < array.length; i++) {
+      if (!array[i].length) {
         res.push(array[i])
       }
-      for (let j = 0; j < array[i].length;j++) { 
+      for (let j = 0; j < array[i].length; j++) {
         res.push(array[i][j])
       }
     }
     return res
   },
 
-  flattenDeep :function (array) {
-  let res = []
-  array.forEach(item => {
-    if(Array.isArray(item)){
-      res = res.concat(flattenDeep(item))
-    } else {
-      res.push(item)
-    }
-  })
-  return res;
-},
+  flattenDeep: function (array) {
+    let res = []
+    array.forEach(item => {
+      if (Array.isArray(item)) {
+        res = res.concat(flattenDeep(item))
+      } else {
+        res.push(item)
+      }
+    })
+    return res;
+  },
 
   fromPairs: function (pairs) {
     var res = {}
-    for (let i = 0; i < pairs.length; i++) { 
+    for (let i = 0; i < pairs.length; i++) {
       let x = pairs[i][0]
       let y = pairs[i][1]
       res[x] = y
@@ -91,21 +91,21 @@ var nj_uzi = {
     return res
   },
 
-  head: function (array) { 
-    if (!array) { 
+  head: function (array) {
+    if (!array) {
       return undefined
     }
-    return [array[0]]
+    return array[0]
   },
 
   indexOf: function (array, value, fromIndex = 0) {
-    var sum=0
-    for (let i = 0; i < array.length; i++) { 
+    var sum = 0
+    for (let i = 0; i < array.length; i++) {
       if (!fromIndex) {
         if (array[i] == value) {
           return i
         }
-      } else { 
+      } else {
         if (array[i] == value) {
           sum++
         }
@@ -116,29 +116,86 @@ var nj_uzi = {
     }
   },
 
-  initial: function () { 
-    
-  }
+  initial: function (array) {
+    var res = []
+    for (let i = 0; i < array.length - 1; i++) {
+      res.push(array[i])
+    }
+    return res
+  },
+
+  join: function (array, separator = ',') {
+    var str = ''
+    for (let i = 0; i < array.length; i++) {
+      if (i == array.length - 1) {
+        str += array[i]
+      } else {
+        str += array[i] + separator
+      }
+    }
+    return str
+  },
+
+  last: function (array) {
+    if (!array) {
+      return undefined
+    }
+    return array[array.length - 1]
+  },
+
+  lastIndexOf: function (array, value, fromIndex = array.length - 1) {
+    var sum = 0
+    var temp = 0
+    for (let i = array.length - 1; i >= 0; i--) {
+      if (!(fromIndex == array.length - 1)) {
+        if (array[i] == value) {
+          sum++
+        }
+        if (sum == fromIndex) {
+          return i
+        }
+      } else {
+        if (array[i] == value) {
+          temp = i
+        }
+      }
+    }
+    return temp
+  },
+
+  reverse: function (array) {
+    var leng = array.length
+    var right = leng - 1
+    var mid = 0
+    for (let left = 0; left < right; left++) {
+      mid = array[left]
+      array[left] = array[right]
+      array[right] = mid
+      right--
+    }
+    return array
+  },
+
 };
 // chunk    xx
 // compact    xx
 // drop    xx
 // dropRight    xx
-// dropRightWhile    
-// dropWhile    
+// dropRightWhile
+// dropWhile
 // fill    xx
-// findIndex    
-// findLastIndex    
+// findIndex
+// findLastIndex
 // flatten    xx
 // flattenDeep    yy
-// flattenDepth    
+// flattenDepth
 // fromPairs    xx
 // head    xx
 // indexOf    xx
-// initial
-// join
-// last
-// lastIndexOf
+// initial    xx
+// join    xx
+// last    xx
+// lastIndexOf    xx
 // reverse
 // uniq
 // uniqBy
