@@ -95,9 +95,537 @@
   //   return width
   // }
 
+  //rgb字符串
+  // function rgb(r, g, b) {
+  //   return 'rgb(' + r + ',' + g + ',' + b + ')'
+  // }
+  // var a = []
+  // var a = Array(n)
+  // for (let i = 0; i < n; i++) {
+  //   var x = Number(prompt('x'))
+  //   a[i] = x
+  // }
+  // for (let j = n - 1; j >= 0; j--) {
+  //   console.log(a[j]);
+  // }
+
+  //有序数列求和等于target
+  // var twoSum = function (numbers, target) {
+
+  //   var j = numbers.length
+  //   for (let i = 0; i < numbers.length; i++) {
+  //     if (numbers[i] + numbers[j] > target) {
+  //       j--
+  //     } else if (numbers[i] + numbers[j] < target) {
+  //       continue
+  //     } else {
+  //       return [i + 1, j + 1]
+  //     }
+
+  //   }
+  // }
 
 
+  //阶乘
+  // function factorial(x) {
+  //   if (x == 0) {
+  //     return 1
+  //   } else {
+  //     return x * factorial(x - 1)
+  //   }
+  // }
 
+  //斐波那契数列
+  // function fibb(n) {
+  //   if (n < 3) {
+  //     return n
+  //   } else {
+  //     return fibb(n - 1) + fibb(n - 2)
+  //   }
+  // }
+
+  //输入n个数并反向输出
+  //输入x,再输入n-1个数并反向输出，输出x
+  // function inputAndReverse(n) {
+  //   if (n == 0) {
+  //     return
+  //   }
+  //   var x = Number(prompt())
+  //   inputAndReverse(n - 1)
+  //   console.log(x)
+  // }
+
+  // function findSolution(targetX, targetY) {
+
+  // var target = 151
+  //   var array = []
+
+  //   function find(x,y, history) {
+  //     if (x == targetX&& y == targetY) {
+  //       array.push(history)
+  //       return
+  //     }
+  //     if (x > targetX|| y > targetY) {
+  //       return
+  //     }
+  //     find(start * 3, '(' + history + ') * 3')
+  //     find(start + 5, history + ' + 5')
+  //   }
+
+  //   find(1, '1')
+  //   return array
+  // }
+
+
+  // 二分法 数组大小比较并插入
+  // var searchInsert = function (nums, target) {
+  //   let left = 0;
+  //   let right = nums.length - 1;
+  //   let mid;
+  //   let midValue
+  //   if (nums[left] > target) return 0;  //如果小于最小的 
+  //   if (nums[right] < target) return nums.length;  //如果大于最大的
+
+  //   while (left <= right) {
+  //     mid = left + ((right - left) >> 1);
+  //     midValue = nums[mid];
+  //     if (midValue === target) {   //如果刚好等于
+  //       return mid;
+  //     } else if (midValue < target) {  //中间值如果小于目标值
+  //       if (nums[mid + 1] > target) return mid + 1; //且中间值后一个大于目标值
+  //       left = mid + 1;
+  //     } else { //中间值如果大于目标值
+  //       if (nums[mid - 1] < target) return mid; //且中间值前一个小于目标值
+  //       right = mid - 1;
+  //     }
+  //   }
+  // };
+  //找B的数量
+  // function countBs(str) {
+  //   var count = 0
+  //   for (let i = 0; i < str.length; i++) {
+  //     if (str[i] === "B") {
+  //       count++
+  //     }
+  //     return count
+  //   }
+
+  //找随意字符的数量
+  // function conutChar(str, char) {
+  //   var count = 0
+  //   for (let i = 0; i < str.length; i++) {
+  //     if (str[i] === char) {
+  //       count++
+  //     }
+  //     return count
+  //   }
+  // }
+
+  //比大小
+  // function min(a, b) {
+  //   if (a - b > 0) {
+  //     return a
+  //   } else if (a - b < 0) {
+  //     return b
+  //   } else {
+  //     return "相等"
+  //   }
+  // }
+
+
+  // function isEven(n) {
+  //   if (n == 0) {
+  //     return true
+  //   } else if (n == 1) {
+  //     return false
+  //   } else {
+  //     return isEven(n - 2)
+  //   }
+
+  //数字----罗马数字1.0
+  // var intToRoman = function (num) {
+  //   var Roman = ''
+  //   while (num >= 1000) {
+  //     Roman += 'M'
+  //     num -= 1000
+  //   }
+  //   while (num >= 900) {
+  //     Roman += 'CM'
+  //     num -= 900
+  //   }
+  //   while (num >= 500) {
+  //     Roman += 'D'
+  //     num -= 500
+  //   }
+  //   while (num >= 400) {
+  //     Roman += 'CD'
+  //     num -= 400
+  //   }
+  //   while (num >= 100) {
+  //     Roman += 'C'
+  //     num -= 100
+  //   }
+  //   while (num >= 90) {
+  //     Roman += 'XC'
+  //     num -= 90
+  //   }
+  //   while (num >= 50) {
+  //     Roman += 'L'
+  //     num -= 50
+  //   }
+  //   while (num >= 40) {
+  //     Roman += 'XL'
+  //     num -= 40
+  //   }
+  //   while (num >= 10) {
+  //     Roman += 'X'
+  //     num -= 10
+  //   }
+  //   while (num >= 9) {
+  //     Roman += 'IX'
+  //     num -= 9
+  //   }
+  //   while (num >= 5) {
+  //     Roman += 'V'
+  //     num -= 5
+  //   }
+  //   while (num >= 4) {
+  //     Roman += 'IV'
+  //     num -= 4
+  //   }
+  //   while (num > 0) {
+  //     Roman += 'I'
+  //     num -= 1
+  //   }
+  //   return Roman
+  // };
+
+  //数字----罗马数字2.0
+  // var intToRoman = function (num) {
+  //   //用keys和values这两个数组记录数组和字母,之间存在一一对应关系
+  //   var keys = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+  //   var char = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I']
+  //   var Roman = ''
+  //   for (let i = 0; i < keys.length; i++) {
+  //     while (num >= keys[i]) { //这里只能写while循环,写了if只会执行一次
+  //       num -= keys[i]
+  //       Roman += char[i]
+  //     }
+  //   }
+  //   return Roman
+  // }
+
+
+  //完美数
+  // var checkPerfectNumber = function (num) {
+  //   if (num === 1) {
+  //     return false;
+  //   }
+  //   let sum = 1;
+  //   for (let i = 2; i * i <= num; ++i) {  i<根号num 一组因数选一个即可
+  //     if (num % i === 0) {
+  //       sum += i
+  //       sum += num / i
+  //     }
+  //   }
+  //   return sum === num;
+  // };
+
+  //杨光辉三角
+  // const generate = numRows => {
+  //   if (numRows === 1) return [[1]];
+  //   const res = [[1]];
+  //   // i代表行，j代表每行的元素
+  //   for (let i = 1; i < numRows; i++) {
+  //     // 定义当前行
+  //     const row = [];
+  //     for (let j = 0; j <= i; j++) {
+  //       // left左上角元素
+  //       // left为上一行的、前一个j
+  //       // 如果不存在就赋值0
+  //       const left = res[i - 1][j - 1] || 0;
+  //       // right右上角元素
+  //       // right为上一行的、当前j
+  //       const right = res[i - 1][j] || 0;
+  //       // 当前元素为 左上角元素 + 右上角元素
+  //       row.push(left + right);
+  //     }
+  //     // 把当前行加入res
+  //     res.push(row);
+  //   }
+  //   return res;
+  // };
+
+  //二进制统计1的个数   使用位运算 1&1=1  1&0=0  来辨别
+  // var hammingWeight = function (n) {
+  //   let num = 0;
+  //   for (let i = 0; i < 32; i++) {
+  //     if ((n & (1 << i)) !== 0) {
+  //       num++;
+  //     }
+  //   }
+  //   return num;
+  // };
+
+  //找不重复的数字  重复的之出现2次    利用异或的特性
+  // var singleNumber = function (nums) {
+  //   var res = nums[0]
+  //   for (let i = 1; i < nums.length; i++) {
+  //     res ^= nums[i]     //^  异或运算  同为1  异为0 
+  //   }
+  //   return res
+  // };
+
+  //大数求和   不丢失精度   字符串计算
+  // var addStrings = function (num1, num2) {
+  //   var length = Math.max(num1.length, num2.length)  //判断长度，取最长的
+  //   num1 = num1.padStart(length, '0')   //向最大长度补0
+  //   num2 = num2.padStart(length, '0')
+  //   let ans = '', add = 0
+  //   let x = 0, y = 0
+
+  //   for (let i = length - 1; i >= 0 || add; i--) {
+  //     x = Number(num1[i]) || 0
+  //     y = Number(num2[i]) || 0
+  //     ans = ((x + y + add) % 10) + ans   //对位相加
+  //     add = (x + y + add) >= 10 ? 1 : 0  //进位
+  //   }
+  //   return ans
+  // };
+
+  //二进制加法  字符串运算   不丢失精度
+  // var addBinary = function (a, b) {
+
+  //   var length = Math.max(num1.length, num2.length)  //判断长度，取最长的
+  //   num1 = num1.padStart(length, '0')   //向最大长度补0
+  //   num2 = num2.padStart(length, '0')
+  //   let ans = '', add = 0
+  //   let x = 0, y = 0
+
+  //   for (let i = length - 1; i >= 0 || add; i--) {
+  //     x = Number(num1[i]) || 0
+  //     y = Number(num2[i]) || 0
+  //     ans = ((x + y + add) % 2) + ans   //对位相加
+  //     add = (x + y + add) >= 2 ? 1 : 0  //进位
+  //   }
+  //   return ans
+  // };
+
+  //乘法运算  不丢失精确度   字符串输出
+  // var multiply = function (num1, num2) {
+  //   if (num1 === '0' || num2 === '0') return '0' //当某一个值为0 乘法必为0
+  //   var res = []
+  //   for (let i = 0; i < num1.length; i++) {
+  //     var tmp1 = num1[num1.length - 1 - i]  //拿到num1的最后一位
+  //     for (let j = 0; j < num2.length; j++) {
+  //       var tmp2 = num2[num2.length - 1 - j]  //拿到num2的最后一位
+  //       var pos = res[i + j] ? res[i + j] + tmp1 * tmp2 : tmp1 * tmp2
+  //       //判断rse[]中i+j项是否存在，存在就加上，不存在就不加，如数两个尾数的乘积
+  //       res[i + j] = pos % 10  //把pos(尾数乘积值)取个位填充进rse[]
+  //       if (pos >= 10) {       //当pos>10时需要进位，同时判断下一位是否存在，存在就加上，不存在就直接输入进位值
+  //         res[i + j + 1] = res[i + j + 1] ? res[i + j + 1] + Math.floor(pos / 10) : Math.floor(pos / 10)
+  //       }
+  //     }
+  //   }
+  //   return res.reverse().join('') //最后对res[] 逆序 依次输出 拼成字符串 得到结果
+  // }
+
+
+  // function push(array, val) {
+  //   array.length = val
+  //   return array.length
+  // }
+
+  // function pop(array) {
+  //   var t = array[array.length - 1]
+  //   array.length--
+  //   return t
+  // }
+
+  // function fill(array, val) {
+  //   for (let i = 0; i < array.length; i++) {
+  //     array[i] = val
+  //   }
+  //   return array
+  // }
+
+  //排序
+  // var sortArray = function (nums) {
+  //   let length = nums.length
+  //   let minIndex = 0
+
+  //   for (let i = 0; i < length - 1; i++) { //完成一次最小值迁移后i++
+  //     minIndex = i
+  //     for (let j = i; j < length; j++) {
+  //       if (nums[minIndex] > nums[j]) {//从下标i开始 取最小值的下标
+  //         minIndex = j
+  //       }
+  //     }
+  //     if (i !== minIndex) { //当i和minIndex不相等的时候  交换值
+  //       let mm = nums[minIndex]
+  //       nums[minIndex] = nums[i]
+  //       nums[i] = mm
+  //     }
+  //   }
+  //   return nums
+  // }
+
+  //数组连续项求和最大值
+  // var maxSubArray = function (nums) {
+  //   let ans = nums[0];
+  //   let sum = 0;
+
+  //   for (let i = 0; i < nums.length; i++) {
+  //     if (sum > 0) {
+  //       // 继续加当前元素
+  //       sum += nums[i];
+  //     } else {
+  //       // 加上当前元素只会对最终数组和起减少的作用，而不是增大数组和，所以就直接以当前元素为起点新起数组求最大数组和
+  //       sum = nums[i];
+  //     }
+  //     ans = Math.max(ans, sum);
+  //   }
+  //   return ans;
+  // };
+
+  //第一个不重复的字符
+  // var firstUniqChar = function (s) {
+  //   for (let i = 0; i < s.length; i++) {
+  //     if (s.indexOf(s[i]) === s.lastIndexOf(s[i])) {   //字符s[i]从左往右第一次出现和从右往左第一次出现的下标相同，则只出现一次
+  //       return i
+  //     }
+  //   }
+  //   return -1
+  // };
+
+  //字符串 最长不重复连续子串
+  // var lengthOfLongestSubstring = function (s) {
+  //   let arr = []
+  //   let max = 0
+
+  //   for (let i = 0; i < s.length; i++) {
+  //     if (arr.indexOf(s[i]) >= 0) {   //当s[i]已经出现在arr[]中的时候，数组清空
+  //       arr = arr.slice(arr.indexOf(s[i]) + 1, arr.length)  //当重复字符出现的时候把 arr[0]--重复字符 部分清除
+  //     }
+  //     arr.push(s[i])
+  //     max = Math.max(max, arr.length)  //比较当前数组长度和最大数组长度  把最大值给max
+  //   }
+  //   return max
+  // };
+
+  //相同字符组成的字符串分类放在一起
+  // var groupAnagrams = function (strs) {
+  //   let arr = new Object()
+
+  //   for (var chars of strs) {  //依次取得每个字符串
+  //     var count = new Array(26).fill(0)   //创建一个长度26的数组
+  //     for (var char of chars) {   //依次取得每个字符串的字符
+  //       count[char.charCodeAt() - 97]++ //用ASCII码值-97，对应a-z即0-25
+  //     }//每个相同字符组成的字符串对应的数组都是一样的
+  //     arr[count] ? arr[count].push(chars) : arr[count] = [chars]
+  //   }//用数组作为对象arr的键名kye、属性，若没有则建立，若有则把字符串记录为建的属性值、键值
+  //   return Object.values(arr)  //返回对象附着的属性值
+  // };
+
+  //找多数元素    数量>n/2
+  // var majorityElement = function (nums) {
+
+  //   var obj = new Object()
+  //   for (let i = 0; i < nums.length; i++) {
+  //     obj[nums[i]] = (obj[nums[i]] || 0) + 1
+  //     //若不存在nums[i]值所对应的key，则建立一个
+  //     //若有则在其基础上+1 代表nums[i]所对应的值又出现一次
+  //     if (obj[nums[i]] > nums.length / 2) { //当出现次数大于n/2时，即为多数元素
+  //       return nums[i]
+  //     }
+  //   }
+  // };
+
+  //两个字符串类比   格式相同返回true
+  // var isIsomorphic = function (s, t) {
+  //   var objS = new Object()
+  //   var objT = new Object()
+  //   for (let i = 0; i < s.length; i++) {
+  //     if (!objS[s[i]]) {    //key不存在则建立对应的映射 A→B
+  //       objS[s[i]] = t[i]
+  //     }
+  //     if (!objT[t[i]]) {
+  //       objT[t[i]] = s[i] //相同建立相反的映射  A←B
+  //     }
+  //     if (objS[s[i]] != t[i] || objT[t[i]] != s[i]) { //当相对应的映射发生错误时返回false
+  //       return false
+  //     }
+  //   }
+  //   return true
+  // };
+
+
+  // var isAnagram = function (s, t) {
+  //   var objS = new Object()
+  //   var objT = new Object()
+  //   if (s.length != t.length) {   //字符串长度不同必false
+  //     return false
+  //   }
+  //   for (let i = 0; i < s.length; i++) {//对应的字符串中的字符依次累计在key的值上
+  //     objS[s[i]] = (objS[s[i]] || 0) + 1
+  //     objT[t[i]] = (objT[t[i]] || 0) + 1
+  //   }
+  //   for (let j = 0; j < s.length; j++) {
+  //     if (objS[s[j]] != objT[s[j]]) { 
+  //       //相同的字符在两个对象中的key值应该相同
+  //       //不同的不是字符异位，字符数量都不一致
+  //       return false
+  //     }
+  //   }
+  //   return true
+  // };
+
+  //旋转数组寻找目标值  [4,5,6,0,1,2]    有序数组的变形   二分法
+  // var search = function (nums, target) {
+  //   var left = 0
+  //   var right = nums.length - 1
+
+  //   while (left <= right) {
+  //     let mid = (left + right) >> 1  //相加除以二
+  //     if (nums[mid] === target) {
+  //       return mid
+  //     }
+  //     if (nums[left] < nums[mid]) {   //左边小于中间值时，左边长度大于右边，左边为长递增
+  //       if (nums[left] <= target && target <= nums[mid]) {
+  //         right = mid - 1
+  //       } else {
+  //         left = mid + 1
+  //       }
+  //     } else {//左边大于中间值时，左边长度小于右边，右边为长递增
+  //       if (nums[mid] <= target && target <= nums[right]) {//判断目标值是否在右边区间
+  //         left = mid + 1
+  //       } else {
+  //         right = mid - 1
+  //       }
+  //     }
+  //   }
+  //   return nums[left + 1] === target ? left + 1 : -1; //当左右颠倒时，判断第left+1项是否是目标值
+  // };
+
+  //杨辉三角
+  // var getRow = function (rowIndex) {
+  //   var rows = new Array()
+  //   rows[0] = [1]
+  //   for (let i = 1; i <= rowIndex; i++) {
+  //     rows[i] = new Array(i + 1)
+  //     rows[i][0] = rows[i][i] = 1
+  //     for (let j = 1; j < i; j++) {
+  //       rows[i][j] = rows[i - 1][j - 1] + rows[i - 1][j]
+  //     }
+  //   }
+  //   return rows[rowIndex]
+  // };
+  debugger
+  max = max > ary[i] ? max : ary[i]
+
+
+  var rowIndex = 4
+  console.log(getRow(rowIndex));
 </script>
 
 <body>

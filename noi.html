@@ -1448,13 +1448,13 @@ function lcf_lcm(n){
   // }
 
   //牛顿公式
-  function sqrt(n) {
-    var x = n
-    while (Math.abs(x * x - n) > 0.001) {
-      x = x / 2 + n / 2 / x
-    }
-    return x
-  }
+  // function sqrt(n) {
+  //   var x = n
+  //   while (Math.abs(x * x - n) > 0.001) {
+  //     x = x / 2 + n / 2 / x
+  //   }
+  //   return x
+  // }
 
   //二分法
   // function sqrt(n) {
@@ -1472,4 +1472,19 @@ function lcf_lcm(n){
   //     }
   //   }
   // }
+
+</script>
+
+<script>
+  var myPow = function (x, n) {
+    var N = Math.abs(n)
+    while (n >= 1) {
+      x *= x
+      n--
+    }
+    return n > 0 ? x || 1 / x
+  }
+  var n = 3, x = 3;
+  console.log(myPow(x, n));
+
 </script>

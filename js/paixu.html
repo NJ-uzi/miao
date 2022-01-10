@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<script>
+  //生成n个由n以内的整数组成的数组
+  function randomAry(n) {
+    var ary = []
+    for (let i = 0; i < n; i++) {
+      ary.push(Math.random() * n | 0)
+    }
+    return ary
+  }
+  //插入排序
+  function insertSort(ary) {
+    var leng = ary.lrngth
+    var x = 0
+
+    for (let i = 1; i < leng; i++) {
+      x = ary[i]
+      for (let j = i - 1; j >= 0; j--) {
+        if (t < ary[j]) {
+          ary[j + 1] = ary[j]
+        } else {
+          break
+        }
+      }
+      ary[j + 1] = t
+    }
+    return ary
+  };
+  //冒泡排序                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+  function bubbleSort(ary) {
+    var leng = ary.length
+    for (let i = leng - 2; i >= 0; i--) {
+      var flag = false
+      for (let j = 0; j <= i; j++) {
+        if (ary[j] > ary[j + 1]) {
+          flag = !flag
+          // var t = ary[j]
+          // ary[j] = ary[j + 1]
+          // ary[j + 1] = t
+          //替换swap函数
+          swap(ary, j, j + 1)
+        }
+      }
+      if (flag) {
+        break
+      }
+    }
+    return ary
+  }
+  //交换数组的第i,j项
+  function swap(ary, i, j) {
+    var mid = 0
+    mid = ary[j]
+    ary[j] = ary[i]
+    ary[i] = mid
+  }
+  //选择排序
+  function selectSort(ary) {
+    for (let i = 0; i < ary.length - 1; i++) {
+      var minIdx = i
+      // min = min > ary[i] ? ary[i] : min
+      for (let j = i + 1; j < ary.length; j++) {
+        if (ary[j] < ary[minIdx]) {
+          minIdx = j
+        }
+      }
+      swap(ary, i, minIdx)
+    }
+    return ary
+  }
+  //归并排序
+  function mergeSort(ary) {
+    if (ary.length < 2) {
+      return ary
+    }
+    //分两半
+    var mid = Math.floor(ary.length / 2)
+    var left = ary.slice(0, mid)
+    var right = ary.slice(mid)
+    //左边排序
+    mergeSort(left)
+    //右边排序
+    mergeSort(right)
+    //合并
+    var i = 0
+    var j = 0
+    var k = 0
+    while (i < left.length && j < right.length) {
+      if (left[i] < right[j]) {
+        ary[k++] = left[i++]
+      } else {
+        ary[k++] = right[j++]
+      }
+    }
+    while (i < left.length) {
+      ary[k++] = left[i++]
+    }
+    while (j < right.length) {
+      ary[k++] = right[j++]
+    }
+    return ary
+  }
+  //快速排序
+  function quickSort(ary) {
+
+  }
+</script>
+
+<body>
+
+</body>
+
+</html>

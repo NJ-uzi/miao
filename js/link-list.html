@@ -1,0 +1,473 @@
+<script>
+  // var node = {
+  //   val: 2,
+  //   next: null
+  // }
+
+  // function arrayToList(array) {
+  //   if (array.length == 0) {
+  //     return null
+  //   }
+
+  //   var nodes = []
+  //   for (var i = 0; i < array.length; i++) {
+  //     // 对于数组中的每个值，创建一个链表结点
+  //     var node = {
+  //       val: array[i],
+  //       next: null,
+  //     }
+  //     nodes.push(node)
+  //   }
+
+  //   for (var i = 0; i < nodes.length - 1; i++) {
+  //     // 把每个结点的next指向其后续的结点
+  //     nodes[i].next = nodes[i + 1]
+  //   }
+
+  //   return nodes[0]
+  // }
+
+  function arrayToList2(array) {
+    if (array.length == 0) {
+      return null
+    }
+    var head = {
+      val: array[0],
+      next: null
+    }
+    var prev = head
+    for (var i = 1; i < array.length; i++) {
+      var node = {
+        val: array[i],
+        next: null
+      }
+      prev.next = node
+      prev = node
+    }
+    return head
+  }
+
+  // function arrayToList3(array) {
+  //   var dummy = {
+  //     val: 0,
+  //     next: null
+  //   }
+  //   var prev = dummy
+
+  //   for (var i = 0; i < array.length; i++) {
+  //     var node = {
+  //       val: array[i],
+  //       next: null
+  //     }
+  //     prev.next = node
+  //     prev = node
+  //   }
+
+  //   return dummy.next
+  // }
+  // function arrayToList4(array) {
+  //   var prev = null
+  //   for (var i = array.length - 1; i >= 0; i--) {
+  //     var node = {
+  //       val: array[i],
+  //       next: null
+  //     }
+  //     node.next = prev
+  //     prev = node
+  //   }
+
+  //   return prev
+  // }
+
+  // function arrayToListR(array) {
+  //   if (array.length == 0) {
+  //     return null
+  //   }
+  //   var head = {
+  //     val: array[0],
+  //     next: null
+  //   }
+  //   var tail = arrayToListR(array.slice(1))
+  //   head.next = tail
+  //   return head
+  // }
+
+  // // 将数组array从start开始到结束转为链表
+  // function arrayToListR2(array, start = 0) {
+  //   if (start == array.length) {
+  //     return null
+  //   }
+  //   var head = new ListNode(array[start])
+  //   var tail = arrayToListR2(array, start + 1)
+  //   head.next = tail
+  //   return head
+  // }
+
+
+  // function listToArray(head) {
+  //   if (head == null) {
+  //     return []
+  //   }
+
+  //   var result = []
+
+  //   while (head) {
+  //     result.push(head.val)
+  //     head = head.next
+  //   }
+
+  //   return result
+  // }
+
+  // function listToArrayR(head) {
+  //   if (head == null) {
+  //     return []
+  //   }
+
+  //   var ary = listToArrayR(head.next)
+
+  //   return [head.val].concat(ary)
+  // }
+
+
+  // function prepend(val, head) {
+  //   return {
+  //     val: val,
+  //     next: head
+  //   }
+  // }
+
+  // function append(val, head) {
+  //   var node = {
+  //     val: val,
+  //     next: null,
+  //   }
+  //   if (head == null) {
+  //     return node
+  //   }
+
+  //   var p = head
+  //   while (p.next) {
+  //     p = p.next
+  //   }
+  //   p.next = node
+  //   return head
+  // }
+
+
+  // function nth(list, n) {
+  //   if (list == null || n < 0) {
+  //     return undefined
+  //   }
+  //   var p = list
+  //   var c = 0
+
+  //   while (p && c < n) {
+  //     c++
+  //     p = p.next
+  //   }
+
+  //   if (p) {
+  //     return p.val
+  //   } else {
+  //     return undefined
+  //   }
+  // }
+
+  // function nth2(list, n) {
+  //   if (list == null || n < 0) {
+  //     return undefined
+  //   }
+  //   if (n == 0) {
+  //     return list.val
+  //   }
+  //   return nth(list.next, n - 1)
+  // }
+
+  // function insert(list, n, val) {
+  //   var node = new ListNode(val)
+
+  //   if (n == 0) {
+  //     node.next = list
+  //     return node
+  //   }
+
+  //   var p = list
+  //   var c = 0
+
+  //   while (p && c < n - 1) {
+  //     c++
+  //     p = p.next
+  //   }
+
+  //   // var q = p.next
+  //   // p.next = node
+  //   // node.next = q
+
+  //   node.next = p.next
+  //   p.next = node
+
+  //   return list
+  // }
+
+  //两数相加，链表
+  // var addTwoNumbers = function (l1, l2) {
+  //   var head = new ListNode()
+  //   var p = head
+
+  //   var carry = 0  //记录进位
+  //   while (l1 !== null || l2 !== null) {
+  //     let val1 = l1.val === null ? 0 : l1.val
+  //     let val2 = l2.val === null ? 0 : l2.val
+  //     let sum = val1 + val2 + carry
+
+  //     // var sum = 0
+  //     // if (l1 !== null) {
+  //     //   sum += l1.val
+  //     //   l1 = l1.next
+  //     // }
+  //     // if (l2 !== null) {
+  //     //   sum += l2.val
+  //     //   l2 = l2.next
+  //     // }
+  //     // sum += carry  //若有进位则加上
+  //     p.next = new ListNode(sum % 10)
+  //     p = p.next
+  //     carry = Math.floor(sum / 10)
+  //   }
+  //   if (carry > 0) {
+  //     p.next = new ListNode(carry)
+  //   }
+  //   return head.next
+  // };
+
+  //链表反转
+  // var reverseList = function (head) {
+  //   var reverse = new ListNode()
+  //   var next = null
+  //   while (head) {
+  //     next = head.next//next指向head的下一节点
+  //     head.next = reverse.next
+  //     reverse.next = head
+  //     head = next   //head指向next坐在节点
+  //   }
+  //   return reverse.next
+  // };
+
+  //删除倒数第n个节点
+  // var removeNthFromEnd = function (head, n) {
+  //   var fast = head
+  //   var slow = head
+
+  //   while (n-- > 0) {  //快指针先走n步
+  //     fast = fast.next
+  //   }
+  //   if (fast == null) {//快指针先走n步就为null时，说明就只有n个节点，直接输出就行了
+  //     return head.next
+  //   }
+  //   while (fast != null && fast.next != null) {//fast到达链表最后一个节点时
+  //     fast = fast.next  //快慢指针同时移动
+  //     slow = slow.next
+  //   }
+  //   slow.next = slow.next.next //此时，slow.next所在的节点就是，目标节点，删除
+  //   return head  //输出表头
+  // };
+
+  //按顺大小序合并链表
+  // var mergeTwoLists = function (list1, list2) {
+  //   var head = new ListNode()
+  //   var p = head
+
+  //   while (list1 && list2) {  //两个链表都不为null时循环
+  //     if (list1.val <= list2.val) {  //判断大小，小的先加在p链表后面
+  //       p.next = list1
+  //       list1 = list1.next
+  //     } else {
+  //       p.next = list2
+  //       list2 = list2.next
+  //     }
+  //     p = p.next //P链表向右移一位 
+  //   }
+  //   p.next = list1 || list2  
+  //   //若有一个链表已经为Null 
+  //   //则其中的最大值也是<=另一个链表中剩余的节点值，所以把剩下的直接连过来
+  //   return head.next
+  // };
+
+  //链表是否有环   快慢指针
+  // var hasCycle = function (head) {
+  //   var fast = head
+  //   var slow = head
+  //   while (fast && fast.next) {
+  //     slow = slow.next
+  //     fast = fast.next.next
+  //     if (slow == fast) {
+  //       return true
+  //     }
+  //   }
+  //   return false
+  // };
+
+  //判断是否有环  有则输出进环的节点 无则null
+  // var detectCycle = function (head) {
+  //   if (head == null) {
+  //     return null
+  //   }
+  //   var slow = head
+  //   var fast = head
+  //   while (fast !== null) {  //若有null则无环
+  //     slow = slow.next   //慢指针走1步
+  //     if (fast.next !== null) {
+  //       fast = fast.next.next //快指针走2步
+  //     } else {
+  //       return null
+  //     }
+  //     if (fast === slow) {  //快慢指针若相遇，快指针从头开始，开始每次走一步
+  //       fast = head
+  //       while (fast !== slow) {//直到再次相遇  返回相遇的节点
+  //         fast = fast.next
+  //         slow = slow.next
+  //       }
+  //       return fast
+  //     }
+  //   }
+  //   return null
+  // };
+
+  //删除链表中的目标节点
+  // var removeElements = function (head, val) {
+  //   var q = new ListNode(0, head)//添加一个额外节点为了可以处理头节点
+  //   var p = q
+  //   if (head === null) {
+  //     return null
+  //   }
+  //   while (p.next !== null) {
+  //     if (p.next.val == val) {  //判断当前节点下一个节点的值是否为val
+  //       p.next = p.next.next    //是，则跳过（删除） //重复判断值
+  //     } else {
+  //       p = p.next   //不是就到下一位
+  //     }
+  //   }
+  //   return q.next    //返回新表头  不是head 应为head也可能被删除
+  // };
+
+  //两两颠倒排序
+  // var swapPairs = function (head) {
+  //   var cur = new ListNode(0, head)
+  //   var p = cur
+  //   while (p.next && p.next.next) {//需要交换的节点存在的话
+  //     var x = p.next     //x为第一个节点
+  //     var y = p.next.next//y为第二个节点
+  //     x.next = y.next   //第一个节点的指针转到第三个节点
+  //     y.next = x    //第二个节点的指针指向第一个节点
+  //     p.next = y    //虚拟节点的指针指向第二个节点，让第二个节点变成头节点
+  //     p = x   //虚拟节点放到第三个节点的位置处，重复上述操作，倒置第三第四个节点
+  //   }
+  //   return cur.next  //返回虚拟节点中保存的常量节点的头节点
+  // };
+
+  //链表12345    45123   变化
+  // var rotateRight = function (head, k) {
+  //   if (k == 0 || !head || !head.next) {
+  //     return head
+  //   }
+  //   var sum = 1
+  //   var cur = head
+  //   while (cur.next) { //获得链表的长度
+  //     cur = cur.next
+  //     sum += 1
+  //   }
+  //   cur.next = head
+  //   var step = sum - (k % sum) //获取要走的步数，长度为5，那么走6步和走1步结果一样
+  //   while (step) {
+  //     cur = cur.next  //找到断点所在
+  //     step--
+  //   }
+  //   var x = cur.next
+  //   cur.next = null   //断点前左边 指!向! cur.next=null  右边为表头 
+  //   return x
+  // };
+
+  //删除重复节点
+  // var deleteDuplicates = function (head) {
+  //   if (!head) {
+  //     return head
+  //   }
+  //   var p = new ListNode()
+  //   p = head
+  //   while (p.next) {
+  //     if (p.val === p.next.val) {
+  //       p.next = p.next.next
+  //     } else {
+  //       p = p.next
+  //     }
+  //   }
+  //   return head
+  // };
+
+  //相交链表
+  // var getIntersectionNode = function (headA, headB) {
+  //   if (headA == null || headB == null) {
+  //     return null
+  //   }
+  //   var pA = headA
+  //   var pB = headB
+  //   while (pA !== pB) {  //如果相交,那么相交时两指针走的步数相同，A指针走完headA走headB，B指针相反操作
+  //     pA = pA === null ? headB : pA.next
+  //     pB = pB === null ? headA : pB.next
+  //   }
+  //   return pB
+  // };
+
+  //回文链表  转数组判断
+  // var isPalindrome = function (head) {
+  //   var ary = []
+  //   while (head) {
+  //     ary.push(head.val)
+  //     head = head.next
+  //   }
+
+  //   var j = ary.length - 1
+  //   for (let i = 0; i < j; i++) {
+  //     if (ary[i] != ary[j]) {
+  //       return false
+  //     }
+  //     j--
+  //   }
+  //   return true
+  // };
+  debugger
+  var deleteDuplicates = function (head) {
+    var dummy = new ListNode(0, head)
+    var p = dummy
+    while (p.next && p.next.next) {//当倒数第一项第二项有意义的时候
+      if (p.next.val == p.next.next.val) {  //如果连续两项和相同
+        var x = p.next.val
+        while (p.next && p.next.next.val == x) {
+          p.next = p.next.next
+        }
+      } else {
+        p = p.next
+      }
+    }
+    return dummy.next
+  };
+
+
+  var head = [1, 1, 1, 2, 3]
+
+  console.log(deleteDuplicates(arrayToList2(head)))
+
+
+  function ListNode(val, next) {
+    this.val = (val === undefined ? 0 : val)
+    this.next = (next === undefined ? null : next)
+  }
+
+
+
+
+
+
+
+</script>

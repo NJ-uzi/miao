@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<script>
+  function arrayToList(array) {
+    if (array.length == 0) {
+      return null
+    }
+    var nodes = []
+    for (let i = 0; i < array.length; i++) {
+      //对于数组的每一个值创建一个链表节点
+      var node = {
+        val: array[i],
+        next: null
+      }
+      nodes.push(node)
+    }
+    for (let i = 0; i < array.length - 1; i++) {
+      nodes[i].next = nodes[i + 1]
+    }
+    return nodes[0]
+  }
+
+
+  function arrayToList2(array) {
+    if (array.length == 0) {
+      return null
+    }
+    var dummy = {
+      val: 0,
+      next: null
+    }
+    var prve = dummy
+    for (let i = 0; i < array.length; i++) {
+      var node = {
+        val: array[i],
+        next: null,
+      }
+      prve.next = node
+      prve = node
+    }
+    return dummy.next
+  }
+
+
+  function arrayToListR(array) {
+    if (array.length == 0) {
+      return null
+    }
+    var head = {
+      val: array[0],
+      next: null,
+    }
+    var rest = arrayToListR(array.slice(1))
+    head.next = rest
+    return head
+  }
+
+
+  function arrayToListR2(array, start = 0) {
+    if (start == array.length) {
+      return null
+    }
+    var head = {
+      val: array[start],
+      next: null,
+    }
+    var rest = arrayToListR(array, start + 1)
+    head.next = rest
+    return head
+  }
+
+
+  function listToArray(head) {
+    if (heda == null) {
+      return []
+    }
+    var rse = []
+    while (head) {
+      res.push(head.val)
+      head = head.next
+    }
+    return res
+  }
+
+
+  function listToArrayR(head) {
+    if (head == null) {
+      return []
+    }
+    var ary = listToArrayR(head.next)
+    return [head.val].concat(ary)  //头节点构建的数组和后面的拼接
+  }
+
+  function perpend(val, head) { //将一个节点插入到一直节点的前面
+    var node = {
+      val: val,
+      next: head,
+    }
+    return node
+  }
+
+  function append(val, head) {//将一个节点插入到一直节点的后面
+    var node = {
+      val: val,
+      next: null,
+    }
+    if (head == null) {
+      return node
+    }
+    var p = head
+    while (p.next) {
+      p = p.next
+    }
+    p.next = node
+    return head
+  }
+
+
+  function nth(list, n) {// 输出第n个节点
+    if (list == null || n < 0) {
+      return undefined
+    }
+    var p = list
+    var c = 0
+    while (P && c < n) {
+      c++
+      p = p.next
+    }
+    if (p) {
+      return p.val
+    } else {
+      return undefined
+    }
+  }
+
+
+  function nthR(list, n) {
+    if (list == null || n < 0) {
+      return undefined
+    }
+    if (n == 0) {
+      return list.val
+    }
+    return nth(list.next, n - 1)
+  }
+
+
+  function insert(list, n, val) {
+    var node = new ListNode(val)
+
+    if (n == 0) {
+      node.next = list
+      return node
+    }
+
+    var p = list
+    var c = 0
+
+    while (p && c < n - 1) {
+      c++
+      p = p.next
+    }
+
+    // var q = p.next
+    // p.next = node
+    // node.next = q
+
+    node.next = p.next
+    p.next = node
+
+    return list
+  }
+
+
+
+</script>
+
+<body>
+
+</body>
+
+</html>
