@@ -15,6 +15,7 @@ var nj_uzi = {
     }
     return res
   },
+
   compact: function (array) {
     var res=[]
     for (let i = 0; i < array.length; i++) { 
@@ -24,21 +25,64 @@ var nj_uzi = {
     }
     return res
   },
-  dorp: function (array, num) { 
-    
-  },
-};
 
-// chunk xx
-// compact xx
-// drop
-// dropRight
-// dropRightWhile
-// dropWhile
-// fill
-// findIndex
-// findLastIndex
-// flatten
+  dorp: function (array, num) { 
+    var res = []
+    if (!num) { 
+      return array
+    }
+    for (let i = num; i < array.length; i++) { 
+      res.push(array[i])
+    }
+    return res
+  },
+
+  dropRight: function (array, num) {
+    var res = []
+    var leng = array.length
+    if (!num) { 
+      num=num==0?0:1 
+    }
+    for (let i = 0; i < leng-num; i++) { 
+      res.push(array[i])
+    }
+    return res
+  },
+
+  fill: function (array, value, start=0, end=array.length) {
+    for (let i = start; i < end; i++) {
+      array[i]=value
+    }
+    return array
+  },
+
+  flatten: function (array) {
+    var res = []
+    for (let i = 0; i < array.length; i++) { 
+      if (!array[i].length) { 
+        res.push(array[i])
+      }
+      for (let j = 0; j < array[i].length;j++) { 
+        res.push(array[i][j])
+      }
+    }
+    return res
+  },
+  flattenDeep: function (array) { 
+
+  },
+
+};
+// chunk    xx
+// compact    xx
+// drop    xx
+// dropRight    xx
+// dropRightWhile    
+// dropWhile    
+// fill    xx
+// findIndex    
+// findLastIndex    
+// flatten    xx
 // flattenDeep
 // flattenDepth
 // fromPairs
