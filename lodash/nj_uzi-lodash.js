@@ -56,29 +56,66 @@ var nj_uzi = {
     return array
   },
 
-  flatten: function (array) {
+  // flatten: function (array) {
+  //   var res = []
+  //   for (let i = 0; i < array.length; i++) {
+  //     if (!array[i].length) { //通过判断是否存在长度，是否是数组
+  //       res.push(array[i])
+  //     }
+  //     for (let j = 0; j < array[i].length; j++) {
+  //       res.push(array[i][j])
+  //     }
+  //   }
+  //   return res
+  // },
+  flatten: function (ary) {
     var res = []
-    for (let i = 0; i < array.length; i++) {
-      if (!array[i].length) {
-        res.push(array[i])
-      }
-      for (let j = 0; j < array[i].length; j++) {
-        res.push(array[i][j])
+    for (var i = 0; i < ary.length; i++) {
+      var item = ary[i]
+      if (Array.isArray(item)) { //直接判断是否是数组
+        for (var j = 0; j < item.length; j++) {
+          res.push(item[j])
+        }
+      } else {
+        res.push(item)
       }
     }
     return res
   },
 
-  flattenDeep: function (array) {
-    let res = []
-    array.forEach(item => {
+  // flattenDeep: function (array) {
+  //   let res = []
+  //   array.forEach(item => {
+  //     if (Array.isArray(item)) {
+  //       res = res.concat(flattenDeep(item))
+  //     } else {
+  //       res.push(item)
+  //     }
+  //   })
+  //   return res;
+  // },
+
+  flattenDeep: function (ary) {
+    var result = []
+    for (var i = 0; i < ary.length; i++) {
+      var item = ary[i]
       if (Array.isArray(item)) {
-        res = res.concat(flattenDeep(item))
+        item = flattenDeep(item)
+        for (var j = 0; j < item.length; j++) {
+          result.push(item[j])
+        }
       } else {
-        res.push(item)
+        result.push(item)
       }
-    })
-    return res;
+    }
+    return result
+  },
+
+  flattenDepth: function (ary, n = 1) {
+    for (var i = 0; i < n; i++) {
+      ary = flatten(ary)
+    }
+    return ary
   },
 
   fromPairs: function (pairs) {

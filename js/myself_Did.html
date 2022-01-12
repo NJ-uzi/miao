@@ -183,7 +183,7 @@
   //   let right = nums.length - 1;
   //   let mid;
   //   let midValue
-  //   if (nums[left] > target) return 0;  //如果小于最小的 
+  //   if (nums[left] > target) return 0;  //如果小于最小的
   //   if (nums[right] < target) return nums.length;  //如果大于最大的
 
   //   while (left <= right) {
@@ -371,7 +371,7 @@
   // var singleNumber = function (nums) {
   //   var res = nums[0]
   //   for (let i = 1; i < nums.length; i++) {
-  //     res ^= nums[i]     //^  异或运算  同为1  异为0 
+  //     res ^= nums[i]     //^  异或运算  同为1  异为0
   //   }
   //   return res
   // };
@@ -571,7 +571,7 @@
   //     objT[t[i]] = (objT[t[i]] || 0) + 1
   //   }
   //   for (let j = 0; j < s.length; j++) {
-  //     if (objS[s[j]] != objT[s[j]]) { 
+  //     if (objS[s[j]] != objT[s[j]]) {
   //       //相同的字符在两个对象中的key值应该相同
   //       //不同的不是字符异位，字符数量都不一致
   //       return false
@@ -620,12 +620,149 @@
   //   }
   //   return rows[rowIndex]
   // };
-  debugger
-  max = max > ary[i] ? max : ary[i]
+
+  //展开数组一层
+  // function flatten(ary) {
+  //   var result = []
+  //   for (var i = 0; i < ary.length; i++) {
+  //     var item = ary[i]
+  //     if (Array.isArray(item)) {
+  //       for (var j = 0; j < item.length; j++) {
+  //         result.push(item[j])
+  //       }
+  //     } else {
+  //       result.push(item)
+  //     }
+  //   }
+  //   return result
+  // }
+
+  //展开数组一层2
+  // function flatten(ary) {
+  //   var result = []
+  //   for (var i = 0; i < ary.length; i++) {
+  //     var item = ary[i]
+  //     if (Array.isArray(item)) {
+  //       result.push(...item)
+  //     } else {
+  //       result.push(item)
+  //     }
+  //   }
+  //   return result
+  // }
+
+  //展开数组一层3
+  // function flatten(ary) {
+  //   return ary.reduce((result, item) => {
+  //     if (Array.isArray(item)) {
+  //       result.push(...item)
+  //     } else {
+  //       result.push(item)
+  //     }
+  //     return result
+  //   }, [])
+  // }
+
+  //展开数组一层4
+  // function flatten(ary) {
+  //   return ary.reduce((result, item) => {
+  //     return result.concat(item)
+  //   }, [])
+  // }
+
+  //展开数组一层5        TheBest NB!!!!!!
+  // function flatten(ary) {
+  //   return [].concat(...ary)
+  // }
+
+  //同上
+  // function flatten(ary) {
+  //   return [].concat.apply([], ary)
+  // }
 
 
-  var rowIndex = 4
-  console.log(getRow(rowIndex));
+  // function flattenDeep(ary) {
+  //   var result = []
+  //   for (var i = 0; i < ary.length; i++) {
+  //     var item = ary[i]
+  //     if (Array.isArray(item)) {
+  //       item = flattenDeep(item)
+  //       for (var j = 0; j < item.length; j++) {
+  //         result.push(item[j])
+  //       }
+  //     } else {
+  //       result.push(item)
+  //     }
+  //   }
+  //   return result
+  // }
+
+
+  // function flattenDeep(ary) {
+  //   var result = []
+  //   for (var i = 0; i < ary.length; i++) {
+  //     var item = ary[i]
+  //     if (Array.isArray(item)) {
+  //       result.push(...flattenDeep(item))
+  //     } else {
+  //       result.push(item)
+  //     }
+  //   }
+  //   return result
+  // }
+
+
+  // function flattenDeep(ary) {
+  //   return ary.reduce((result, item) => {
+  //     if (Array.isArray(item)) {
+  //       return result.concat(flattenDeep(item))
+  //     }
+  //     return result.concat(item)
+  //   }, [])
+  // }
+
+
+  // function flattenDepth(ary, n = 1) {
+  //   for (var i = 0; i < n; i++) {
+  //     ary = flatten(ary)
+  //   }
+  //   return ary
+  // }
+
+  // function flattenDepth(ary, n = 1) {
+  //   if (n == 0) {
+  //     return Array.from(ary)
+  //     return ary.slice()
+  //     return [...ary]
+  //   }
+  //   return ary.reduce((result, item) => {
+  //     if (Array.isArray(item)) {
+  //       return result.concat(flattenDepth(item, n - 1))
+  //     }
+  //     return result.concat(item)
+  //   }, [])
+  // }
+
+  // function flattenDepth(ary, n = 1) {
+  //   if (n == 0) {
+  //     return [...ary]
+  //   }
+  //   var result = []
+  //   for (var i = 0; i < ary.length; i++) {
+  //     var item = ary[i]
+  //     if (Array.isArray(item)) {
+  //       result.push(...flattenDepth(item, n - 1))
+  //     } else {
+  //       result.push(item)
+  //     }
+  //   }
+  //   return result
+  // }
+
+
+
+
+
 </script>
 
 <body>
