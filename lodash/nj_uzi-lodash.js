@@ -314,7 +314,22 @@ var nj_uzi = {
     return false
   },
 
-  isNaN: function () { },
+  isNull: function (value) {
+    return value === null
+  },
+
+  isNumber: function (value) {
+    return typeof (value) === typeof (0)
+  },
+
+  toArray: function (value) {
+    if (typeof (value) === 'number' || !value) {
+      return []
+    }
+
+    var res = []
+    if (typeof (value) === 'string' ||)
+  },
 
 };
 
@@ -327,11 +342,16 @@ var nj_uzi = {
 // uniqBy
 // countBy
 // every
+// some
 // filter
 // find
 // forEach
 // groupBy
 // keyBy
+// isNaN
+// isNil
+
+
 // map
 // partition
 // reduce
@@ -339,12 +359,6 @@ var nj_uzi = {
 // reject
 // sample
 // shuffle
-// some
-
-// isNaN
-// isNil
-// isNull
-// isNumber
 // toArray
 // ceil
 // max
