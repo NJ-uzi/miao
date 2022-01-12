@@ -95,10 +95,10 @@ var nj_uzi = {
   //   return res;
   // },
 
-  flattenDeep: function (ary) {
+  flattenDeep: function (array) {
     var result = []
-    for (var i = 0; i < ary.length; i++) {
-      var item = ary[i]
+    for (var i = 0; i < array.length; i++) {
+      var item = array[i]
       if (Array.isArray(item)) {
         item = flattenDeep(item)
         for (var j = 0; j < item.length; j++) {
@@ -111,11 +111,11 @@ var nj_uzi = {
     return result
   },
 
-  flattenDepth: function (ary, n = 1) {
-    for (var i = 0; i < n; i++) {
-      ary = flatten(ary)
+  flattenDepth: function (array, depth = 1) {
+    for (var i = 0; i < depth; i++) {
+      array = flatten(array)
     }
-    return ary
+    return array
   },
 
   fromPairs: function (pairs) {
@@ -215,37 +215,116 @@ var nj_uzi = {
 
   uniq: function (array) {
     var res = []
-    var k = new Object()
+    var map = {}
     for (let i = 0; i < array.length; i++) {
-
+      if (array[i] in map) {  //利用对象的key来判断元素是否出现过，出现过的跳过，没出现过的push进res
+        continue
+      } else {
+        map[array[i]] = 1
+        res.push(array[i])
+      }
     }
-
+    return res
   },
+
+  withOut: function (array, values) {
+    var res = []
+    for (let i = 0; i < array.length; i++) {
+      if (!(array[i] == values)) {
+        res.push(array[i])
+      }
+    }
+    return res
+  },
+
+  zip: function (...array) {
+    var res = []
+    for (let i = 0; i < array[0].length; i++) {
+      var ary = []
+      for (let j = 0; j < array.length; j++) {
+        ary.push(array[j][i])
+      }
+      res.push(ary)
+    }
+    return res
+  },
+
+  size: function (collection) {
+    var leng = 0
+    for (var key in collection) {
+      leng++
+    }
+    return leng
+  },
+
+  isBoolean: function (value) {
+    value === false || value === true ? true : false
+  },
+
+  isEmpty: function (value) {
+    for (var key in value) {
+      return false
+    }
+    return true
+  },
+
+  isEqual: function (a, b) {
+    if (a === b) {
+      return true
+    }
+    if (a !== a && b !== b) {
+      return true
+    }
+    // 两个都是数组
+    if (Array.isArray(a) && Array.isArray(b)) {
+      if (a.length !== b.length) {
+        return false
+      } else {
+        for (var i = 0; i < a.length; i++) {
+          if (!deepEqual(a[i], b[i])) {
+            return false
+          }
+        }
+        return true
+      }
+    }
+    // 两个都是对象
+    if (!Array.isArray(a) && !Array.isArray(b) && typeof a === 'object' && typeof b === 'object') {
+      for (var key in a) {
+        // a的每个属性都要在b里
+        // 一旦不在，就返回false
+        if (!(key in b)) {
+          return false
+        }
+      }
+      for (var key in b) {
+        // b的每个属性都要在a里
+        // 一旦不在，就返回false
+        if (!(key in a)) {
+          return false
+        }
+      }
+      for (var key in a) {
+        if (!deepEqual(a[key], b[key])) {
+          return false
+        }
+      }
+      return true
+    }
+    return false
+  },
+
+  isNaN: function () { },
+
 };
-// chunk          xx
-// compact        xx
-// drop           xx
-// dropRight      xx
+
 // dropRightWhile
 // dropWhile
-// fill           xx
 // findIndex
 // findLastIndex
-// flatten        xx
-// flattenDeep    yy
-// flattenDepth
-// fromPairs      xx
-// head           xx
-// indexOf        xx
-// initial        xx
-// join           xx
-// last           xx
-// lastIndexOf    xx
-// reverse        xx
-// uniq
+// indexOf        x
+// lastIndexOf    x
 // uniqBy
-// without
-// zip
 // countBy
 // every
 // filter
@@ -260,11 +339,8 @@ var nj_uzi = {
 // reject
 // sample
 // shuffle
-// size
 // some
-// isBoolean
-// isEmpty
-// isEqual
+
 // isNaN
 // isNil
 // isNull
