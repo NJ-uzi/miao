@@ -376,10 +376,39 @@ var nj_uzi = {
     return array.reduce((a, b) => a + b)
   },
 
+  repeat: function (string = '', n = 1) {
+    if (!n) {
+      return ''
+    }
+
+    var res = ''
+    for (let i = 0; i < n; i++) {
+      res += string
+    }
+    return res
+  },
+
+  range: function (start = 0, end, step = 1) {
+    var res = []
+    if (arguments.length == 1) {
+      end = start
+      start = 0
+    }
+    while (start < end) {
+      res.push(start)
+      start += step
+    }
+    while (start > end) {
+      res.push(start)
+      start += -step
+    }
+    return res
+  },
+
 
 };
 
-// dropRightWhile
+// dropRihtWhile
 // dropWhile
 // findIndex
 // findLastIndex
@@ -407,7 +436,4 @@ var nj_uzi = {
 // ceil
 // maxBy
 // sumBy
-// sum
-// repeat
-// range
 // cloneDeep
