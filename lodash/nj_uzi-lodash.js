@@ -26,7 +26,7 @@ var nj_uzi = {
     return res
   },
 
-  dorp: function (array, num) {
+  drop: function (array, num) {
     var res = []
     if (!num) {
       return array
@@ -328,8 +328,54 @@ var nj_uzi = {
     }
 
     var res = []
-    if (typeof (value) === 'string' ||)
+    if (typeof (value) === 'string' || Array.isArray(value)) {
+      for (let i = 0; i < value.length; i++) {
+        res.push(array[i])
+      }
+      return res
+    }
+
+    for (let key of value) {
+      res.push(value[key])
+    }
+    return res
   },
+
+  add: function (augend, addend) {
+    return augend + addend
+  },
+
+  max: function (array) {
+    if (!array.length) {
+      return undefined
+    }
+    var M = -Infinity
+    for (let key of array) {
+      key > M ? M = key : M
+    }
+    return M
+  },
+
+  min: function (array) {
+    if (!array.length) {
+      return undefined
+    }
+    var M = Infinity
+    for (let key of array) {
+      key < M ? M = key : M
+    }
+    return M
+  },
+
+  sum: function (array) {
+    // var res = 0
+    // for (let key of array) {
+    //   res += key
+    // }
+    // return res
+    return array.reduce((a, b) => a + b)
+  },
+
 
 };
 
@@ -351,7 +397,6 @@ var nj_uzi = {
 // isNaN
 // isNil
 
-
 // map
 // partition
 // reduce
@@ -359,9 +404,7 @@ var nj_uzi = {
 // reject
 // sample
 // shuffle
-// toArray
 // ceil
-// max
 // maxBy
 // sumBy
 // sum
