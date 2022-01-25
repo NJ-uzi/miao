@@ -27,8 +27,16 @@ var nj_uzi = {
     return res
   },
 
-  difference: function difference() {
-
+  difference: function difference(array) {
+    var res = new Array()
+    for (let item of array) {
+      if (item in arguments) {
+        continue
+      } else {
+        res.push(itme)
+      }
+    }
+    return res
   },
 
   differenceBy: function () {
@@ -354,8 +362,7 @@ var nj_uzi = {
 
   },
 
-
-  withOut: function withOut(array, values) {
+  without: function without(array, values) {
     var res = []
     for (let i = 0; i < array.length; i++) {
       if (!(array[i] == values)) {
@@ -364,7 +371,6 @@ var nj_uzi = {
     }
     return res
   },
-
 
   xor: function () {
 
