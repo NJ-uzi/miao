@@ -759,8 +759,198 @@
   //   return result
   // }
 
+  // function plural(x, y) {
+  //   this.x = x
+  //   this.y = y
+  // }
+  // plural.prototype.plus = function (p) {
+  //   var x = this.x + p.x
+  //   var y = this.y + p.y
+  //   return new plural(x, y)
+  // }
+  // plural.prototype.mins = function (p) {
+  //   var x = this.x - p.x
+  //   var y = this.y - p.y
+  //   return new plural(x, y)
+  // }
+  // plural.prototype.mul = function (p) {
+  //   var x = this.x * p.x - (this.y * p.y)
+  //   var y = this.x * p.y + this.y * p.x
+  //   return new plural(x, y)
+  // }
+  // plural.prototype.div = function (p) {
+  //   var x = (this.x * p.x - this.y * p.y) / (p.x * p.x + p.y * p.y)
+  //   var y = (this.x * p.y + this.y * p.x) / (p.x * p.x + p.y * p.y)
+  //   return new plural(x, y)
+  // }
+  // //-------------------------------------------------------------------
 
 
+
+  // function MySet() {
+  //   this.item = []
+  // }
+  // MySet.prototype.add = function (val) {
+  //   for (let i = 0; i < this.item.length; i++) {
+  //     if (val === this.item[i]) return this
+  //   }
+  //   this.item.push(val)
+  //   return this
+  // }
+
+  // MySet.prototype.delete = function (val) {
+  //   for (let i = 0; i < this.item.length; i++) {
+  //     if (val === this.item[i]) {
+  //       this.item.splice(i, 1)
+  //       return true
+  //     }
+  //   }
+  //   return false
+  // }
+
+  // MySet.prototype.has = function (val) {
+  //   for (let s of this.item) {
+  //     if (val === s) {
+  //       return true
+  //     }
+  //   }
+  //   return false
+  // }
+  // MySet.prototype.clear = function () {
+  //   this.item = []
+  // }
+
+
+  // function MyMap() {
+  //   this.keys = []
+  //   this.vals = []
+  // }
+  // MyMap.prototype.set = function (key, val) {
+  //   let length = this.keys.length
+  //   for (let i = 0; i < length; i++) {
+  //     if (key == this.keys[i]) {
+  //       this.vals[i] = val
+  //       return this
+  //     }
+  //   }
+  //   this.keys.push(key)
+  //   this.vals.push(val)
+  //   return this
+  // }
+
+  // MyMap.prototype.get = function (key) {
+  //   for (let i = 0; i < this.keys.length; i++) {
+  //     if (key == this.keys[i]) {
+  //       return this.vals[i]
+  //     }
+  //   }
+  //   return undefined
+  // }
+
+  // MyMap.prototype.has = function (key) {
+  //   for (let i = 0; i < this.keys.length; i++) {
+  //     if (key == this.keys[i]) {
+  //       return true
+  //     }
+  //   }
+  //   return false
+  // }
+
+  // MyMap.prototype.clear = function () {
+  //   this.keys = []
+  //   this.vals = []
+  //   return this
+  // }
+
+  // MyMap.prototype.delete = function (key) {
+  //   for (let i = 0; i < this.keys.length; i++) {
+  //     if (key == this.keys[i]) {
+  //       this.keys.splice(i, 1)
+  //       this.vals.splice(i, 1)
+  //       return true
+  //     }
+  //   }
+  //   return false
+  // }
+
+
+
+  // // 用链表实现栈
+  // function Stack() {
+  //   this.head = null
+  // }
+
+  // // 进栈，出栈，查看栈顶元素
+  // Stack.prototype.push = function (val) {
+  //   var node = {
+  //     val: val,
+  //     next: this.head,
+  //   }
+  //   this.head = node
+  //   return this
+  // }
+
+  // Stack.prototype.pop = function () {
+
+  // }
+
+  // Stack.prototype.peek = function () {
+  //   if (this.head) {
+  //     return this.head.val
+  //   }
+  // }
+
+  // // getter size 获取栈的长度
+
+
+  // // 用链表实现队列
+  // function Queue() {
+
+  // }
+
+  // // 进队，出队，查看队头元素
+  // Queue.prototype.enqueue = function () { }
+
+  // Queue.prototype.dequeue = function () { }
+
+  // Queue.prototype.peek = function () { }
+
+
+  // function unary(func) {
+  //   return function (val) {
+  //     return func(val)
+  //   }
+  // }
+
+  // function negate(f) {
+  //   return function (...args) {
+  //     return !f(...args)
+  //   }
+  // }
+
+  // function spread(f) {
+  //   return function (array) {
+  //     return f(...array)
+  //   }
+  // }
+
+  // function flip(func) {
+  //   return function (...args) {
+  //     return func(...args.reverse())
+  //   }
+  // }
+
+  // function before(n, func) {
+  //   var c = 0
+  //   var res = 0
+  //   return function (...args) {
+  //     if (c < n) {
+  //       res = func(...args)
+  //       c++
+  //     }
+  //     return res
+  //   }
+  // }
 
 
 </script>

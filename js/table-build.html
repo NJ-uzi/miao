@@ -1,0 +1,315 @@
+<script>
+
+  function TextCell(text) {
+    this.lines = text.split('\n')
+    // this.minHeight = this.lines.length
+    // this.minWidth = Math.max(...this.lines.map(it => it.length))
+  }
+
+  TextCell.prototype.minWidth = function () {
+    return Math.max(...this.lines.map(it => it.length))
+  }
+  TextCell.prototype.minHeight = function () {
+    return this.lines.length
+  }
+  TextCell.prototype.draw = function (width, height) {
+    var result = []
+    for (var i = 0; i < height; i++) {
+      var line = this.lines[i] || ''
+      result.push(line.padEnd(width, ' '))
+    }
+    return result
+  }
+
+  function RightTextCell(text) {
+    // this.lines = text.split('\n')
+    TextCell.call(this, text)
+  }
+
+  Object.setPrototypeOf(RightTextCell.prototype, TextCell.prototype)
+
+  RightTextCell.prototype.draw = function (width, height) {
+    var result = []
+    for (var i = 0; i < height; i++) {
+      var line = this.lines[i] || ''
+      result.push(line.padStart(width, ' '))
+    }
+    return result
+  }
+
+  function rowHeights(rows) {
+    return rows.map(row => {
+      return Math.max(...row.map(cell => cell.minHeight()))
+    })
+  }
+
+  function colWidths(rows) {
+    return rows[0].map((_, i) => {
+      // i为列标
+
+      // 拿到第i列的单元格们：行映射为行中的第i项
+      var col = rows.map(row => {
+        return row[i]
+      })
+      // 取出其宽度，返回最大值
+      return Math.max(...col.map(it => it.minWidth()))
+    })
+  }
+
+  function drawTable(rows) {
+    var heights = rowHeights(rows)
+    var widths = colWidths(rows)
+
+    function drawRow(row, 行标) {
+      // blocks是每个单元格的draw返回的字符串数组
+      var blocks = row.map((cell, 列标) => {
+        return cell.draw(widths[列标], heights[行标])
+      })
+
+      return blocks[0].map((line, idx) => {
+        return blocks.map(block => block[idx]).join(' ')
+      }).join('\n')
+    }
+
+    return rows.map(drawRow).join('\n')
+  }
+
+
+  // 下划线单元格，接收任意一个单元格做为参数
+  function UnderlinedCell(innerCell) {
+    this.inner = innerCell
+  }
+  UnderlinedCell.prototype.minWidth = function () {
+    return this.inner.minWidth()
+  }
+  UnderlinedCell.prototype.minHeight = function () {
+    return this.inner.minHeight() + 1
+  }
+  UnderlinedCell.prototype.draw = function (width, height) {
+    return this.inner.draw(width, height - 1).concat('-'.repeat(width))
+  }
+
+  function BorderedCell(inner) {
+    this.inner = inner
+  }
+  BorderedCell.prototype.minWidth = function () {
+    return this.inner.minWidth() + 2
+  }
+  BorderedCell.prototype.minHeight = function () {
+    return this.inner.minHeight() + 2
+  }
+  BorderedCell.prototype.draw = function (width, height) {
+    var innerBlock = this.inner.draw(width - 2, height - 2)
+    var topBorder = '┌' + '─'.repeat(width - 2) + '┐'
+    var bottomBorder = '└' + '─'.repeat(width - 2) + '┘'
+    var borderedBlock = innerBlock.map(it => '│' + it + '│')
+    return [
+      topBorder,
+      ...borderedBlock,
+      bottomBorder,
+    ]
+  }
+
+  // ┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐
+  // │ id │ name               │ mode     │ ↺    │ status    │ cpu      │ memory   │
+  // ├────┼────────────────────┼──────────┼──────┼───────────┼──────────┼──────────┤
+  // │ 4  │ app                │ fork     │ 29   │ online    │ 0%       │ 30.9mb   │
+  // │ 0  │ aria2c             │ fork     │ 0    │ online    │ 0%       │ 2.8mb    │
+  // │ 1  │ client_windows_am… │ fork     │ 0    │ errored   │ 0%       │ 0b       │
+  // │ 3  │ index              │ fork     │ 0    │ stopped   │ 0%       │ 0b       │
+  // │ 2  │ static-page-serve… │ fork     │ 0    │ online    │ 0%       │ 11.4mb   │
+  // └────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
+
+
+  var MOUNTAINS = [{
+    name: "Kilimanjaro",
+    height: 5895,
+    country: "Tanzania"
+  }, {
+    name: "Everest",
+    height: 8848,
+    country: "Nepal"
+  }, {
+    name: "Mount Fuji",
+    height: 3776,
+    country: "Japan"
+  }, {
+    name: "Mont Blanc",
+    height: 4808,
+    country: "Italy/France"
+  }, {
+    name: "Vaalserberg",
+    height: 323,
+    country: "Netherlands"
+  }, {
+    name: "Denali",
+    height: 6168,
+    country: "United States"
+  }, {
+    name: "Popocatepetl",
+    height: 5465,
+    country: "Mexico"
+  }];
+
+
+  var rows = [
+    [new TextCell('fosfwefo'), new TextCell('foo\nbarr'), new TextCell('bazzaaa')],
+    [new TextCell('foo\naaaaaa\nbbb'), new TextCell('fooc\nbarwef\nr\na'), new TextCell('bazz\naaa')],
+    [new TextCell('fosadfweo\naaaaaa\nbbb'), new TextCell('fowefoc\nbarra'), new TextCell('bazz\naaa')],
+    [new TextCell('foo\naaafwaaa\nbbb'), new TextCell('fooc\nbarwefra'), new TextCell('bazz\naaawfe')],
+  ]
+
+  rows = []
+
+  var headerRow = []
+  for (var prop in MOUNTAINS[0]) {
+    var cell = new BorderedCell(new UnderlinedCell(new TextCell(prop)))
+    headerRow.push(cell)
+  }
+  rows.push(headerRow)
+
+  MOUNTAINS.forEach(mount => {
+    var row = []
+    for (var key in mount) {
+      var val = mount[key]
+      if (typeof val == 'number') {
+        row.push(new BorderedCell(new RightTextCell('' + val)))
+      } else {
+        row.push(new BorderedCell(new TextCell('' + val)))
+      }
+    }
+    rows.push(row)
+  })
+
+
+
+
+
+  function Vector(x, y) {
+    this.x = x
+    this.y = y
+  }
+  Vector.prototype.plus = function (v) {
+    var x = this.x + v.x
+    var y = this.y + v.y
+    return new Vector(x, y)
+  }
+  Vector.prototype.minus = function (v) {
+    var x = this.x - v.x
+    var y = this.y - v.y
+    return new Vector(x, y)
+  }
+  Vector.prototype.getLength = function () {
+    return Math.sqrt(this.x * this.x + this.y * this.y)
+  }
+  Object.defineProperty(Vector.prototype, 'length', {
+    get: function () {
+      return Math.sqrt(this.x * this.x + this.y * this.y)
+    }
+  })
+
+
+
+  function Complex(real, imag) {
+    // if (!(this instanceof Complex)) {
+    if (this == window) { // 如果this是window，说明没加new
+      return new Complex(real, imag)
+    }
+    this.real = real
+    this.imag = imag
+  }
+
+  // 静态方法：直接挂在构造函数上，通过  构造函数.xx  的形式访问到
+  // 静态方法正常使用（Complex.fromString('5+3i')）里面的this是构造函数自身
+  Complex.fromString = function (str) {
+    var real = xxxx
+    var imag = xxyxyxy
+    return new Complex(real, imag)
+  }
+  Complex.add = function (a, b) {
+    return a.plus(b)
+  }
+
+
+  // 实例方法：通过  实例.xx  访问到
+  Complex.prototype.plus = function (c) {
+    var real = this.real + c.real
+    var imag = this.imag + c.imag
+    return new Complex(real, imag)
+  }
+  Complex.prototype.minus = function (c) {
+    var real = this.real - c.real
+    var imag = this.imag - c.imag
+    return new Complex(real, imag)
+  }
+  Complex.prototype.mul = function (c) {
+    var real = this.real * c.real - this.imag * c.imag
+    var imag = this.real * c.imag + this.imag * c.real
+    return new Complex(real, imag)
+  }
+  Complex.prototype.div = function (c) {
+    var helper = new Complex(c.real, -c.imag)
+    var fenzhi = this.mul(helper)
+    var fenmu = c.mul(helper)
+
+    return new Complex(fenzhi.real / fenmu.real, fenzhi.imag / fenmu.real)
+  }
+  Complex.prototype.toString = function () {
+    if (this.imag < 0) {
+      return '' + this.real + this.imag + 'i'
+    }
+    return this.real + '+' + this.imag + 'i'
+  }
+
+
+
+  function MySet() {
+
+  }
+  MySet.prototype.add = function () { }
+  MySet.prototype.delete = function () { }
+  MySet.prototype.has = function () { }
+  MySet.prototype.clear = function () { }
+
+
+  function MyMap() {
+
+  }
+  MyMap.prototype.set = function () { }
+  MyMap.prototype.get = function () { }
+  MyMap.prototype.has = function () { }
+  MyMap.prototype.clear = function () { }
+  MyMap.prototype.delete = function () { }
+
+
+
+  // 用链表实现栈
+  function Stack() {
+
+  }
+
+  // 进栈，出栈，查看栈顶元素
+  Stack.prototype.push = function () { }
+  Stack.prototype.pop = function () { }
+  Stack.prototype.peek = function () { }
+  // getter size 获取栈的长度
+
+
+  // 用链表实现队列
+  function Queue() {
+
+  }
+
+  // 进队，出队，查看队头元素
+  Queue.prototype.enqueue = function () { }
+  Queue.prototype.dequeue = function () { }
+  Queue.prototype.peek = function () { }
+    // getter size 获取队列的长度
+
+</script>
+
+JS的类型判断：
+typeof 用来判断原型类型，除null以外，它针对原始都能返回类型名称的小写单词
+instanceof 用来判断对象是否是某个的实例或其子类的实例，不能判断原型类型，也不能判断null
+Object.prototype.toString
+可以直接得到一个实例的构造函数/类型的名字，只能是环境自带的

@@ -1,5 +1,6 @@
 var nj_uzi = {
-  chunk: function (array, size) {
+  //*************************************************************** */
+  chunk: function chunk(array, size) {
     let leng = array.length
     var res = []
     var temp = Math.ceil(leng / size)
@@ -16,7 +17,7 @@ var nj_uzi = {
     return res
   },
 
-  compact: function (array) {
+  compact: function compact(array) {
     var res = []
     for (let i = 0; i < array.length; i++) {
       if (array[i]) {
@@ -26,18 +27,30 @@ var nj_uzi = {
     return res
   },
 
-  drop: function (array, num) {
+  difference: function difference() {
+
+  },
+
+  differenceBy: function () {
+
+  },
+
+  differenceWith: function () {
+
+  },
+
+  drop: function drop(array, n = 1) {
     var res = []
-    if (!num) {
+    if (!n) {
       return array
     }
-    for (let i = num; i < array.length; i++) {
+    for (let i = n; i < array.length; i++) {
       res.push(array[i])
     }
     return res
   },
 
-  dropRight: function (array, num) {
+  dropRight: function dropRight(array, num) {
     var res = []
     var leng = array.length
     if (!num) {
@@ -49,26 +62,34 @@ var nj_uzi = {
     return res
   },
 
-  fill: function (array, value, start = 0, end = array.length) {
+  dropRightWhile: function () {
+
+  },
+
+  dropWhile: function () {
+
+  },
+
+  fill: function fill(array, value, start = 0, end = array.length) {
     for (let i = start; i < end; i++) {
       array[i] = value
     }
     return array
   },
 
-  // flatten: function (array) {
-  //   var res = []
-  //   for (let i = 0; i < array.length; i++) {
-  //     if (!array[i].length) { //通过判断是否存在长度，是否是数组
-  //       res.push(array[i])
-  //     }
-  //     for (let j = 0; j < array[i].length; j++) {
-  //       res.push(array[i][j])
-  //     }
-  //   }
-  //   return res
-  // },
-  flatten: function (ary) {
+  findIndex: function () {
+
+  },
+
+  indLastIndex: function () {
+
+  },
+
+  findLastIndex: function () {
+
+  },
+
+  flatten: function flatten(ary) {
     var res = []
     for (var i = 0; i < ary.length; i++) {
       var item = ary[i]
@@ -83,19 +104,7 @@ var nj_uzi = {
     return res
   },
 
-  // flattenDeep: function (array) {
-  //   let res = []
-  //   array.forEach(item => {
-  //     if (Array.isArray(item)) {
-  //       res = res.concat(flattenDeep(item))
-  //     } else {
-  //       res.push(item)
-  //     }
-  //   })
-  //   return res;
-  // },
-
-  flattenDeep: function (array) {
+  flattenDeep: function flattenDeep(array) {
     var result = []
     for (var i = 0; i < array.length; i++) {
       var item = array[i]
@@ -111,14 +120,14 @@ var nj_uzi = {
     return result
   },
 
-  flattenDepth: function (array, depth = 1) {
+  flattenDepth: function flattenDepth(array, depth = 1) {
     for (var i = 0; i < depth; i++) {
       array = flatten(array)
     }
     return array
   },
 
-  fromPairs: function (pairs) {
+  fromPairs: function fromPairs(pairs) {
     var res = {}
     for (let i = 0; i < pairs.length; i++) {
       let x = pairs[i][0]
@@ -128,14 +137,14 @@ var nj_uzi = {
     return res
   },
 
-  head: function (array) {
+  head: function head(array) {
     if (!array) {
       return undefined
     }
     return array[0]
   },
 
-  indexOf: function (array, value, fromIndex = 0) {
+  indexOf: function indexOf(array, value, fromIndex = 0) {
     var sum = 0
     for (let i = 0; i < array.length; i++) {
       if (!fromIndex) {
@@ -153,7 +162,7 @@ var nj_uzi = {
     }
   },
 
-  initial: function (array) {
+  initial: function initial(array) {
     var res = []
     for (let i = 0; i < array.length - 1; i++) {
       res.push(array[i])
@@ -161,7 +170,19 @@ var nj_uzi = {
     return res
   },
 
-  join: function (array, separator = ',') {
+  intersection: function () {
+
+  },
+
+  intersectionBy: function () {
+
+  },
+
+  intersectionWith: function () {
+
+  },
+
+  join: function join(array, separator = ',') {
     var str = ''
     for (let i = 0; i < array.length; i++) {
       if (i == array.length - 1) {
@@ -173,14 +194,14 @@ var nj_uzi = {
     return str
   },
 
-  last: function (array) {
+  last: function last(array) {
     if (!array) {
       return undefined
     }
     return array[array.length - 1]
   },
 
-  lastIndexOf: function (array, value, fromIndex = array.length - 1) {
+  lastIndexOf: function lastIndexOf(array, value, fromIndex = array.length - 1) {
     var sum = 0
     var temp = 0
     for (let i = array.length - 1; i >= 0; i--) {
@@ -200,7 +221,31 @@ var nj_uzi = {
     return temp
   },
 
-  reverse: function (array) {
+  nth: function () {
+
+  },
+
+  pull: function () {
+
+  },
+
+  pullAll: function () {
+
+  },
+
+  pullAllBy: function () {
+
+  },
+
+  pullAllWith: function () {
+
+  },
+
+  remove: function () {
+
+  },
+
+  reverse: function reverse(array) {
     var leng = array.length
     var right = leng - 1
     var mid = 0
@@ -213,7 +258,79 @@ var nj_uzi = {
     return array
   },
 
-  uniq: function (array) {
+  slice: function () {
+
+  },
+
+  sortedIndex: function () {
+
+  },
+
+  sortedIndexBy: function () {
+
+  },
+
+  sortedIndexOf: function () {
+
+  },
+
+  sortedLastIndex: function () {
+
+  },
+
+  sortedLastIndexBy: function () {
+
+  },
+
+  sortedLastIndexOf: function () {
+
+  },
+
+  sortedUniq: function () {
+
+  },
+
+  sortedUniqBy: function () {
+
+  },
+
+  tail: function () {
+
+  },
+
+  take: function () {
+
+  },
+
+  takeRight: function () {
+
+  },
+
+  takeRightWhile: function () {
+
+  },
+
+  takeWhile: function () {
+
+  },
+
+  union: function () {
+
+  },
+
+  unionBy: function () {
+
+  },
+
+  unionWith: function () {
+
+  },
+
+  uniqWith: function () {
+
+  },
+
+  uniq: function uniq(array) {
     var res = []
     var map = {}
     for (let i = 0; i < array.length; i++) {
@@ -227,7 +344,18 @@ var nj_uzi = {
     return res
   },
 
-  withOut: function (array, values) {
+  uniqBy: function () {
+
+  },
+  unzip: function () {
+
+  },
+  unzipWith: function () {
+
+  },
+
+
+  withOut: function withOut(array, values) {
     var res = []
     for (let i = 0; i < array.length; i++) {
       if (!(array[i] == values)) {
@@ -237,7 +365,27 @@ var nj_uzi = {
     return res
   },
 
-  zip: function (...array) {
+
+  xor: function () {
+
+  },
+  xorBy: function () {
+
+  },
+  xorWith: function () {
+
+  },
+  zipObject: function () {
+
+  },
+  zipObjectDeep: function () {
+
+  },
+  zipWith: function () {
+
+  },
+
+  zip: function zip(...array) {
     var res = []
     for (let i = 0; i < array[0].length; i++) {
       var ary = []
@@ -249,7 +397,77 @@ var nj_uzi = {
     return res
   },
 
-  size: function (collection) {
+  countBy: function () {
+
+  },
+  every: function () {
+
+  },
+  filter: function () {
+
+  },
+  find: function () {
+
+  },
+  findLast: function () {
+
+  },
+  flatMap: function () {
+
+  },
+  flatMapDeep: function () {
+
+  },
+  flatMapDepth: function () {
+
+  },
+  forEach: function () {
+
+  },
+  forEachRight: function () {
+
+  },
+  groupBy: function () {
+
+  },
+  includes: function () {
+
+  },
+  invokeMap: function () {
+
+  },
+  keyBy: function () {
+
+  },
+  map: function () {
+
+  },
+  orderBy: function () {
+
+  },
+  partition: function () {
+
+  },
+  reduce: function () {
+
+  },
+  reduceRight: function () {
+
+  },
+  reject: function () {
+
+  },
+  sample: function () {
+
+  },
+  sampleSize: function () {
+
+  },
+  shuffle: function () {
+
+  },
+
+  size: function size(collection) {
     var leng = 0
     for (var key in collection) {
       leng++
@@ -257,18 +475,69 @@ var nj_uzi = {
     return leng
   },
 
-  isBoolean: function (value) {
+  some: function () {
+
+  },
+  sortBy: function () {
+
+  },
+  defer: function () {
+
+  },
+  delay: function () {
+
+  },
+  castArray: function () {
+
+  },
+  conformsTo: function () {
+
+  },
+  eq: function () {
+
+  },
+  gt: function () {
+
+  },
+  gte: function () {
+
+  },
+  isArguments: function () {
+
+  },
+  isArray: function () {
+
+  },
+  isArrayBuffer: function () {
+
+  },
+
+  isArrayLike: function () {
+
+  },
+  isArrayLikeObject: function () {
+
+  },
+
+  isBoolean: function isBoolean(value) {
     value === false || value === true ? true : false
   },
 
-  isEmpty: function (value) {
+  isDate: function () {
+
+  },
+  isElement: function () {
+
+  },
+
+  isEmpty: function isEmpty(value) {
     for (var key in value) {
       return false
     }
     return true
   },
 
-  isEqual: function (a, b) {
+  isEqual: function isEqual(a, b) {
     if (a === b) {
       return true
     }
@@ -314,15 +583,94 @@ var nj_uzi = {
     return false
   },
 
-  isNull: function (value) {
+  isEqualWith: function () {
+
+  },
+  isError: function () {
+
+  },
+  isFunction: function () {
+
+  },
+  isInteger: function () {
+
+  },
+  isLength: function () {
+
+  },
+  isMap: function () {
+
+  },
+  isMatch: function () {
+
+  },
+  isMatchWith: function () {
+
+  },
+  isNaN: function () {
+
+  },
+
+  isNil: function () {
+
+  },
+  isNative: function () {
+
+  },
+
+  isNull: function isNull(value) {
     return value === null
   },
 
-  isNumber: function (value) {
+  isNumber: function isNumber(value) {
     return typeof (value) === typeof (0)
   },
 
-  toArray: function (value) {
+  isObject: function () {
+
+  },
+  isObjectLike: function () {
+
+  },
+  isPlainObject: function () {
+
+  },
+
+  isRegExp: function () {
+
+  },
+  isSafeInteger: function () {
+
+  },
+  isSet: function () {
+
+  },
+  isString: function () {
+
+  },
+  isSymbol: function () {
+
+  },
+  isTypedArray: function () {
+
+  },
+  isUndefined: function () {
+
+  },
+  isWeakMap: function () {
+
+  },
+  isWeakSet: function () {
+
+  },
+  lt: function () {
+
+  },
+  lte: function () {
+
+  },
+
+  toArray: function toArray(value) {
     if (typeof (value) === 'number' || !value) {
       return []
     }
@@ -341,11 +689,41 @@ var nj_uzi = {
     return res
   },
 
-  add: function (augend, addend) {
+  toFinite: function () {
+
+  },
+
+  toInteger: function () {
+
+  },
+  toLength: function () {
+
+  },
+  toNumber: function () {
+
+  },
+  assign: function () {
+
+  },
+  toSafeInteger: function () {
+
+  },
+
+  add: function add(augend, addend) {
     return augend + addend
   },
 
-  max: function (array) {
+  ceil: function () {
+
+  },
+  divide: function () {
+
+  },
+  floor: function () {
+
+  },
+
+  max: function max(array) {
     if (!array.length) {
       return undefined
     }
@@ -356,7 +734,17 @@ var nj_uzi = {
     return M
   },
 
-  min: function (array) {
+  maxBy: function () {
+
+  },
+  mean: function () {
+
+  },
+  meanBy: function () {
+
+  },
+
+  min: function min(array) {
     if (!array.length) {
       return undefined
     }
@@ -367,7 +755,21 @@ var nj_uzi = {
     return M
   },
 
-  sum: function (array) {
+  minBy: function () {
+
+  },
+  multiply: function () {
+
+  },
+  round: function () {
+
+  },
+  subtract: function () {
+
+  },
+
+
+  sum: function sum(array) {
     // var res = 0
     // for (let key of array) {
     //   res += key
@@ -376,7 +778,173 @@ var nj_uzi = {
     return array.reduce((a, b) => a + b)
   },
 
-  repeat: function (string = '', n = 1) {
+  sumBy: function () {
+
+  },
+  clamp: function () {
+
+  },
+  inRange: function () {
+
+  },
+  random: function () {
+
+  },
+  assignIn: function () {
+
+  },
+  at: function () {
+
+  },
+  defaults: function () {
+
+  },
+  defaultsDeep: function () {
+
+  },
+  findKey: function () {
+
+  },
+  findLastKey: function () {
+
+  },
+  forIn: function () {
+
+  },
+  forInRight: function () {
+
+  },
+  forOwn: function () {
+
+  },
+  forOwnRight: function () {
+
+  },
+  functions: function () {
+
+  },
+  functionsIn: function () {
+
+  },
+  get: function () {
+
+  },
+  has: function () {
+
+  },
+  hasIn: function () {
+
+  },
+  invert: function () {
+
+  },
+  invertBy: function () {
+
+  },
+  keys: function () {
+
+  },
+  keysIn: function () {
+
+  },
+  mapKeys: function () {
+
+  },
+  mapValues: function () {
+
+  },
+  merge: function () {
+
+  },
+
+  mergeWith: function () {
+
+  },
+  omit: function () {
+
+  },
+  omitBy: function () {
+
+  },
+
+  pick: function () {
+
+  },
+  pickBy: function () {
+
+  },
+  result: function () {
+
+  },
+  set: function () {
+
+  },
+  setWith: function () {
+
+  },
+  toPairs: function () {
+
+  },
+  toPairsIn: function () {
+
+  },
+  transform: function () {
+
+  },
+  unset: function () {
+
+  },
+  update: function () {
+
+  },
+  updateWith: function () {
+
+  },
+  values: function () {
+
+  },
+  valuesIn: function () {
+
+  },
+  camelCase: function () {
+
+  },
+
+  capitalize: function () {
+
+  },
+  deburr: function () {
+
+  },
+  endsWith: function () {
+
+  },
+  deburr: function () {
+
+  },
+  escape: function () {
+
+  },
+  escapeRegExp: function () {
+
+  },
+  kebabCase: function () {
+
+  },
+  lowerCase: function () {
+
+  },
+  pad: function () {
+
+  },
+  padEnd: function () {
+
+  },
+  padStart: function () {
+
+  },
+
+  repeat: function repeat(string = '', n = 1) {
     if (!n) {
       return ''
     }
@@ -388,7 +956,59 @@ var nj_uzi = {
     return res
   },
 
-  range: function (start = 0, end, step = 1) {
+  replace: function () {
+
+  },
+  snakeCase: function () {
+
+  },
+  split: function () {
+
+  },
+  startCase: function () {
+
+  },
+  startsWith: function () {
+
+  },
+  toLower: function () {
+
+  },
+  toUpper: function () {
+
+  },
+  trim: function () {
+
+  },
+  trimEnd: function () {
+
+  },
+  trimStart: function () {
+
+  },
+  truncate: function () {
+
+  },
+  unescape: function () {
+
+  },
+  upperCase: function () {
+
+  },
+  upperFirst: function () {
+
+  },
+  words: function () {
+
+  },
+  bindAll: function () {
+
+  },
+  defaultTo: function () {
+
+  },
+
+  range: function range(start = 0, end, step = 1) {
     var res = []
     if (arguments.length == 1) {
       end = start
@@ -405,35 +1025,93 @@ var nj_uzi = {
     return res
   },
 
+  rangeRight: function () {
+
+  },
+  mixin: function () {
+
+  },
+  times: function () {
+
+  },
+  toPath: function () {
+
+  },
+  uniqueId: function () {
+
+  },
+  cloneDeep: function () {
+
+  },
+  uniqueId: function () {
+
+  },
+  identity: function () {
+
+  },
+  concat: function () {
+
+  },
+  pullAt: function () {
+
+  },
+  matches: function () {
+
+  },
+  property: function () {
+
+  },
+  ary: function () {
+
+  },
+  unary: function () {
+
+  },
+  negate: function () {
+
+  },
+  once: function () {
+
+  },
+  spread: function () {
+
+  },
+  curry: function () {
+
+  },
+  memoize: function () {
+
+  },
+  flip: function () {
+
+  },
+  conforms: function () {
+
+  },
+  constant: function () {
+
+  },
+  flow: function () {
+
+  },
+  method: function () {
+
+  },
+  methodOf: function () {
+
+  },
+  nthArg: function () {
+
+  },
+  propertyOf: function () {
+
+  },
+  parseJson: function () {
+
+  },
+  stringifyJson: function () {
+
+  },
 
 };
 
-// dropRihtWhile
-// dropWhile
-// findIndex
-// findLastIndex
-// indexOf        x
-// lastIndexOf    x
-// uniqBy
-// countBy
-// every
-// some
-// filter
-// find
-// forEach
-// groupBy
-// keyBy
-// isNaN
-// isNil
-
-// map
-// partition
-// reduce
-// reduceRight
-// reject
-// sample
-// shuffle
-// ceil
-// maxBy
-// sumBy
-// cloneDeep

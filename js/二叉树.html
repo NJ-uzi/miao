@@ -1,0 +1,603 @@
+<script>
+
+
+  function createTreeNode(val) {
+    return {
+      val: val,
+      left: null,
+      right: null,
+    }
+  }
+
+  // 将使用顺序数组存放的根结点在rootPos位置的二叉树，转换为二叉链表
+  function aryToTree(ary, rootPos = 0) {
+    if (ary[rootPos] == null) {
+      return null
+    }
+
+    var rootNode = createTreeNode(ary[rootPos])
+    var leftPos = rootPos * 2 + 1
+    var rightPos = rootPos * 2 + 2
+    var leftTree = aryToTree(ary, leftPos)
+    var rightTree = aryToTree(ary, rightPos)
+
+    rootNode.left = leftTree
+    rootNode.right = rightTree
+
+    return rootNode
+  }
+
+  function treeToAry(tree, idx = 0, ary = []) {
+    if (tree) {
+      ary[idx] = tree.val // 将根结点放进该放的位置
+      treeToAry(tree.left, idx * 2 + 1, ary) // 将左子树放入
+      treeToAry(tree.right, idx * 2 + 2, ary) // 将右子树放入
+    }
+    return ary
+  }
+
+  function condensedAryToTree(ary) {
+    var nodes = []
+    if (ary.length == 0) {
+      return null
+    }
+
+    // 用数组的第一个元素创建根结点并存入结点数组
+    var root = createTreeNode(ary[0])
+    nodes.push(root)
+    var j = 0
+
+    for (var i = 1; i < ary.length; i++) {
+      var current = nodes[j++]
+      var node
+
+      if (ary[i] == null) {
+        node = null
+      } else {
+        var node = createTreeNode(ary[i])
+        nodes.push(node)
+      }
+      current.left = node
+
+      i++
+
+      if (ary[i] == null) {
+        node = null
+      } else {
+        var node = createTreeNode(ary[i])
+        nodes.push(node)
+      }
+      current.right = node
+    }
+    return root
+  }
+
+  function treeToCondensedAry(root) {
+    if (root == null) {
+      return []
+    }
+    var nodes = [root]
+    var result = []
+
+    while (nodes.length) {
+      var current = nodes.shift()
+      if (current) {
+        result.push(current.val)
+        nodes.push(current.left, current.right)
+      } else {
+        result.push(null)
+      }
+    }
+    return result
+  }
+
+  //通val构建一个结点，并将其插入到根节点为root的BST中
+  //
+  function insertIntoBST(root, val) {
+    if (!root) {
+      var node = createTreeNode(val)
+      return node
+    } else {
+      if (val < root.val) {
+        root.left = insertIntoBST(root.left, val)
+      } else {
+        root.right = insertIntoBST(root.right, val)
+      }
+    }
+    return root
+  }
+
+
+
+
+  //两个二叉树是否相同
+  // var isSameTree = function (p, q) {
+  //   if (p == null && q == null) { //若头结点都为空，则相同
+  //     return true
+  //   }
+  //   if (p == null || q == null) { //若头结点，一个为空，一个不为空，不相同
+  //     return false
+  //   }
+  //   if (p.val != q.val) {  //都不为空，值不相同也不同
+  //     return false
+  //   }
+  //   //上述都相同则判断子结点是否相同   递归即可
+  //   return isSameTree(q.left, p.left) && isSameTree(q.right, p.right)
+  // };
+
+  //先序遍历   v-L-R
+  //中序遍历   L-v-R
+  //后序遍历   L-R-v
+  // var preorderTraversal = function (root) {
+  //   const res = []
+  //   function traversal(root) {
+  //     if (root !== null) {
+  //       traversal(root.left)//递归遍历左子树
+  //       traversal(root.right)//递归遍历右子树
+  //       res.push(root.val) //访问根结点的值
+  //     }
+  //   }
+  //   traversal(root)
+  //   return res
+  // }
+
+  //二叉树深度
+  // var maxDepth = function (root) {
+  //   var num = 0
+  //   if (!root) {
+  //     return false
+  //   }
+  //   function traversal(root, depth) {
+  //     if (root !== null) {  //判断结点是否为空
+  //       if (depth > num) {
+  //         num = depth
+  //       }
+  //     }
+  //     if (root.left) {
+  //       traversal(root.left, depth + 1)
+  //     }
+  //     if (root.right) {
+  //       traversal(root.right, depth + 1)
+  //     }
+  //   }
+  //   traversal(root, 1)
+  //   return num
+  // };
+
+  //最小深度
+  // var minDepth = function (root) {
+  //   if (!root) { //头结点为空 深度0
+  //     return 0
+  //   }
+  //   var num = Infinity
+  //   if (root.left == null && root.right == null) { //当子结点都为空就头结点，深度1
+  //     return 1
+  //   }
+  //   if (root.left) {
+  //     num = Math.min(minDepth(root.left), num)
+  //   }
+  //   if (root.right) {
+  //     num = Math.min(minDepth(root.right), num)
+  //   }
+  //   return num + 1  //深度为子结点深度+1
+  // };
+
+  //翻转二叉树
+  // var invertTree = function (root) {
+  //   if (!root) {
+  //     return null
+  //   }
+  //   var left = invertTree(root.left)
+  //   var right = invertTree(root.right)
+  //   root.left = right
+  //   root.right = left
+
+  //   return root
+  // };
+
+  //层序遍历 每一层的val合并为一个数组  放在一个数组内
+  // var levelOrder = function (root) {
+  //   var res = []
+  //   function traversal(root, depth) {
+  //     if (root !== null) {
+  //       if (!res[depth]) {
+  //         res[depth] = []
+  //       }
+  //       traversal(root.left, depth + 1)
+  //       res[depth].push(root.val)
+  //       traversal(root.right, depth + 1)
+  //     }
+  //   }
+  //   traversal(root, 0)
+  //   return res
+  // }
+
+  //层序遍历二叉树，奇数层逆序   蛇形遍历
+  // var zigzagLevelOrder = function (root) {
+  //   if (!root) {
+  //     return []
+  //   }
+  //   var res = []
+  //   function traversal(root, depth) {
+  //     if (root !== null) {
+  //       if (!res[depth]) {
+  //         res[depth] = []
+  //       }
+  //       traversal(root.left, depth + 1)
+  //       traversal(root.right, depth + 1)
+  //       res[depth].push(root.val)
+  //     }
+  //   }
+  //   traversal(root, 0) //层序遍历二叉树
+  //   for (let i = 0; i < res.length; i++) { //奇数行逆序
+  //     if (i % 2 == 1) {
+  //       res[i].reverse()
+  //     }
+  //   }
+  //   return res
+  // };
+
+  //二叉树转字符串并用（）包裹
+  // var tree2str = function (root) {
+  //   if (!root) {
+  //     return ''
+  //   }
+  //   var res = ''
+  //   function traversa(root) {
+  //     var str = ''
+  //     if (!root) {
+  //       return
+  //     } else {
+  //       str = "" + root.val
+  //     }
+  //     if (root.left) {
+  //       str = str + "(" + traversa(root.left) + ")"
+  //     } else if (!root.left && root.right) {
+  //       str = str + '()'
+  //     }
+  //     if (root.right) {
+  //       str = str + "(" + traversa(root.right) + ")"
+  //     }
+  //     return str
+  //   }
+  //   res = traversa(root)
+  //   return res
+  // };
+
+
+  // 合并二叉树
+  // var mergeTrees = function (root1, root2) {
+  //   if (!root1) {
+  //     return root2
+  //   }
+  //   if (!root2) {  //两个合并，有一个为空，则直接给不为空的
+  //     return root1
+  //   }
+  //   root1.val = root1.val + root2.val  //头结点值合并
+  //   root1.left = mergeTrees(root1.left, root2.left) //左子树递归
+  //   root1.right = mergeTrees(root1.right, root2.right)//右子树递归
+  //   return root1
+  // };
+
+  //中序遍历数组 后续遍历数组  推导二叉树
+  // var buildTree = function (inorder, postorder) {
+  //   if (!postorder.length) {//递归结束条件为分割完成
+  //     return null
+  //   }
+  //   var root = new TreeNode(postorder[postorder.length - 1])
+  //   //后续遍历数组的最后一项，即为二叉树的头结点，也是第一个结点
+  //   var index = inorder.findIndex(number => number === root.val)
+  //   //获得结点的数组索引（二叉树没有重复值才行）
+  //   root.left = buildTree(inorder.slice(0, index), postorder.slice(0, index))
+  //   //中序遍历的结点左右分别为其左右子树的值，分开进行递归
+  //   //后续遍历为左右子树遍历完才到结点
+  //   root.right = buildTree(inorder.slice(index + 1), postorder.slice(index, postorder.length - 1))
+  //   //[9,   *3,*   15, 20, 7]      [9,   15, 7, 20,   *3*]
+  //   return root
+  // }
+
+  //先序遍历  后序遍历  还原二叉树
+  // var constructFromPrePost = function (preorder, postorder) {
+  //   if (!postorder.length) {
+  //     return null
+  //   }
+  //   var root = new TreeNode(preorder[0])
+  //   var index = postorder.findIndex(number => number === preorder[1])
+
+  //   root.left = constructFromPrePost(preorder.slice(1, index + 2), postorder.slice(0, index + 1))
+  //   root.right = constructFromPrePost(preorder.slice(index + 2, preorder.length), postorder.slice(index + 1, postorder.length - 1))
+  //   return root
+  // };
+
+
+  //展平二叉树 → 右侧
+  // var flatten = function (root) {
+  //   if (root == null) return null;
+
+  //   flatten(root.left);
+  //   flatten(root.right);
+  //   // 左右子树已经被拉平成一条链表
+
+  //   // 先用两个变量把原先的左右子树保存起来
+  //   let left = root.left;
+  //   let right = root.right;
+
+  //   // 将左子树作为右子树
+  //   root.left = null;
+  //   root.right = left;
+
+  //   // 将原先的右子树接到当前右子树的末端
+  //   while (root.right != null) {//走到右子树的末端
+  //     root = root.right;
+  //   }
+  //   root.right = right;//拼接
+  // };
+
+  //左子叶之和
+  // var sumOfLeftLeaves = function (root) {
+  //   var sum = 0
+  //   function traversal(root) {
+  //     if (root == null) {
+  //       return null
+  //     }
+  //     if (root.left !== null && root.left.left == null && root.left.right == null) {
+  //       sum += root.left.val
+  //     }
+  //     traversal(root.left)
+  //     traversal(root.right)
+  //   }
+  //   traversal(root)
+  //   return sum
+  // };
+
+
+  //逆波兰表示法  运算式
+  // var evalRPN = function (tokens) {
+  //   var result = []//数组当栈用，数字进栈，遇到符号出栈两个数运算，结果进栈
+  //   for (let token of tokens) {
+  //     if (isNaN(Number(token))) { //判断是数字还是符号
+  //       var n2 = result.pop()//先进后出，后进先出
+  //       var n1 = result.pop()
+  //       switch (token) { //判断符号类别
+  //         case '+':
+  //           result.push(n1 + n2)
+  //           break
+  //         case '-':
+  //           result.push(n1 - n2)
+  //           break
+  //         case '*':
+  //           result.push(n1 * n2)
+  //           break
+  //         case '/':
+  //           result.push(Math.trunc(n1 / n2))
+  //           break
+  //       }
+  //     } else {//是数组，进栈(进数组)
+  //       result.push(Number(token))
+  //     }
+  //   }
+  //   return result[0]//正确的运算结束，数组中应只有一个结果
+  // };
+
+  //mac地址缩写
+  // var simplifyPath = function (path) {
+  //   path = path.split('/');
+  //   let stack = [];
+  //   for (let name of path) {
+  //     if (name === '' || name === '.') continue;
+  //     if (name === '..') {
+  //       if (stack.length) {
+  //         stack.pop();
+  //       }
+  //     }
+  //     else stack.push(name);
+
+  //   }
+  //   return '/' + stack.join('/');
+  // };
+
+  //括号的正确与否
+  // var isValid = function (s) {
+  //   var stack = []
+  //   var map = {  //出入栈的思路，左右括号——名/值对，左括号进栈，右括号检测是否匹配
+  //     '(': ')',
+  //     '[': ']',
+  //     '{': '}',
+  //   }
+  //   for (let p of s) {
+  //     if (p in map) {
+  //       stack.push(p)
+  //     } else if (map[stack.pop()] !== p) {
+  //       return false
+  //     }
+  //   }
+  //   return stack.length == 0
+  // };
+
+  //判断是否是 搜索二叉树：左子树小于根，右子树大于根
+  // var isValidBST = function (root) {
+  //   var res = []
+  //   var traversal = (root) => {
+  //     if (root) {
+  //       traversal(root.left)
+  //       res.push(root.val)
+  //       traversal(root.right)
+  //     }
+  //   }
+  //   traversal(root)
+  //   for (let i = 1; i < res.length; i++) {
+  //     if (res[i - 1] >= res[i]) {
+  //       return false
+  //     }
+  //   }
+  //   return true
+  // };
+
+  //升序数组转换成搜索二叉树
+  // var sortedArrayToBST = function (nums) {
+  //   if (!nums.length) { //排除空数组
+  //     return null
+  //   }
+  //   var mid = nums.length >> 1  //取中间下标值，作为头结点
+
+  //   var root = new TreeNode(   //创建二叉树
+  //     nums[mid],
+  //     sortedArrayToBST(nums.slice(0, mid)), //数组左边继续创建二叉树
+  //     sortedArrayToBST(nums.slice(mid + 1, nums.length))//同上
+  //   )
+  //   return root
+  // };
+
+  //升序链表转搜索二叉树
+  // var sortedListToBST = function (head) {
+  //   var ary = []
+  //   while (head) {
+  //     ary.push(head.val)
+  //     head = head.next
+  //   }
+  //   return buildBST(ary, 0, ary.length - 1)
+
+  //   function buildBST(ary, start, end) {
+  //     if (start > end) {
+  //       return null
+  //     }
+  //     var mid = Math.floor((start + end) / 2)
+  //     var root = new TreeNode(
+  //       ary[mid],
+  //       buildBST(ary, start, mid - 1),
+  //       buildBST(ary, mid + 1, end)
+  //     )
+  //     return root
+  //   }
+  // };
+
+  //升序链表转搜索二叉树-------递归法
+  // var sortedListToBST = function (head) {
+  //   var buildBST = (head, end) => {
+  //     var end = null
+  //     if (head === end) {
+  //       return null
+  //     }
+  //     var fast = head
+  //     var slow = head
+  //     while (head.next) {
+  //       fast = fast.nest
+  //       if (head.next) {
+  //         slow = slow.next
+  //         fast = fast.next
+  //       }
+  //     }
+  //     var root = new TreeNode(
+  //       slow.val,
+  //       buildBST(head, slow),
+  //       buildBST(slow.next, end)
+  //     )
+  //     return root
+  //   }
+  //   return buildBST(head, null)
+  // }
+
+  //所搜二叉树  插入新值，还是搜索树
+  // var insertIntoBST = function (root, val) {
+  //   if (root === null) {
+  //     return new TreeNode(val)
+  //   }
+  //   var head = root
+  //   while (head !== null) {//值小于根结点值，放左边，大于放右边
+  //     if (val < head.val) {
+  //       if (head.left === null) {
+  //         head.left = new TreeNode(val)
+  //         break
+  //       } else {
+  //         head = head.left
+  //       }
+  //     } else {
+  //       if (val > head.val) {
+  //         if (head.right === null) {
+  //           head.right = new TreeNode(val)
+  //           break
+  //         } else {
+  //           head = head.right
+  //         }
+  //       }
+  //     }
+  //   }
+  //   return root
+  // };
+
+
+  //搜索二叉树的搜索
+  // var searchBST = function (root, val) {
+  //   if (root === null) { //判断是否为空
+  //     return null
+  //   }
+  //   if (root.val == val) { //符合条件输出结点
+  //     return root
+  //   }
+  //   if (val < root.val) { //判断val从哪个子树递归
+  //     return searchBST(root.left, val)
+  //   } else {
+  //     return searchBST(root.right, val)
+  //   }
+  // };
+
+  //二叉树先序遍历数组 → 搜索二叉树 
+  // var bstFromPreorder = function (preorder) {
+  //   // 条件判断
+  //   if (!preorder.length) {
+  //     return null;
+  //   }
+
+  //   // 主逻辑先序遍历根结点在前
+  //   var val = preorder.shift();
+  //   let root = new TreeNode(val);
+
+  //   // 递归
+  //   var left = preorder.filter(item => item < val)//小于根节点在左
+  //   var right = preorder.filter(item => item > val)//大于根节点在右
+  //   root.left = bstFromPreorder(left);
+  //   root.right = bstFromPreorder(right);
+  //   return root;
+  // };
+
+  debugger
+
+
+
+  var preorder = [8, 5, 1, 7, 10, 12]
+
+  console.log(bstFromPreorder(preorder))
+
+  //condensedAryToTree
+
+  function TreeNode(val, left, right) {
+    this.val = (val === undefined ? 0 : val)
+    this.left = (left === undefined ? null : left)
+    this.right = (right === undefined ? null : right)
+  }
+
+  function ListNode(val, next) {
+    this.val = (val === undefined ? 0 : val)
+    this.next = (next === undefined ? null : next)
+  }
+
+  function arrayToList2(array) {
+    if (array.length == 0) {
+      return null
+    }
+    var head = {
+      val: array[0],
+      next: null
+    }
+    var prev = head
+    for (var i = 1; i < array.length; i++) {
+      var node = {
+        val: array[i],
+        next: null
+      }
+      prev.next = node
+      prev = node
+    }
+    return head
+  }
+</script>
