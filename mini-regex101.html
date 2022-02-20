@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini-Regex101</title>
+</head>
+<style>
+  strong:nth-child(odd) {
+    background-color: #d5ebff;
+  }
+
+  strong:nth-child(even) {
+    background-color: #9fcfff;
+  }
+
+  strong:empty {
+    display: inline-block;
+    width: 2px;
+    margin-left: -1px;
+    margin-right: -1px;
+    height: 1.3em;
+    vertical-align: bottom;
+    background-color: red;
+  }
+
+  em:nth-child(1) {
+    background-color: #c4e8ac;
+  }
+
+  em:nth-child(2) {
+    background-color: #f6d7a6;
+  }
+
+  em:nth-child(3) {
+    background-color: #c8c8ff;
+  }
+
+  em:nth-child(4) {
+    background-color: #f2cfff;
+  }
+
+  em:nth-child(5) {
+    background-color: #ffc5bf;
+  }
+
+  em:nth-child(6) {
+    background-color: #c8e7d6;
+  }
+
+  textarea,
+  pre {
+    position: relative;
+    top: 0;
+    margin: 0;
+    width: 100%;
+    height: 150px;
+    font-size: 24px;
+    font-family: consolas;
+    padding: 10px;
+    border: 1px solid;
+    overflow: auto;
+    background-color: transparent;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    line-height: 1.3;
+  }
+
+  em {
+    font-style: normal;
+  }
+
+  #string {
+    width: 400px;
+    position: relative;
+  }
+</style>
+
+<body>
+  <div>REGULAR EXPRESSION</div>
+  <input type="text" id="reInput" value="f.." oninput="run()">
+  <div>
+    <label>g<input type="checkbox" onclick="run()" id="reFlagGlobal"></label>
+    <label>m<input type="checkbox" onclick="run()" id="reFlagMulitline"></label>
+    <label>i<input type="checkbox" onclick="run()" id="reFlagInsensitive"></label>
+    <label>y<input type="checkbox" onclick="run()" id="reFlagSticky"></label>
+    <label>u<input type="checkbox" onclick="run()" id="reFlagUnicode"></label>
+    <label>s<input type="checkbox" onclick="run()" id="reFlagSingleline"></label>
+  </div>
+  <div>TEST STRING</div>
+  <div id="string">
+    <pre contenteditable id="resultShow"></pre>
+    <textarea onscroll="scrollSync()" spellcheck="false" id="testStringInput" cols="30" rows="5"
+      oninput="run()">asflddd wslfkk jowe fjlj woief</textarea>
+  </div>
+
+  <script>
+    //可以用元素的id作为变量名访问到这个元素
+    function run() {
+      var reStr = reInput.value
+      var flags = getflags()
+      var testString = testStringInput.value
+      if (reStr.length == 0) {
+        resultShow.innerHTML = testString + '\n'
+        return
+      }
+      try {
+        var re = new RegExp(reStr, flags + 'd')
+      } catch (e) {
+        if (e instanceof SyntaxError) {
+          resultShow.innerHTML = testString + '\n'
+          return
+        } else {
+          throw e
+        }
+      }
+      var resultHTML = ''
+      var startIdx = 0
+      var match
+      var matchCount = 0
+      var start = Date.now()
+      while (match = re.exec(testString)) {
+        matchCount++
+        resultHTML += testString.slice(startIdx, match.index)
+        resultHTML += `<strong title="Match ${matchCount}\nPos:${match.index}-${match.index + match[0].length}">` + highlightGroups(match, matchCount) + '</strong>'
+        startIdx = re.lastIndex
+        if (match[0] == '') { // 如果匹配到的是空白内容，则主动增加lastIndex，否则会死循环
+          re.lastIndex++
+        }
+        if (!re.global) {
+          // 如果正则不带g标记，则lastIndex不会更新，一直是0
+          startIdx = match.index + match[0].length
+          break
+        }
+      }
+      var end = Date.now()
+      var time = end - start
+      resultHTML += testString.slice(startIdx)
+      resultShow.innerHTML = resultHTML + '\n'
+    }
+
+    run()
+
+    function highlightGroups(match, matchIndex) {
+      var groupColors = [
+        '#c4e8ac',
+        '#f6d7a6',
+        '#c8c8ff',
+        '#f2cfff',
+        '#ffc5bf',
+        '#c8e7d6',
+      ]
+      var matchString = match[0]
+      var groupRanges = match.indices.map(range => {
+        var start = range[0]
+        var end = range[1]
+        return [start - match.index, end - match.index]
+      }) // 每个捕获在匹配到的字符串中的下标范围
+      groupRanges.shift() // 删掉第一项
+      var matchChars = match[0].split('')
+      var tags = new Array(match[0].length + 1).fill('')
+      var idx = 0
+      for (var range of groupRanges) {
+        idx++
+        var start = range[0]
+        var end = range[1]
+        tags[start] += `<em style="background-color:${groupColors[idx - 1]}" title="Group: ${idx}\nPos: ${start + match.index}-${end + match.index}">`
+        tags[end] += '</em>'
+      }
+      var result = ''
+      for (var i = 0; i < matchChars.length; i++) {
+        result += tags[i] + matchChars[i]
+      }
+      result += tags[i]
+      return result
+    }
+
+
+    function getflags() {
+      var flags = ''
+      if (reFlagGlobal.checked) {
+        flags += 'g'
+      }
+      if (reFlagMulitline.checked) {
+        flags += 'm'
+      }
+      if (reFlagInsensitive.checked) {
+        flags += 'i'
+      }
+      if (reFlagSticky.checked) {
+        flags += 'y'
+      }
+      if (reFlagUnicode.checked) {
+        flags += 'u'
+      }
+      if (reFlagSingleline.checked) {
+        flags += 's'
+      }
+      return flags
+    }
+  </script>
+</body>
+
+</html>

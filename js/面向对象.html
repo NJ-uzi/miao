@@ -1,0 +1,339 @@
+<script>
+
+  function MySet(initial = []) {
+    this._elements = []
+
+    initial.forEach(it => {
+      this.add(it)
+    })
+  }
+
+  MySet.prototype.add = function (val) {
+    if (!this.has(val)) {
+      this._elements.push(val)
+    }
+    return this
+  }
+  MySet.prototype.delete = function (val) {
+    var idx = this._elements.indexOf(val)
+    if (idx >= 0) {
+      this._elements.splice(idx, 1)
+    }
+    return this
+  }
+  MySet.prototype.clear = function (val) {
+    this._elements = []
+    return this
+  }
+  MySet.prototype.has = function (val) {
+    return this._elements.includes(val)
+  }
+  Object.defineProperty(MySet.prototype, 'size', {
+    get: function () {
+      return this._elements.length
+    }
+  })
+
+
+
+  function Stack(initials = []) {
+    this._head = null
+    this._size = 0
+    initials.forEach(it => {
+      this.push(it)
+    })
+  }
+  Stack.prototype.push = function (val) {
+    var node = {
+      val: val,
+      next: this._head
+    }
+    this._head = node
+    this._size++
+    return this
+  }
+  Stack.prototype.pop = function () {
+    if (this._head) {
+      var val = this._head.val
+      this._head = this._head.next
+      this._size--
+      return val
+    }
+  }
+  Stack.prototype.peek = function () {
+    if (this._head) {
+      return this._head.val
+    }
+  }
+  Object.defineProperty(Stack.prototype, 'size', {
+    get: function () {
+      return this._size
+    }
+  })
+
+  class Stack2 {
+    #head = null
+    #size = 0
+    constructor(initials = []) {
+      initials.forEach(it => {
+        this.push(it)
+      })
+    }
+    push(val) {
+      var node = {
+        val: val,
+        next: this.#head
+      }
+      this.#head = node
+      this.#size++
+      return this
+    }
+    pop() {
+      if (this.#head) {
+        var val = this.#head.val
+        this.#head = this.#head.next
+        this.#size--
+        return val
+      }
+    }
+    peek() {
+      if (this.#head) {
+        return this.#head.val
+      }
+    }
+    get size() {
+      return this.#size
+    }
+  }
+
+
+
+  function Queue(initials = []) {
+    this._head = null
+    this._tail = null
+    this._size = 0
+
+    initials.forEach(it => {
+      this.enqueue(it)
+    })
+  }
+
+  q2 = new Queue([1, 2, 3, 4, 5])
+
+
+  Queue.prototype = {
+    constructor: Queue,
+    enqueue: function (val) {
+      var node = {
+        val,
+        next: null,
+      }
+      if (this._head) {
+        this._tail.next = node
+        this._tail = node
+      } else {
+        this._head = this._tail = node
+      }
+      this._size++
+      return this
+    },
+    dequeue: function () {
+      if (this._head) {
+        var val = this._head.val
+        this._head = this._head.next
+        if (this._head == null) {
+          this._tail = null
+        }
+        this._size--
+        return val
+      }
+    },
+    peek: function () {
+      if (this._head) {
+        return this._head.val
+      }
+    },
+    get size() {
+      return this._size
+    }
+  }
+
+  q2 = new Queue()
+
+  // Queue.prototype.enqueue = function(val) {
+  //   var node = {
+  //     val,
+  //     next: null,
+  //   }
+  //   if (this._head) {
+  //     this._tail.next = node
+  //     this._tail = node
+  //   } else {
+  //     this._head = this._tail = node
+  //   }
+  //   this._size++
+  //   return this
+  // }
+  // Queue.prototype.dequeue = function() {
+  //   if (this._head) {
+  //     var val = this._head.val
+  //     this._head = this._head.next
+  //     if (this._head == null) {
+  //       this._tail = null
+  //     }
+  //     this._size--
+  //     return val
+  //   }
+  // }
+  // Queue.prototype.peek = function() {
+  //   if (this._head) {
+  //     return this._head.val
+  //   }
+  // }
+  // Object.defineProperty(Queue.prototype, 'size', {
+  //   get: function() {
+  //     return this._size
+  //   }
+  // })
+
+  /**
+   * 箭头函数与非箭头函数的区别：
+   *
+   * 箭头函数里面没有arguments，使用时看其外部环境中的arguments
+   * 箭头函数里面没有this，所以一般也不能放在原型上做为实例的方法
+   *    使用时看其外部环境中的this指向谁
+   * 箭头函数没有prototype
+   * 箭头函数不能new，即不能做为构造函数，非要new会报错
+   */
+
+  function MyMap(initialPairs) {
+    this._mapKeys = []
+    this._mapVals = []
+    initialPairs.forEach(pair => {
+      var key = pair[0]
+      var val = pair[1]
+      this.set(key, val)
+    })
+  }
+
+  MyMap.prototype = {
+    set(key, val) {
+      var idx = this._keyIdx(key)
+      if (idx == -1) {
+        this._mapKeys.push(key)
+        this._mapVals.push(val)
+      } else {
+        this._mapVals[idx] = val
+      }
+      return this
+    },
+    _keyIdx(key) {
+      return this._mapKeys.indexOf(key)
+    },
+    get(key) {
+      var idx = this._keyIdx(key)
+      if (idx >= 0) {
+        return this._mapVals[idx]
+      }
+    },
+    has(key) {
+      var idx = this._keyIdx(key)
+      if (idx >= 0) {
+        return true
+      } else {
+        return false
+      }
+    },
+    clear() {
+      this._mapKeys.length = 0
+      this._mapVals.length = 0
+      return this
+    },
+    delete(key) {
+      var idx = this._keyIdx(key)
+      if (idx >= 0) {
+        this._mapKeys.splice(idx, 1)
+        this._mapVals.splice(idx, 1)
+      }
+      return this
+    },
+    get size() {
+      return this._mapKeys.length
+    }
+  }
+
+
+  /**
+   * 使用上方的语法实现一个类的时候
+   * 会存在一些问题：
+   * 代码不是一整块
+   * 代码的重复有很多
+   *      统一重置原型对象
+   * 原型上的方法都可以被枚举出来:
+   *      对每个原型上的方法及属性使用defineProperty来定义
+   * 实现继承的时候比较麻烦：
+   *      需要自身重置原型链
+   * 复用父类的构造函数时写法比较奇怪：
+   *      BasicMap.call(this, xxx, yyy)
+   * 构造函数可以不加new调用，可能会造成返回undefined
+   *      在构造函数内添加判断逻辑
+   * 静态方法也得一块一块的写
+   *      MyMap.xxx = function() {}
+   *      MyMap.yyy = function() {}
+   * 没有私有属性
+   *    实现起来比较麻烦
+   *
+   *
+   */
+
+  class BasicMap {
+    has() {
+
+    }
+  }
+
+  class MyMap2 extends BasicMap {
+    // 静态方法，即以MyMap2.isMap(val)的形式调用
+    static isMap() {
+
+    }
+    static fromPairs() {
+
+    }
+    // 构造函数
+    #mapKeys = [];
+    #mapVals = []; // private class field
+    size = 0;
+    count = 0; // class field
+
+    constructor() {
+      super(1, 2, 3) // 调用父类构造函数,如果没有父类，则不用这句，如果有，则必须写
+      var x = new Stack()
+      super.has() // 调用来自父类的方法
+      this.has() // 调用自身的方法
+    }
+    // 以下为定义在原型上的方法
+    get() {
+
+    }
+    set() {
+
+    }
+    has() {
+
+    }
+    delete() {
+
+    }
+    clear() {
+
+    }
+    // 以下为定义在原型上的getter/setter/accesser
+    get size() {
+
+    }
+    set size(val) {
+
+    }
+  }
+</script>

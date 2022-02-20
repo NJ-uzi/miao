@@ -953,6 +953,91 @@
   // }
 
 
+  // 用`sigma(s,e,f)` 函数表示函数 `f(x)` 在 `x` 从 `s` 到 `e` 范围的和：
+  //         * 即如果`f(x) = x*x` ，则 `sigma(1,10,f)` 将得到 1 到 10 的平方和
+
+  function f(x) {
+    return x * x
+  }
+  function sigma(s, e, f) {
+    var sum = 0
+    for (let i = s; i <= e; i++) {
+      sum += f(i)
+    }
+    return sum
+  }
+  // 用`factorial(x)` 表示 `x` 的阶乘
+  function factorial(x) {
+    var mul = 1
+    for (let i = 1; i <= x; i++) {
+      mul *= i
+    }
+    return mul
+  }
+  //深度冻结对象属性
+  function deepFreeze(obj) {
+    Object.freeze(obj)
+    for (let objs of obj) {
+      if (obj[objs] && typeof obj[objs] == 'object') {
+        deepFreeze(objs)
+      }
+    }
+    return obj
+  }
+
+  function With(...args) {
+    var f = args.pop()
+    try {
+      f(...args)
+    } finally {
+      args.forEach(it => it.close())
+    }
+  }
+
+  With(open('a.txt'), open('b.txt'), function (a, b) {
+
+  })
+
+
+
+
+  function MultiplicatorUnitFailure(msg) { }
+
+  function primitiveMultiply(a, b) {
+    if (Math.random() < 0.5) {
+      return a * b
+    } else {
+      throw new MultiplicatorUnitFailure('')
+    }
+  }
+
+  function multiple(a, b) {
+    for (; ;) {
+      try {
+        var result = primitiveMultiply(a, b)
+        return result
+      } catch (e) {
+        if (e instanceof MultiplicatorUnitFailure) {
+          continue
+        } else {
+          throw e
+        }
+      }
+    }
+  }
+
+
+  var r = String.raw
+  function raw(ary, ...interplots) {
+    var result = ary.raw[0]
+    for (let i = 0; i < ary.length; i++) {
+      result += interplots[i]
+      result += ary.raw[i + 1]
+    }
+    return result
+  }
+
+  //console.log(r`askjh\\sjdh${2 * 33}`)
 </script>
 
 <body>

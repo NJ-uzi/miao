@@ -82,17 +82,6 @@ var aut1smer = function () {
   }
 
 
-  function difference(ary, ...values) {
-    var result = []
-    var valuesAry = flattenDeep(values)
-    for (let i = 0; i < ary.length; i++) {
-      if (!valuesAry.includes(ary[i])) {
-        result.push(ary[i])
-      }
-    }
-    return result
-  }
-
   // _.differenceBy(array, [values], [iteratee=_.identity])
   function differenceBy(ary, ...values) {
     var differ = values[values.length - 1]

@@ -27,18 +27,17 @@ var nj_uzi = {
     return res
   },
 
-  difference: function difference(array) {
-    var res = new Array()
-    for (let item of array) {
-      if (item in arguments) {
-        continue
-      } else {
-        res.push(itme)
+  //未完待续
+  //把第一个数组里的元素和后续数组中的元素对比，没有出现过的元素放进新数组
+  difference: function difference(ary, ...values) {
+    var result = []
+    var valuesAry = flattenDeep(values) //把后续的数组放在一个大数组valus里 然后在数组里展开，变成一个一维数组
+    for (let i = 0; i < ary.length; i++) {
+      if (!valuesAry.includes(ary[i])) {//如果后续数组的元素没有被目标数组包含，则记录
+        result.push(ary[i])
       }
     }
-    return res
   },
-
   differenceBy: function () {
 
   },
@@ -1052,9 +1051,11 @@ var nj_uzi = {
   uniqueId: function () {
 
   },
-  identity: function () {
 
+  identity: function identity(it) {
+    return it
   },
+
   concat: function () {
 
   },
