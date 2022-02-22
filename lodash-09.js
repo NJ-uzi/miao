@@ -523,14 +523,6 @@ var aut1smer = function () {
     return ary[0]
   }
 
-  function indexOf(ary, val, fromIndex = 0) {
-    for (let i = fromIndex; i < ary.length; i++) {
-      if (ary[i] === val) {
-        return i
-      }
-    }
-    return -1
-  }
 
   function lastIndexOf(ary, val, fromIndex = ary.length - 1) {
     for (let i = fromIndex; i >= 0; i--) {

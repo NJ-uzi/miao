@@ -157,21 +157,12 @@ var nj_uzi = {
   },
 
   indexOf: function indexOf(array, value, fromIndex = 0) {
-    var sum = 0
     for (let i = 0; i < array.length; i++) {
-      if (!fromIndex) {
-        if (array[i] == value) {
-          return i
-        }
-      } else {
-        if (array[i] == value) {
-          sum++
-        }
-        if (sum == fromIndex) {
-          return i
-        }
+      if (array[i] === value) {
+        return i
       }
     }
+    return -1
   },
 
   initial: function initial(array) {
@@ -214,23 +205,12 @@ var nj_uzi = {
   },
 
   lastIndexOf: function lastIndexOf(array, value, fromIndex = array.length - 1) {
-    var sum = 0
-    var temp = 0
-    for (let i = array.length - 1; i >= 0; i--) {
-      if (!(fromIndex == array.length - 1)) {
-        if (array[i] == value) {
-          sum++
-        }
-        if (sum == fromIndex) {
-          return i
-        }
-      } else {
-        if (array[i] == value) {
-          temp = i
-        }
+    for (let i = fromIndex; i >= 0; i--) {
+      if (val === array[i]) {
+        return i
       }
     }
-    return temp
+    return -1
   },
 
   nth: function () {
