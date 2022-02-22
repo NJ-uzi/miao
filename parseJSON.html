@@ -1,0 +1,125 @@
+<script>
+
+  var ParseJSON = (
+    function () {
+      var str = ''
+      var i = 0
+      return function ParseJSON(input) {
+        i = 0
+        str = input
+        return parseValue()
+      }
+      /**
+      思路：
+      用一个指针指向当前解析的位置
+      根据当前位置的符号就能确定解析处何种值
+      对于每种值，写出解析其值的一个函数
+      解析完成将指针移动到解析完成的下一位
+      */
+      //此时i指向一个字符串的开始，即一个 "
+      //解析字符串，移动指针，返回解析出的字符串
+
+      function parseValue() {
+        if (str[i] == '"') {
+          return parseString()
+        }
+        if (str[i] == 't') {
+          return parseTrue()
+        }
+        if (str[i] == 'f') {
+          return parseFalse()
+        }
+        if (str[i] == 'n') {
+          return parseNull()
+        }
+        if (str[i] >= '0' && str[i] <= '9') {
+          return parseNumber()
+        }
+        if (str[i] == '[') {
+          return parseArray()
+        }
+        if (str[i] == '{') {
+          return parseObject()
+        }
+      }
+
+      function parseString() {
+        i++ //skip frist "
+        var start = i
+        while (str[i] !== '"') {
+          i++
+        }
+        //此时i指向第二个" 
+        var s = str.slice(start, i)
+        i++
+        return s
+      }
+
+      function parseNumber() {
+        var numStr = ''
+        while (str[i] >= '0' && str[i] <= '9') {
+          numStr += str[i++]
+        }
+        return parseInt(numStr, 10)
+      }
+
+      function parseTrue() {
+        i += 4
+        return true
+      }
+      function parseFalse() {
+        i += 5
+        return false
+      }
+      function parseNull() {
+        i += 4
+        return null
+      }
+
+      function parseArray() {
+        var ary = []
+        i++ // skip  [
+        if (str[i] == "]") {
+          i++
+          return ary
+        }
+        while (true) {
+          var value = parseValue()
+          ary.push(value)
+          if (str[i] == ',') {
+            i++
+            continue
+          }
+          if (str[i] == ']') {
+            i++
+            return ary
+          }
+        }
+      }
+
+      function parseObject() {
+        var obj = {}
+        i++
+        if (str[i] == "}") {
+          i++
+          return obj
+        }
+        while (true) {
+          var key = parseString()
+          i++  //skip ':'
+          var val = parseValue()
+          obj[key] = val
+
+          if (str[i] == ',') {
+            i++
+            continue
+          }
+          if (str[i] == '}') {
+            i++
+            return obj
+          }
+        }
+      }
+    }
+  )()
+</script>

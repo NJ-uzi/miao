@@ -80,7 +80,7 @@
 
 <body>
   <div>REGULAR EXPRESSION</div>
-  <input type="text" id="reInput" value="f.." oninput="run()">
+  <input type="text" id="reInput" value="" oninput="run()">
   <div>
     <label>g<input type="checkbox" onclick="run()" id="reFlagGlobal"></label>
     <label>m<input type="checkbox" onclick="run()" id="reFlagMulitline"></label>
@@ -93,9 +93,13 @@
   <div id="string">
     <pre contenteditable id="resultShow"></pre>
     <textarea onscroll="scrollSync()" spellcheck="false" id="testStringInput" cols="30" rows="5"
-      oninput="run()">asflddd wslfkk jowe fjlj woief</textarea>
+      oninput="run()"></textarea>
   </div>
-
+  <div>SUBSTITUTION</div>
+  <input type="text" id="replacement" value="">
+  <div>
+    <textarea id="replaceResult" cols="30" rows="5"></textarea>
+  </div>
   <script>
     //可以用元素的id作为变量名访问到这个元素
     function run() {
@@ -180,24 +184,12 @@
 
     function getflags() {
       var flags = ''
-      if (reFlagGlobal.checked) {
-        flags += 'g'
-      }
-      if (reFlagMulitline.checked) {
-        flags += 'm'
-      }
-      if (reFlagInsensitive.checked) {
-        flags += 'i'
-      }
-      if (reFlagSticky.checked) {
-        flags += 'y'
-      }
-      if (reFlagUnicode.checked) {
-        flags += 'u'
-      }
-      if (reFlagSingleline.checked) {
-        flags += 's'
-      }
+      reFlagGlobal.checked && (flags += 'g')
+      reFlagMulitline.checked && (flags += 'm')
+      reFlagInsensitive.checked && (flags += 'i')
+      reFlagSticky.checked && (flags += 'y')
+      reFlagUnicode.checked && (flags += 'u')
+      reFlagSingleline.checked && (flags += 's')
       return flags
     }
   </script>

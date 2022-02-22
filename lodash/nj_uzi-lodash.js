@@ -31,14 +31,16 @@ var nj_uzi = {
   //把第一个数组里的元素和后续数组中的元素对比，没有出现过的元素放进新数组
   difference: function difference(ary, ...values) {
     var result = []
-    var valuesAry = flattenDeep(values) //把后续的数组放在一个大数组valus里 然后在数组里展开，变成一个一维数组
+    var valuesAry = flattenDeep(values) //把后续的数组放在一个大数组values里 然后在数组里展开，变成一个一维数组
     for (let i = 0; i < ary.length; i++) {
       if (!valuesAry.includes(ary[i])) {//如果后续数组的元素没有被目标数组包含，则记录
         result.push(ary[i])
       }
     }
   },
-  differenceBy: function () {
+
+  differenceBy: function (ary, ...values) {
+    var differ = values[values.length - 1]
 
   },
 
@@ -115,8 +117,8 @@ var nj_uzi = {
     var result = []
     for (var i = 0; i < array.length; i++) {
       var item = array[i]
-      if (Array.isArray(item)) {
-        item = flattenDeep(item)
+      if (Array.isArray(array[i])) {
+        item = flattenDeep(array[i])
         for (var j = 0; j < item.length; j++) {
           result.push(item[j])
         }
@@ -127,19 +129,22 @@ var nj_uzi = {
     return result
   },
 
-  flattenDepth: function flattenDepth(array, depth = 1) {
-    for (var i = 0; i < depth; i++) {
-      array = flatten(array)
+  //根据depth递归减少ary的层级
+  flattenDepth: function flattenDepth(ary, depth = 1) {
+    if (depth == 0) {
+      return ary.slice()
     }
-    return array
-  },
 
-  fromPairs: function fromPairs(pairs) {
-    var res = {}
-    for (let i = 0; i < pairs.length; i++) {
-      let x = pairs[i][0]
-      let y = pairs[i][1]
-      res[x] = y
+    let res = []
+    for (let i = 0; i < ary.length; i++) {
+      if (Array.isArray(ary[i])) {
+        let item = flattenDepth(ary[i], depth - 1)
+        for (let j = 0; j < item.length; j++) {
+          res.push(item[j])
+        }
+      } else {
+        res.push(ary[i])
+      }
     }
     return res
   },
@@ -1052,73 +1057,73 @@ var nj_uzi = {
 
   },
 
-  identity: function identity(it) {
-    return it
-  },
+  : function identity(it) {
+  return it
+},
 
-  concat: function () {
+concat: function () {
 
-  },
-  pullAt: function () {
+},
+pullAt: function () {
 
-  },
-  matches: function () {
+},
+matches: function () {
 
-  },
-  property: function () {
+},
+property: function () {
 
-  },
-  ary: function () {
+},
+ary: function () {
 
-  },
-  unary: function () {
+},
+unary: function () {
 
-  },
-  negate: function () {
+},
+negate: function () {
 
-  },
-  once: function () {
+},
+once: function () {
 
-  },
-  spread: function () {
+},
+spread: function () {
 
-  },
-  curry: function () {
+},
+curry: function () {
 
-  },
-  memoize: function () {
+},
+memoize: function () {
 
-  },
-  flip: function () {
+},
+flip: function () {
 
-  },
-  conforms: function () {
+},
+conforms: function () {
 
-  },
-  constant: function () {
+},
+constant: function () {
 
-  },
-  flow: function () {
+},
+flow: function () {
 
-  },
-  method: function () {
+},
+method: function () {
 
-  },
-  methodOf: function () {
+},
+methodOf: function () {
 
-  },
-  nthArg: function () {
+},
+nthArg: function () {
 
-  },
-  propertyOf: function () {
+},
+propertyOf: function () {
 
-  },
-  parseJson: function () {
+},
+parseJson: function () {
 
-  },
-  stringifyJson: function () {
+},
+stringifyJson: function () {
 
-  },
+},
 
 };
 

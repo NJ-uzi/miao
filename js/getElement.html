@@ -1,0 +1,77 @@
+<script>
+  // 获取parent元素里面的标签名称为tagName的所有标签并返回数组
+  function getElementsByTagName(parent, tagName) {
+    var res = []
+    //遍历子元素，如果子元素是要找的则push  
+    for (let i = 0; i < parent.children.length; i++) {
+      if (parent.children[i].tagName == tagName) {
+        res.push(parent.children[i])
+      }
+      //然后找出该子元素的后代中满足条件的元素，然后push进去
+      res.push(...getElementsByTagName(parent.children[i], tagName))
+
+    }
+    return res
+  }
+
+  //在node及其后代中找特定的id元素，找到就返回，找不到返回空
+  function getElementById(id) {
+    var res = null
+    traverse(document.documentElement, el => {
+      if (el.id == id) {
+        res = el
+        return false
+      }
+    })
+    return res
+  }
+
+  function traverse(node, action) {
+    if (action(node) === false) {
+      return false
+    }
+    for (var child of node.children) {
+      if (traverse(child, action) === false) {
+        return false
+      }
+    }
+  }
+
+
+  //遍历node及其后代元素们，如果action 返回false，则停止遍历后续元素
+  function getElementById(id, node = document.documentElement) {
+    if (node.id == id) {
+      return node
+    }
+    for (let child of node.children) {
+      var result = getElementById(id, child)
+      if (result) {
+        return result
+      }
+    }
+    return null
+  }
+
+
+  function elt(tagName, attrs = {}, ...children) {
+    var el = document.documentElement(tagName)
+    if (attrs && typeof attrs == 'Object') {
+      for (const key in attrs) {
+        el.setAttribute(key, attrs[key])
+      }
+    }
+  }
+
+  for (const child of children) {
+    if (typeof child == 'string') {
+      el.appendChild(document.createTextNode(child))
+    } else {
+      el.appendChild(child)
+    }
+  }
+  return el
+
+
+  elt('div', { id: 'foo', class: 'bar baz' }, elt('a', null, 'aaa'))
+
+</script>
