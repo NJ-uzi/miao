@@ -27,7 +27,6 @@ var nj_uzi = {
     return res
   },
 
-  //未完待续
   //把第一个数组里的元素和后续数组中的元素对比，没有出现过的元素放进新数组
   difference: function difference(ary, ...values) {
     var result = []
@@ -1037,73 +1036,73 @@ var nj_uzi = {
 
   },
 
-  : function identity(it) {
-  return it
-},
+  identity: function identity(it) {
+    return it
+  },
 
-concat: function () {
+  concat: function () {
 
-},
-pullAt: function () {
+  },
+  pullAt: function () {
 
-},
-matches: function () {
+  },
+  matches: function () {
 
-},
-property: function () {
+  },
+  property: function () {
 
-},
-ary: function () {
+  },
+  ary: function () {
 
-},
-unary: function () {
+  },
+  unary: function () {
 
-},
-negate: function () {
+  },
+  negate: function () {
 
-},
-once: function () {
+  },
+  once: function () {
 
-},
-spread: function () {
+  },
+  spread: function () {
 
-},
-curry: function () {
+  },
+  curry: function () {
 
-},
-memoize: function () {
+  },
+  memoize: function () {
 
-},
-flip: function () {
+  },
+  flip: function () {
 
-},
-conforms: function () {
+  },
+  conforms: function () {
 
-},
-constant: function () {
+  },
+  constant: function () {
 
-},
-flow: function () {
+  },
+  flow: function () {
 
-},
-method: function () {
+  },
+  method: function () {
 
-},
-methodOf: function () {
+  },
+  methodOf: function () {
 
-},
-nthArg: function () {
+  },
+  nthArg: function () {
 
-},
-propertyOf: function () {
+  },
+  propertyOf: function () {
 
-},
-parseJson: function () {
+  },
+  parseJson: function () {
 
-},
-stringifyJson: function () {
+  },
+  stringifyJson: function () {
 
-},
+  },
 
 };
 

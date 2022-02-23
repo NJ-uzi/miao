@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  span:first-child {
+    position: relative;
+    background-color: red;
+    overflow: hidden;
+    font-size: 30px;
+    top: 200px;
+    left: 200px;
+  }
+
+  p {
+    position: absolute;
+    background-color: red;
+    top: 30px;
+  }
+</style>
+
+<body>
+  <span>Cat</span>
+  <p>Hat</p>
+</body>
+<script>
+  var cat = document.querySelector('span')
+  var hat = document.querySelector('p')
+  var lastTime = null
+  var angle = 0
+  var angle2 = 0
+  requestAnimationFrame(
+    function animate(time) {
+      if (lastTime !== null) {
+        angle += (time - lastTime) * 0.001
+      }
+      lastTime = time
+      var x1 = Math.sin(angle) * 130 + 250
+      var y1 = Math.cos(angle) * 130 + 250
+      var x2 = Math.sin(angle) * 130 + 250
+      var y2 = Math.cos(angle) * 130 + 250
+      cat.style.top = x1 + 'px'
+      cat.style.left = y1 + 'px'
+      hat.style.top = x2 + 'px'
+      hat.style.left = y2 + 'px'
+      requestAnimationFrame(animate)
+    }
+  )
+</script>
+
+</html>
