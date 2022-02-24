@@ -38,12 +38,12 @@ var nj_uzi = {
     }
   },
 
-  differenceBy: function (ary, ...values) {
-    var differ = values[values.length - 1]
+  differenceBy: function differenceBy(ary, ...values) {
+
 
   },
 
-  differenceWith: function () {
+  differenceWith: function differenceWith() {
 
   },
 
@@ -70,11 +70,11 @@ var nj_uzi = {
     return res
   },
 
-  dropRightWhile: function () {
+  dropRightWhile: function dropRightWhile() {
 
   },
 
-  dropWhile: function () {
+  dropWhile: function dropWhile() {
 
   },
 
@@ -85,15 +85,15 @@ var nj_uzi = {
     return array
   },
 
-  findIndex: function () {
+  findIndex: function findIndex() {
 
   },
 
-  indLastIndex: function () {
+  indLastIndex: function indLastIndex() {
 
   },
 
-  findLastIndex: function () {
+  findLastIndex: function findLastIndex() {
 
   },
 
@@ -156,7 +156,7 @@ var nj_uzi = {
   },
 
   indexOf: function indexOf(array, value, fromIndex = 0) {
-    for (let i = 0; i < array.length; i++) {
+    for (let i = fromIndex; i < array.length; i++) {
       if (array[i] === value) {
         return i
       }
@@ -172,8 +172,15 @@ var nj_uzi = {
     return res
   },
 
-  intersection: function () {
-
+  intersection: function (...arrays) {
+    var res = []
+    for (let num of arguments[0]) {
+      for (let i = 1; i < arguments.length; i++) {
+        if (arguments[i].includes(num))
+          res.push(num)
+      }
+    }
+    return res
   },
 
   intersectionBy: function () {
@@ -205,7 +212,7 @@ var nj_uzi = {
 
   lastIndexOf: function lastIndexOf(array, value, fromIndex = array.length - 1) {
     for (let i = fromIndex; i >= 0; i--) {
-      if (val === array[i]) {
+      if (value === array[i]) {
         return i
       }
     }

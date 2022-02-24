@@ -74,4 +74,28 @@
 
   elt('div', { id: 'foo', class: 'bar baz' }, elt('a', null, 'aaa'))
 
+
+  /**
+   * 
+   * 第十三章部分代码
+  */
+  function cloneNode(node) {
+    if (node.nodeType == document.ELEMENT_NODE) {
+      var el = document.createElement(node.tagName)
+
+      var names = node.getAttributeNames()
+      for (var name of names) {
+        el.setAttribute(name, node.getAttribute(name))
+      }
+
+      for (var child of node.childNodes) {
+        el.appendChild(cloneNode(child))
+      }
+      return el
+    } else if (node.nodeType == document.TEXT_NODE) {
+      return document.createTextNode(node.nodeValue)
+    } else if (node.nodeType == document.COMMENT_NODE) {
+      return document.createComment(node.nodeValue)
+    }
+  }
 </script>
