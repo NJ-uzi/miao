@@ -1,14 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis placeat rerum dolor maxime reprehenderit laborum
+    id. Ex quod beatae in porro placeat? Sunt minima impedit provident asperiores temporibus excepturi corporis?
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit, sit.
+      <button>BUTTON</button>
+    </p>
+  </div>
+</body>
+
+
 <script>
-  Array.prototype.slice2 = function (start = 0, end = this.length) {
-    var result = []
-    for (let i = start; i < end; i++) {
-      result.push[i]
+
+
+
+  //node.contains(target)
+  //判断node是否包含target
+  function contains(node, target) {
+    while (target) {
+      if (node == target) {
+        return true
+      }
+      target = target.parentNode
     }
-    return result
+    return false
   }
 
 
-  function cloneNode(node) {
+  var para = document.querySelector('p')
+  var button = document.querySelector('button')
+  para.addEventListener('mousedown', function () {
+    console.log('parahraph clicked!!')
+  })
+  button.addEventListener('mousedown', function () {
+    console.log('button clicked!!!')
+  })
 
-  }
+
+  // Array.prototype.slice2 = function (start = 0, end = this.length) {
+  //   var result = []
+  //   for (let i = start; i < end; i++) {
+  //     result.push[i]
+  //   }
+  //   return result
+  // }
+
+
+  // function cloneNode(node) {
+  //   if (node.nodeType == document.ELEMENT_NODE) {
+  //     var el = document.createElement(node.tagName)
+
+  //     var names = node.getAttributeNames()
+  //     for (var name of names) {
+  //       el.setAttribute(name, node.getAttribute(name))
+  //     }
+
+  //     for (var child of node.childNodes) {
+  //       el.appendChild(cloneNode(child))
+  //     }
+  //     return el
+  //   } else if (node.nodeType == document.TEXT_NODE) {
+  //     return document.createTextNode(node.nodeValue)
+  //   } else if (node.nodeType == document.COMMENT_NODE) {
+  //     return document.createComment(node.nodeValue)
+  //   }
+  // }
+
+  // function getOuterHTML(node) {
+
+  // }
+
+  // function normalize(node) {
+  //   var str = ''
+  //   for (let child of node) {
+  //     if (child.nodeType == document.TEXT_NODE) {
+  //       str += child.nodeValue
+  //       node.removeChild(child)
+  //     } else {
+  //       node.insertBefore(document.createTextNode(str), child)
+  //       str = ''
+  //     }
+  //   }
+  //   if (str.length) {
+  //     node.appendChild(document.createTextNode(str))
+  //   }
+  // }
+
+
+
 </script>
+
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Great Painter</title>
+</head>
+<style>
+  html {
+    user-select: none;
+  }
+
+  body {
+    position: relative;
+  }
+
+  .svg-border {
+    border: 2px solid black;
+    display: inline-block;
+    position: absolute;
+    left: 40px;
+  }
+
+  .svg-border svg {
+    display: block;
+  }
+
+  hr {
+    border: 2px solid grey;
+  }
+
+  .buttonClass {
+    display: inline-block;
+  }
+
+  button {
+    /* font-size: 20px; */
+    height: 30px;
+    /* width: 30px; */
+    vertical-align: top;
+  }
+
+  input {
+    height: 30px;
+  }
+
+  .message {
+    position: absolute;
+    top: 700px;
+  }
+</style>
+
+<body>
+  <input type="color" id="colorSelect1" value="#ff0000">
+  <input type="range" id="storkeWidthSelect" value="3" min="1" max="10" step="1">
+  <div class="buttonClass">
+    <button id="lineKey">✎</button>
+    <button id="rectKey">▭</button>
+    <button id="circleKey">〇</button>
+    <button id="fillKey">填充</button>
+    <input type="color" id="colorSelect2" value="#ff0000">
+    <button id="clearAllKey">ClearAll</button>
+
+  </div>
+  <hr>
+
+
+  <div class="svg-border">
+    <svg width="600px" height="600px"></svg>
+  </div>
+
+  <div class="message">
+    <p>Ctrl+z 撤销绘图操作，可全部依次撤销</p>
+    <p>Ctrl+x 恢复上一次撤销的操作，所有撤销的都可以恢复，不遵守时间逻辑</p>
+    <p>填充按钮默认为不填充，点击即可开启填充，再次点击即可关闭。填充色自选</p>
+    <p>ClearAll 按钮可一次性撤销全部绘图操作</p>
+  </div>
+  <script>
+    //-------------------------------------------//
+    //点击按钮事件跟踪
+    var lineKey = document.querySelector('#lineKey')
+    lineKey.addEventListener('click', function () {
+      tool = 'line'
+    })
+
+    var rectKey = document.querySelector('#rectKey')
+    rectKey.addEventListener('click', function () {
+      tool = 'rect'
+    })
+
+    var circleKey = document.querySelector('#circleKey')
+    circleKey.addEventListener('click', function () {
+      tool = 'circle'
+    })
+
+    var clearAllKey = document.querySelector('#clearAllKey')
+    clearAllKey.addEventListener('click', clearAll)
+
+    var fillKey = document.querySelector('#fillKey')
+    fillKey.addEventListener('click', function () {
+      isfill++
+    })
+    //-------------------------------------------//
+    //基线色
+    var colorSelect1 = document.querySelector('#colorSelect1')
+    //填充色
+    var colorSelect2 = document.querySelector('#colorSelect2')
+    //线条粗细
+    var storkeWidthSelect = document.querySelector('#storkeWidthSelect')
+
+
+    var svg = document.querySelector('svg')
+
+    var lastX
+    var lastY
+    var node   //每次按下鼠标左键的点开始创建一个子节点   对应tool的类型
+    var startPos  //记录鼠标按下时的点坐标
+    var tool = 'line' //默认子结点类型
+    var isfill = 0
+    svg.addEventListener('mousedown', function (e) {
+      if (e.which == 1) {
+        var pos = mouse(svg)
+        startPos = pos
+      }
+
+      //Move to  M x y  移动画笔的位置
+      //Line to  L x y  在当前位置和之前位置之间连线
+      if (tool == 'line') {
+        node = svgElt('path', {
+          d: `M ${pos.x} ${pos.y} L ${pos.x} ${pos.y}`,
+          //fill: 'none', //colorSelect2.value, //填充
+          stroke: colorSelect1.value, //颜色
+          'stroke-width': storkeWidthSelect.value, //粗细
+          'stroke-linecap': 'round', //线条样式  直角变弧
+        })
+        if (isfill % 2) {
+          node.setAttribute('fill', colorSelect2.value)
+        } else {
+          node.setAttribute('fill', 'none')
+        }
+        svg.appendChild(node)
+      }
+
+      if (tool == 'rect') {
+        node = svgElt('rect', {
+          x: pos.x,
+          y: pos.y,
+          width: 0,
+          height: 0,
+          //fill: 'none',//colorSelect2.value, //填充
+          stroke: colorSelect1.value, //颜色
+          'stroke-width': storkeWidthSelect.value, //粗细
+          'stroke-linecap': 'round', //线条样式  直角变弧
+        })
+
+        if (isfill % 2) {
+          node.setAttribute('fill', colorSelect2.value)
+        } else {
+          node.setAttribute('fill', 'none')
+        }
+        svg.appendChild(node)
+      }
+
+      if (tool == 'circle') {
+        node = svgElt('ellipse', {
+          cx: pos.x,
+          cy: pos.y,
+          rx: 0,
+          ry: 0,
+          //fill: 'none',//colorSelect2.value, //填充
+          stroke: colorSelect1.value, //颜色
+          'stroke-width': storkeWidthSelect.value, //粗细
+          'stroke-linecap': 'round', //线条样式  直角变弧
+        })
+        if (isfill % 2) {
+          node.setAttribute('fill', colorSelect2.value)
+        } else {
+          node.setAttribute('fill', 'none')
+        }
+        svg.appendChild(node)
+      }
+
+
+      window.addEventListener('mousemove', onMove)
+    })
+
+    function onMove(e) {
+      if (!buttonPressed(e)) {
+        // console.log('release')
+        window.removeEventListener('mousemove', onMove)
+        return
+      }
+      var pos = mouse(svg)
+
+      if (tool == 'line') {
+        var d = node.getAttribute('d')
+        d += `L ${pos.x} ${pos.y}`
+        node.setAttribute('d', d)
+      }
+
+      if (tool == 'rect') {
+        var width = (pos.x - startPos.x)
+        var height = (pos.y - startPos.y)
+        node.setAttribute('width', width)
+        node.setAttribute('height', height)
+      }
+
+      if (tool == 'circle') {
+        var cx = (pos.x + startPos.x) / 2
+        var cy = (pos.y + startPos.y) / 2
+        var rx = pos.x - startPos.x
+        var ry = pos.y - startPos.y
+        node.setAttribute('cx', cx)
+        node.setAttribute('cy', cy)
+        node.setAttribute('rx', rx)
+        node.setAttribute('ry', ry)
+      }
+
+    }
+
+    var ary = []
+    window.addEventListener('keydown', function (e) {
+      if (e.ctrlKey && e.key == 'z') {
+        ary.push(svg.lastChild) //数组存储即将要被删除的子节点
+        svg.removeChild(svg.lastChild)
+      }
+      if (e.ctrlKey && e.key == 'x') {
+        let oldChild = ary.pop()//数组释放最近一次被删除的子节点
+        svg.appendChild(oldChild)
+      }
+    })
+
+    function clearAll() {
+      var childs = svg.childNodes
+      for (let i = childs.length - 1; i >= 0; i--) {
+        svg.removeChild(childs[i])
+      }
+    }
+
+    function mouse(node) {
+      var nodePos = node.getBoundingClientRect()
+      return {
+        x: window.event.clientX - nodePos.x,
+        y: window.event.clientY - nodePos.y,
+      }
+    }
+
+    function buttonPressed(event) {
+      if (event.buttons == null) {
+        return event.which !== 0
+      } else {
+        return event.buttons !== 0
+      }
+    }
+
+    function svgElt(tagName, attrs = {}, ...children) {
+      var node = document.createElementNS('http://www.w3.org/2000/svg', tagName)
+      for (let key in attrs) {
+        var val = attrs[key]
+        node.setAttribute(key, val)
+      }
+      for (let child of children) {
+        if (typeof child == 'string') {
+          child = document.createTextNode(child)
+        }
+        node.appendChild(child)
+      }
+      return node
+    }
+
+  </script>
+</body>
+
+</html>

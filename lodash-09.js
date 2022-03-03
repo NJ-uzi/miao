@@ -47,17 +47,7 @@ function flattenDeep(ary) {
   return res
 }
 
-function flattenDeep2(ary) {
-  let res = []
-  for (let i = 0; i < ary.length; i++) {
-    res = res.concat(Array.isArray(ary[i]) ? flattenDeep2(ary[i]) : ary[i])
-  }
-  return res
-}
 
-function flattenDeep3(ary) {
-  return ary.reduce((res, item) => res.concat(Array.isArray(item) ? flattenDeep3(item) : item), [])
-}
 
 
 //根据depth递归减少ary的层级
@@ -83,18 +73,18 @@ function flattenDepth(ary, depth = 1) {
 
 // _.differenceBy(array, [values], [iteratee=_.identity])
 function differenceBy(ary, ...values) {
-  var differ = values[values.length - 1]
+  var diff = values[values.length - 1]
   var valuesAry
-  if (!Array.isArray(differ)) {
-    differ = iteratee(differ) //_.property
-    valuesAry = flattenDeep(values.slice(0, -1)).map((it) => differ(it))
+  if (!Array.isArray(diff)) {
+    diff = iteratee(diff) //_.property
+    valuesAry = flattenDeep(values.slice(0, -1)).map((it) => diff(it))
   } else {
-    differ = identity // it => it
-    valuesAry = flattenDeep(values).map((it) => differ(it))
+    diff = identity // it => it
+    valuesAry = flattenDeep(values).map((it) => diff(it))
   }
   var result = []
   for (let i = 0; i < ary.length; i++) {
-    if (!valuesAry.includes(differ(ary[i], i))) {
+    if (!valuesAry.includes(diff(ary[i], i))) {
       result.push(ary[i])
     }
   }
@@ -134,7 +124,7 @@ function intersection(...arys) {
   }
   return result
 }
-
+bind
 //_.intersectionBy([arrays], [iteratee=_.identity])
 function intersectionBy(...arys) {
   var predicate = arys[arys.length - 1]
@@ -779,7 +769,7 @@ function unionBy(...arys) {
   })
   return res
 }
-
+isMatch
 //The comparator is invoked with two arguments: (arrVal, othVal).
 function unionWith(...arys) {
   let comparator = isEqual
@@ -1734,7 +1724,7 @@ function size(collection) {
  *              Function
  *------------------------------------
  */
-
+iteratee
 //可跳跃绑定的bind  
 bind.placeholder = window;
 
@@ -1986,117 +1976,6 @@ function memoize(func, resolver = (...args) => args[0]) {
 
 //-----------------Function--------------------
 
-
-
-/*-----------------------------------
- *              Lang
- *------------------------------------
- */
-
-
-//判断obj是否全包含src，src的每个属性及值都在obj上找到并相等.支持深层
-//测试用例 isMatch({a:1,b:2,c:3,d:{x:1,y:2}}, {b:2,d:{x:1}})
-function isMatch(obj, src) {
-  if (obj === src) {
-    return true
-  }
-  if ((typeof obj == 'object') + (typeof src == 'object') == 1) { //不是都为对象
-    return false
-    //lodash规则奇怪，src可以不是对象，也返回true
-  }
-  for (var key in src) {
-    if (src.hasOwnProperty(key)) {
-      if (typeof src[key] !== 'object') {
-        if (!obj.hasOwnProperty(key) || obj[key] !== src[key]) {
-          return false
-        }
-      } else { //src[key]是Object，深层判断
-        if (src[key] === null && obj[key] !== null) {
-          return false
-        } else if (!isMatch(obj[key], src[key])) {
-          return false
-        }
-      }
-    }
-  }
-  return true
-}
-
-
-function isMatchWith(obj, src, customizer = function () { }) {
-  if (customizer(obj, src) || obj === src) {
-    return true
-  }
-  if ((typeof obj == 'object') + (typeof src == 'object') == 1) {
-    return false
-  }
-
-  for (let key in src) {
-    if (src.hasOwnProperty(key)) {
-      if (!obj.hasOwnProperty(key)) {
-        return false
-      } else {
-        if (customizer(obj[key], src[key], key, obj, src)) {
-          continue
-        }
-        if (typeof src[key] != 'object') {
-          return src[key] === obj[key]
-        } else {
-          if ((src[key] === null) + (obj[key] === null) === 1) {
-            return false
-          } else
-            if (!isMatchWith(obj[key], src[key], customizer)) {
-              return false
-
-            }
-        }
-      }
-    }
-  }
-
-  return true
-}
-
-
-
-function isEqual(a, b) {
-  if (a === b) {
-    return true
-  }
-  var typea = typeof a
-  var typeb = typeof b
-  if (typea !== typeb) { //类型不同
-    return false
-  } else {
-    //类型相同,同为obj
-    if (typea === 'object') {
-      //数组、对象
-      if (Array.isArray(a) + Array.isArray(b) == 1) { //一个数组一个不是数组
-        return false
-      }
-      if (Array.isArray(a)) { //两个数组
-        if (a.length !== b.length) {
-          return false
-        }
-      } else { //两个对象
-        if (Object.keys(a).length !== Object.keys(b).length) {
-          return false
-        }
-      }
-      for (let key in a) {
-        if (!(key in b)) {
-          return false
-        }
-        if (!isEqual(a[key], b[key])) {
-          return false
-        }
-      }
-      return true
-    } else {
-      return a == b
-    }
-  }
-}
 
 
 function isGreeting(val) {
@@ -3663,140 +3542,6 @@ function updateWith(obj, path, updater, customizer = () => { }) {
 
 
 
-/*-----------------------------------
- *              Util
- *------------------------------------
- */
-
-//根据不同类型生成不同的断言函数
-function iteratee(maybePredicate) {
-  if (typeof maybePredicate === 'function') {
-    return maybePredicate
-  } else if (typeof maybePredicate === 'string') {
-    return property(maybePredicate) //输入属性，返回属性值
-  } else if (Array.isArray(maybePredicate)) {
-    return matchesProperty(...maybePredicate) // 输入...[key,val]，返回断言是否其超集
-  } else if (maybePredicate instanceof RegExp) {
-    return isMatchByRegexp(maybePredicate) //输入正则，返回断言是否匹配string
-  } else if (typeof maybePredicate === 'object') {
-    return matches(maybePredicate) //输入对象，返回断言是否其超集
-  }
-}
-
-
-//传入什么属性名，它返回的函数就用来获取对象的属性值
-function property(prop) {
-  // return bind(get,null, _, prop) //当一个函数调用另一个函数，传入的参数不变的情况下，永远可以被优化为bind写法
-  return function (obj) {
-    // return obj[prop]
-    return get(obj, prop) //get(obj, path)得到深层路径下的属性值
-  }
-}
-
-//_.map(['a[2]', 'c[0]'], _.propertyOf(object));
-// => [2, 0]
-function propertyOf(obj) {
-  return function (...args) {
-    let valPath = args[0]
-    return get(obj, valPath)
-  }
-}
-
-
-
-//将String的路径转为数组 
-//假设路径合法， 'a[0].b.c[0][3][4].foo.bar[2]'  ---> ['a','0','b','c','0','3','4','foo','bar']  右括号必须遇到左括号或者.，单独的左括号和单独的.
-function toPath(val) {
-  if (Array.isArray(val)) {
-    return val
-  } else {
-    var res = val.split(/\]\[|\]\.|\.|\[|\]/)
-    if (res[0] === '') {
-      res.shift()
-    }
-    if (res[res.length - 1] === '') {
-      res.pop()
-    }
-    return res
-  }
-}
-
-function toPath2(val) {
-  if (Array.isArray(val)) {
-    return val
-  } else {
-    var result = val.split('][')
-      .reduce((res, it) => res.concat(it.split('].')), [])
-      .reduce((res, it) => res.concat(it.split('[')), [])
-      .reduce((res, it) => res.concat(it.split('.')), [])
-    var item = result[result.length - 1]
-    if (item[item.length - 1] === ']') { //val最后属性为[2]时，该项为2]，需要把]去掉
-      result[result.length - 1] = item.slice(0, item.length - 1)
-    }
-    return result
-  }
-}
-
-
-//src为filter接收的对象，判断src是否是obj的子集.没有考虑深层次嵌套
-//函数构造器matches，返回的函数传入的参数应是传入matches里的超集。不支持深层
-function matches2(src) {
-  return function (obj) {
-    if (obj === src) {
-      return true
-    }
-    for (var key in src) {
-      if (!obj.hasOwnProperty(key) || obj[key] !== src[key]) {
-        return false
-      }
-    }
-    return true
-  }
-}
-//对matches的优化改进，支持了深层比较
-function matches(src) {
-  // return bind(isMatch, null, window, src)
-  return function (obj) {
-    return isMatch(obj, src)
-  }
-}
-
-
-
-//判断obj在path路径下的属性值与val是否深度相等
-function matchesProperty(path, val) {
-  return function (obj) {
-    return isEqual(get(obj, path), val)
-  }
-}
-
-
-//返回它自己
-function identity(val) {
-  return val
-}
-//调用iteratee n次，返回调用结果
-function times(n, iteratee = identity) {
-  let result = []
-  let idx = 0
-  while (n) {
-    result.push(iteratee(idx))
-    idx++
-    n--
-  }
-  return result
-}
-//常量函数，创建一个返回val的函数
-function constant(val) {
-  return function () {
-    return val
-  }
-}
-
-//返回第一个接收到的参数
-function identity(val) {
-  return arguments[0]
-}
 //实测了很多类型与上下界情况...
 function range(start = 0, end, step = 1) {
   let result = []

@@ -8,49 +8,76 @@
   <title>Document</title>
 </head>
 <style>
-  span:first-child {
-    position: relative;
-    background-color: red;
+  #sun,
+  #earth,
+  #moon {
+    position: fixed;
+    border-radius: 99999px;
     overflow: hidden;
-    font-size: 30px;
-    top: 200px;
-    left: 200px;
+    text-align: center;
   }
 
-  p {
-    position: absolute;
+  #sun {
+    width: 50px;
+    height: 50px;
     background-color: red;
-    top: 30px;
+  }
+
+  #earth {
+    width: 20px;
+    height: 20px;
+    background-color: pink;
+  }
+
+  #moon {
+    width: 10px;
+    height: 10px;
+    background-color: green;
   }
 </style>
 
 <body>
-  <span>Cat</span>
-  <p>Hat</p>
+  <span id="sun" style="left: 0px; top: 0px;">Sun</span>
+  <span id="earth" style="left: 0px; top: 0px;">Earth</span>
+  <span id="moon" style="left: 0px; top: 0px;">Moon</span>
+
 </body>
 <script>
-  var cat = document.querySelector('span')
-  var hat = document.querySelector('p')
+  var sun = document.querySelector('#sun')
+  var earth = document.querySelector('#earth')
+  var moon = document.querySelector('#moon')
+
   var lastTime = null
   var angle = 0
-  var angle2 = 0
+
   requestAnimationFrame(
     function animate(time) {
       if (lastTime !== null) {
         angle += (time - lastTime) * 0.001
       }
       lastTime = time
-      var x1 = Math.sin(angle) * 130 + 250
-      var y1 = Math.cos(angle) * 130 + 250
-      var x2 = Math.sin(angle) * 130 + 250
-      var y2 = Math.cos(angle) * 130 + 250
-      cat.style.top = x1 + 'px'
-      cat.style.left = y1 + 'px'
-      hat.style.top = x2 + 'px'
-      hat.style.left = y2 + 'px'
+      var sunx = 400
+      var suny = 400
+      sun.style.top = sunx + 'px'
+      sun.style.left = suny + 'px'
+
+      var angleEarth = angle
+      var earthx = Math.sin(angleEarth) * 150 + sunx + 25 - 10
+      var earthy = Math.cos(angleEarth) * 150 + suny + 25 - 10
+      earth.style.top = earthx + 'px'
+      earth.style.left = earthy + 'px'
+
+      var angleMoon = 365 * angle
+      var moonx = Math.sin(angleMoon) * 50 + earthx + 10 - 5
+      var moony = Math.cos(angleMoon) * 50 + earthy + 10 - 5
+      moon.style.top = moonx + 'px'
+      moon.style.left = moony + 'px'
+
+
       requestAnimationFrame(animate)
-    }
-  )
+    })
+
+
 </script>
 
 </html>
