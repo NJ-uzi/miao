@@ -8,16 +8,79 @@
   <title>Document</title>
 </head>
 <style>
+  body {
+    position: relative;
+  }
+
+  #headBox {
+    position: absolute;
+    white-space: nowrap;
+    width: auto;
+    height: 30px;
+    width: 1000px;
+    top: 10px;
+
+  }
+
+  #svgBox {
+    position: absolute;
+    top: 40px;
+  }
+
   svg {
     border: 2px solid black;
+  }
+
+  input {
+    width: 300px;
+    height: 20px;
+  }
+
+  button {
+    height: 26px;
+  }
+
+  span {
+    display: inline-block;
+    color: red;
+    font-size: 18px;
   }
 </style>
 
 <body>
-  <svg width="5000px" height="5000px"></svg>
+  <div id="headBox">
+    Regular Expression:
+    <input type="text" id="regInput" value="abc">&nbsp;<button id="drawG" onclick="draw()">绘图</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <span>注：正则表达式必须符合正则语法规范</span>
+
+  </div>
+  <div id="svgBox">
+    <svg width="1000px" height="600px"></svg>
+  </div>
 
 </body>
 <script>
+  function draw() {
+    var svg = document.querySelector('svg')
+    svg.innerHTML = ''
+    var re = regInput.value
+    var tree = parseRegularExpression(re)
+    var graph = createRegularExpressionGraph(tree)
+    // svg.setAttribute('width', graph.width + 'px')
+    // svg.setAttribute('height', graph.height + 'px')
+  }
+  var InputEnter = document.getElementById('regInput')
+  InputEnter.addEventListener('keydown', function (e) {
+    if (e.keyCode == '13') {
+      draw()
+    }
+  })
+
+  window.onload = function () {
+    document.getElementById('drawG').click()
+    document.getElementById('regInput').focus()
+  }
   //各种正则语法对象大致参数
   // var Character = {
   //   type: 'Character',
@@ -183,7 +246,11 @@
         node.elements.push(character)
       }
     }
-    i++ //跳过 ]
+    if (str[i] == ']') {
+      i++ //跳过 ]
+    } else {
+      throw new SyntaxError('Character Class without ]  ps:彩鸟记得打括号！！！')
+    }
     node.end = i
     node.raw = str.slice(node.start, node.end)
     return node
@@ -425,7 +492,8 @@
 
 
   var svg = document.querySelector('svg')
-  var gp = 10
+  var gp = 10  //graphPadding
+
   //创建svg标签函数  标签名   属性：属性值  子标签
   function elt(tagName, attrs = {}, ...children) {
     var el = document.createElementNS("http://www.w3.org/2000/svg", tagName)
@@ -543,9 +611,10 @@
         stroke: 'black',
       })
 
-      graph.g.setAttribute('transform', `translate(${x},${(height - graph.height) / 2})`)
+      graph.g.setAttribute('transform', `translate(${x}, ${(height - graph.height) / 2})`)
       x += graph.width + gp
       g.appendChild(graph.g)
+      g.appendChild(line)
     }
 
     var line = elt('line', {
@@ -556,6 +625,7 @@
       'stroke-width': 2,
       stroke: 'black',
     })
+    g.appendChild(line)
 
     var box = g.getBBox()
 
@@ -618,6 +688,257 @@
     }
   }
 
+  function createCaptureGroupGraph(node) {
+    var branchesGraph = createBranchesGraph(node.branches)
+
+    var fill = elt('rect', {
+      width: branchesGraph.width,
+      height: branchesGraph.height + 4 * gp,
+      fill: 'none',
+      'stroke-width': 2,
+      rx: 3,
+    })
+
+    var dottedBorder = elt('rect', {
+      x: 0,
+      y: 2 * gp,
+      width: branchesGraph.width,
+      height: branchesGraph.height,
+      fill: 'none',
+      rx: 3,
+      'stroke-dasharray': '10,5',
+      'stroke-width': 2,
+      stroke: 'grey'
+    })
+
+    var g = elt('g')
+
+    g.appendChild(fill)
+    branchesGraph.g.setAttribute('transform', `translate(0,${gp * 2})`)
+    g.appendChild(branchesGraph.g)
+    g.appendChild(dottedBorder)
+
+    var box = g.getBBox()
+
+    //---------------------------------------------//
+    //分组名称信息 //
+    //---------------------------------------------//
+    var groupDescText = 'Group '
+    if (node.name) {
+      groupDescText += '#' + node.name
+    }
+    if (node.index) {
+      groupDescText += '#' + node.index
+    }
+    // 分组的描述文字
+    var desc = elt('text', {
+      'dominant-baseline': 'text-before-edge',
+      'font-size': '12px',
+    }, groupDescText)
+
+    g.appendChild(desc)
+    //---------------------------------------------//
+    //---------------------------------------------//
+
+    return {
+      g: g,
+      width: box.width,
+      height: box.height,
+    }
+  }
+
+  function createQuantifierGraph(node) {
+    var elementGraph = createGraph(node.element)
+
+    var width = elementGraph.width + 4 * gp
+    var height = elementGraph.height + 4 * gp
+
+    var fill = elt('rect', {
+      width: width,
+      height: height,
+      fill: 'none',
+      rx: 3,
+
+    })
+
+    var g = elt('g')
+    g.appendChild(fill)
+
+    var line = elt('path', {
+      d: `
+      M 0 ${height / 2}
+      L ${gp * 2} ${height / 2}
+
+      M ${width} ${height / 2}
+      L ${width - gp * 2} ${height / 2}
+      `,
+      fill: 'none',
+      stroke: 'black',
+      'stroke-width': 2,
+    })
+    elementGraph.g.setAttribute('transform', `translate(${(width - elementGraph.width) / 2},${(height - elementGraph.height) / 2})`)
+
+    g.appendChild(elementGraph.g)
+    g.appendChild(line)
+
+
+    var skipLine = elt('path', {
+      d: `
+      M 0 ${height / 2}
+      a ${gp} ${gp} 0 0 0 ${gp} ${-gp}
+      V ${gp * 2} 
+      a ${gp} ${gp} 0 0 1 ${gp} ${-gp} 
+      H ${width - gp * 2} 
+      a ${gp} ${gp} 0 0 1 ${gp} ${gp} 
+      V ${height / 2 - gp}
+      a ${gp} ${gp} 0 0 0 ${gp} ${gp}
+      `,
+      fill: 'none',
+      stroke: 'black',
+      'stroke-width': 2,
+
+    })
+
+    g.appendChild(skipLine)
+
+    var repeatLine = elt('path', {
+      d: `
+      M ${gp * 2} ${height / 2}
+      a ${gp} ${gp} 0 0 0 ${-gp} ${gp}
+      V ${height - gp * 2} 
+      a ${gp} ${gp} 0 0 0 ${gp} ${gp} 
+      H ${width - gp * 2} 
+      a ${gp} ${gp} 0 0 0 ${gp} ${-gp} 
+      V ${height / 2 + gp}
+      a ${gp} ${gp} 0 0 0 ${-gp} ${-gp}
+      `,
+      fill: 'none',
+      stroke: 'black',
+      'stroke-width': 2,
+
+    })
+    g.appendChild(repeatLine)
+    var box = g.getBBox()
+    return {
+      g: g,
+      width: box.width,
+      height: box.height,
+    }
+  }
+
+  function createRegularExpressionGraph(node) {
+    var branchesGraph = createBranchesGraph(node.branches)
+
+    var width = branchesGraph.width + 2 * gp
+    var height = branchesGraph.height
+
+    var fill = elt('rect', {
+      width: width,
+      height: height,
+      fill: 'none',
+    })
+
+    var g = elt('g')
+
+    g.appendChild(fill)
+
+    branchesGraph.g.setAttribute('transform', `translate(${gp}, 0)`)
+
+    var leftCircle = elt('circle', {
+      cx: gp / 2,
+      cy: height / 2,
+      r: gp / 2,
+      fill: '#6b6659',
+      stroke: 'black',
+      'stroke-width': 2,
+    })
+    g.appendChild(leftCircle)
+
+    var rightCircle = elt('circle', {
+      cx: width - gp / 2,
+      cy: height / 2,
+      r: gp / 2,
+      fill: '#6b6659',
+      stroke: 'black',
+      'stroke-width': 2,
+    })
+    g.appendChild(leftCircle)
+
+    var box = g.getBBox()
+
+    return {
+      g: g,
+      width: box.width,
+      height: box.height,
+    }
+  }
+
+  // function explainRegularExpression(node) {
+  //   if (node.type == 'Character') {
+  //     return explainCharacter(node)
+  //   }
+  //   if (node.type == 'Branch') {
+  //     return explainBranch(node)
+  //   }
+  //   if (node.type == 'RegularExpression') {
+  //     return explainRegExp(node)
+  //   }
+  // }
+
+  // function explainCharacter(node) {
+  //   return `<div>'${node.value}',此部分匹配单个字符，内容为${node.value}</div>`
+  // }
+
+  // function explainBranch(node) {
+  //   var explains = node.elements.map(explainRegularExpression)
+  //   return `<div>
+  //     <h3>${node.raw},此分支按顺序匹配以下内容</h3>
+  //     ${explains.join('')}
+  //     </div>
+  //     `
+  // }
+
+  // function explainRegExp(node) {
+  //   var explains = node.branches.map(explainRegularExpression)
+
+  //   return `<div>
+  //     <h3>${node.raw}, 此部分是多选，可匹配以下分支之一</h3>
+  //     <section>
+  //       ${explains.join('')}
+  //     </section>
+  //   </div>`
+  // }
+
+  // function highlightRegularExpression(node) {
+  //   if (node.type == 'Character') {
+  //     return `<span class="character" title="Text, matches:${node.value}">${node.value}</span>`
+  //   }
+  //   if (node.type == 'Escape') {
+  //     return `<span class="escape" title="Escape: 代表：数字">${node.raw}</span>`
+  //   }
+  //   if (node.type == 'Branch') {
+  //     return `<span class="branch">${node.elements.map(highlightRegularExpression).join('')}</span>`
+  //   }
+  //   if (node.type == 'CharacterClass') {
+  //     return `<span class="character-class">[${node.elements.map(highlightRegularExpression).join('')}]</span>`
+  //   }
+  //   if (node.type == 'RegularExpression') {
+  //     return `<span class="regular-expression">${node.branches.map(highlightRegularExpression).join('<span class="branches-operator">|</span>')}</span>`
+  //   }
+  //   if (node.type == 'CaptureGroup') {
+  //     return `<span class="capture-group">(${node.branches.map(highlightRegularExpression).join('<span class="branches-operator">|</span>')})</span>`
+  //   }
+  // }
+
+  // document.write(
+
+  //   explainRegularExpression(parseRegularExpression(input.value))
+
+  // )
+
+  // document.write(
+  //   highlightRegularExpression(parseRegularExpression(input.value))
+  // )
 </script>
 
 </html>

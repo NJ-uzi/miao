@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Great Painter</title>
+  <title>小破板</title>
 </head>
 <style>
   html {
@@ -20,11 +20,12 @@
     border: 2px solid black;
     display: inline-block;
     position: absolute;
-    left: 40px;
+
   }
 
   .svg-border svg {
     display: block;
+    cursor: crosshair;
   }
 
   hr {
@@ -40,10 +41,12 @@
     height: 30px;
     /* width: 30px; */
     vertical-align: top;
+    cursor: pointer;
   }
 
   input {
     height: 30px;
+    cursor: pointer;
   }
 
   .message {
@@ -68,12 +71,11 @@
 
 
   <div class="svg-border">
-    <svg width="600px" height="600px"></svg>
+    <svg width="1000px" height="600px"></svg>
   </div>
-
   <div class="message">
     <p>Ctrl+z 撤销绘图操作，可全部依次撤销</p>
-    <p>Ctrl+x 恢复上一次撤销的操作，所有撤销的都可以恢复，不遵守时间逻辑</p>
+    <p>Ctrl+x 恢复上一次撤销的操作。ClaerAll撤销不可恢复。不遵守时间逻辑</p>
     <p>填充按钮默认为不填充，点击即可开启填充，再次点击即可关闭。填充色自选</p>
     <p>ClearAll 按钮可一次性撤销全部绘图操作</p>
   </div>
