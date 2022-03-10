@@ -219,8 +219,12 @@ var nj_uzi = {
     return -1
   },
 
-  nth: function () {
-
+  nth: function (array, n = 0) {
+    if (n >= 0) {
+      return array[n]
+    } else {
+      return array[array.length + n]
+    }
   },
 
   pull: function () {
@@ -260,8 +264,29 @@ var nj_uzi = {
 
   },
 
-  sortedIndex: function () {
+  //把val 插入有序数组 返回下标
+  sortedIndex: function (ary, val) {
+    if (!Array.isArray(ary) && typeof ary !== 'string') {
+      return NaN
+    }
 
+    let start = 0
+    let end = ary.length
+    while (start < end) {
+      let mid = (start + end) >> 1
+      if (val < ary[mid]) {
+        mid = end
+      } else if (val > ary[mid]) {
+        start = mid + 1
+      } else if (val == ary[mid]) {
+        if (ary[mid - 1] !== val) {
+          return mid
+        } else {
+          end = mid
+        }
+      }
+    }
+    return start
   },
 
   sortedIndexBy: function () {
@@ -312,8 +337,17 @@ var nj_uzi = {
 
   },
 
-  union: function () {
-
+  //多个数组去重，返回新数组
+  union: function (...args) {
+    let res = []
+    args.forEach(ary => {
+      ary.forEach(val => {
+        if (!res.includes(val)) {
+          res.push(val)
+        }
+      })
+    })
+    return res
   },
 
   unionBy: function () {
@@ -342,7 +376,7 @@ var nj_uzi = {
     return res
   },
 
-  uniqBy: function () {
+  uniqBy: function (ary, predicate = identity) {
 
   },
   unzip: function () {
