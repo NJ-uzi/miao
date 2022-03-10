@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <textarea name="" id="" cols="30" rows="10">复制测试内容</textarea>
+  <script>
+    //剪切板附加加版权声明信息
+    $(document).on('copy', function (e) {
+      var selected = window.getSelection();
+      var selectedText = selected.toString().replace(/\n/g, '<br>');  // Solve the line breaks conversion issue
+      var copyFooter = '<br>---------------------<br>著作权归作者所有。<br>'
+        + '商业转载请联系作者获得授权，非商业转载请注明出处。<br>'
+        + '作者：Busen Yang<br> 源地址：' + document.location.href
+        + '<br>来源：大喵科技damiaokeji<br>© 版权声明：本文为喵喵原创文章，转载请附上链接！';
+      var copyHolder = $('<div>', { id: 'temp', html: selectedText + copyFooter, style: { position: 'absolute', left: '-99999px' } });
+      $('body').append(copyHolder);
+      selected.selectAllChildren(copyHolder[0]);
+      window.setTimeout(function () {
+        copyHolder.remove();
+      }, 0);
+    });
+  </script>
+</body>
+
+</html>

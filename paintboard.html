@@ -34,6 +34,7 @@
 
   .buttonClass {
     display: inline-block;
+    height: 50px;
   }
 
   button {
@@ -65,7 +66,17 @@
     <button id="fillKey">填充</button>
     <input type="color" id="colorSelect2" value="#ff0000">
     <button id="clearAllKey">ClearAll</button>
-
+    <button id="saveKey">Save</button>
+  </div>
+  <div colorBoxs>
+    <button class="color" style="background-color: aqua"></button>
+    <button class="color" style="background-color:blue"></button>
+    <button class="color" style="background-color:brown"></button>
+    <button class="color" style="background-color:chartreuse"></button>
+    <button class="color" style="background-color:lightsalmon"></button>
+    <button class="color" style="background-color:red"></button>
+    <button class="color" style="background-color:white"></button>
+    <button class="color" style="background-color:black"></button>
   </div>
   <hr>
 
@@ -80,6 +91,16 @@
     <p>ClearAll 按钮可一次性撤销全部绘图操作</p>
   </div>
   <script>
+
+    //保存函数
+    var saved = false
+    window.addEventListener('beforeunload', function (e) {
+      if (!saved) {
+        e.returnValue = '页面有改动，不保存就推出么？'//传空字符串即可
+        //return '页面有改动，不保存就推出么？'
+      }
+    })
+
     //-------------------------------------------//
     //点击按钮事件跟踪
     var lineKey = document.querySelector('#lineKey')
@@ -103,6 +124,17 @@
     var fillKey = document.querySelector('#fillKey')
     fillKey.addEventListener('click', function () {
       isfill++
+    })
+    //保存/下载文件
+    var saveKey = document.querySelector('#saveKey')
+    saveKey.addEventListener('click', function () {
+      var blob = new Blob([svg.outerHTML], { type: 'image/svg+xml' })
+      var link = URL.createObjectURL(blob)
+      var anchor = document.createElement('a')
+      anchor.href = link
+      anchor.download = '破板画图.svg'
+      anchor.click()
+      saved = true
     })
     //-------------------------------------------//
     //基线色

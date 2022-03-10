@@ -97,6 +97,56 @@
 
 
 
+  var div = document.querySelect('div')
+  div.addEventListener('click', debounce(function (e) {
+
+  }, 1000))
+
+  function debounce(func, time) {
+    var timeId
+
+    return function (...args) {
+      clearTimeout(timeId)
+
+      timeId = setTimeout(() => {
+        fucn.call(this, ...args)
+      }, time)
+    }
+  }
+
+  function throttle(func, time) {//2022-3-7-15-15
+    var timeId
+    var scheduled = false
+    var event
+    return function (e) {
+      event = e
+      // clearTimeout(timeId)
+      if (!scheduled) {
+        scheduled = true
+        timeId = setTimeout(() => {
+          func(event)
+          scheduled = false
+        }, time)
+      }
+    }
+  }
+
+
+  function throttle2(func, time) {
+    var lastTime = 0
+    return function (e) {
+      var now = Date.now()
+      if (now - lastTime > time) {
+        func(e)
+        lastTime = now
+      }
+    }
+  }
+
+
+  //输入aabbbcccccd    输出a2b3c5d1
+
+
 </script>
 
 </html>
