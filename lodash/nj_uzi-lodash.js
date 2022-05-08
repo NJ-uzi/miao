@@ -133,7 +133,6 @@ var nj_uzi = {
     if (depth == 0) {
       return ary.slice()
     }
-
     let res = []
     for (let i = 0; i < ary.length; i++) {
       if (Array.isArray(ary[i])) {

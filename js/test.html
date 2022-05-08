@@ -25,25 +25,25 @@
 
   //node.contains(target)
   //判断node是否包含target
-  function contains(node, target) {
-    while (target) {
-      if (node == target) {
-        return true
-      }
-      target = target.parentNode
-    }
-    return false
-  }
+  // function contains(node, target) {
+  //   while (target) {
+  //     if (node == target) {
+  //       return true
+  //     }
+  //     target = target.parentNode
+  //   }
+  //   return false
+  // }
 
 
-  var para = document.querySelector('p')
-  var button = document.querySelector('button')
-  para.addEventListener('mousedown', function () {
-    console.log('parahraph clicked!!')
-  })
-  button.addEventListener('mousedown', function () {
-    console.log('button clicked!!!')
-  })
+  // var para = document.querySelector('p')
+  // var button = document.querySelector('button')
+  // para.addEventListener('mousedown', function () {
+  //   console.log('parahraph clicked!!')
+  // })
+  // button.addEventListener('mousedown', function () {
+  //   console.log('button clicked!!!')
+  // })
 
 
   // Array.prototype.slice2 = function (start = 0, end = this.length) {
@@ -97,55 +97,89 @@
 
 
 
-  var div = document.querySelect('div')
-  div.addEventListener('click', debounce(function (e) {
+  // var div = document.querySelect('div')
+  // div.addEventListener('click', debounce(function (e) {
 
-  }, 1000))
+  // }, 1000))
 
-  function debounce(func, time) {
-    var timeId
+  // function debounce(func, time) {
+  //   var timeId
 
-    return function (...args) {
-      clearTimeout(timeId)
+  //   return function (...args) {
+  //     clearTimeout(timeId)
 
-      timeId = setTimeout(() => {
-        fucn.call(this, ...args)
-      }, time)
-    }
-  }
+  //     timeId = setTimeout(() => {
+  //       fucn.call(this, ...args)
+  //     }, time)
+  //   }
+  // }
 
-  function throttle(func, time) {//2022-3-7-15-15
-    var timeId
-    var scheduled = false
-    var event
-    return function (e) {
-      event = e
-      // clearTimeout(timeId)
-      if (!scheduled) {
-        scheduled = true
-        timeId = setTimeout(() => {
-          func(event)
-          scheduled = false
-        }, time)
-      }
-    }
-  }
-
-
-  function throttle2(func, time) {
-    var lastTime = 0
-    return function (e) {
-      var now = Date.now()
-      if (now - lastTime > time) {
-        func(e)
-        lastTime = now
-      }
-    }
-  }
+  // function throttle(func, time) {//2022-3-7-15-15
+  //   var timeId
+  //   var scheduled = false
+  //   var event
+  //   return function (e) {
+  //     event = e
+  //     // clearTimeout(timeId)
+  //     if (!scheduled) {
+  //       scheduled = true
+  //       timeId = setTimeout(() => {
+  //         func(event)
+  //         scheduled = false
+  //       }, time)
+  //     }
+  //   }
+  // }
 
 
-  //输入aabbbcccccd    输出a2b3c5d1
+  // function throttle2(func, time) {
+  //   var lastTime = 0
+  //   return function (e) {
+  //     var now = Date.now()
+  //     if (now - lastTime > time) {
+  //       func(e)
+  //       lastTime = now
+  //     }
+  //   }
+  // }
 
+
+  //剑指04
+  // var findNumberIn2DArray = function (matrix, target) {
+  //   if (!matrix.length) {
+  //     return false
+  //   }
+  //   var rows = matrix.length
+  //   var cols = 0
+  //   if (matrix[0].length) {
+  //     cols = matrix[0].length
+  //   }
+  //   if (rows > 0 && cols > 0) {
+  //     let row = 0
+  //     let col = cols - 1
+  //     while (row < rows && cols >= 0) {
+  //       if (matrix[row][col] == target) {
+  //         return true
+  //       } else if (matrix[row][col] > target) {
+  //         col--
+  //       } else {
+  //         row++
+  //       }
+  //     }
+  //   }
+  //   return false
+  // };
+
+  // var matrix = [
+  //   [1, 4, 7, 11, 15],
+  //   [2, 5, 8, 12, 19],
+  //   [3, 6, 9, 16, 22],
+  //   [10, 13, 14, 17, 24],
+  //   [18, 21, 23, 26, 30]
+  // ]
+  // var target = 130
+
+  // console.log(findNumberIn2DArray(matrix, target))
 
 </script>
 

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  div {
+    border: 1px solid;
+    position: relative;
+    display: inline-block;
+  }
+
+  ul {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-size: 20px;
+    top: 100%;
+    left: 0;
+    /* height: 50px; */
+    width: 100%;
+    border: 1px solid;
+    display: none;
+  }
+
+  input:focus+ul:not(:empty) {
+    display: block;
+  }
+</style>
+
+<body>
+  <div>
+    <input type="text" name="word">
+    <ul class="suggestions"></ul>
+  </div>
+
+  <script>
+    var input = document.querySelector('input')
+    var suggestions = document.querySelector('.suggestions')
+
+    // input.addEventListener('input', function (e) {
+    //   var word = input.value
+    //   var suggests = getSuggests(word)
+    //   var html = suggests.map(it => {
+    //     return `<li>${it}</li>`
+    //   }).join('')
+    //   suggestions.innerHTML = html
+    // })
+    input.addEventListener('input', function (e) {
+      var word = input.value
+      getSuggests(word, function (suggests 2) {
+        var html = suggests.map(it => {
+          return `<li>${it}</li>`
+        }).join('')
+        suggestions.innerHTML = html
+      })
+    })
+
+    function getSuggests(word, callback) {
+      if (word.length < 3) {
+        return []
+      }
+      var res = []
+      for (let i = 0; i < 10; i++) {
+        res.push(word + Math.random().toString(16).slice(2, 7))
+      }
+      setTimeout(() => {
+        callback(res)
+      }, 500 + Math.random() * 200)
+    }
+
+  </script>
+</body>
+
+</html>
